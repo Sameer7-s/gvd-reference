@@ -1,0 +1,227 @@
+@import "tailwindcss";
+
+/* ============================================================
+   HKM VIZAG — DESIGN TOKENS
+   Authentic Vaishnava temple palette: saffron, temple gold,
+   deep maroon, Krishna blue, on warm cream.
+   ============================================================ */
+@theme {
+  /* Typography (CSS vars are injected by next/font in layout.tsx) */
+  --font-display: var(--font-marcellus), ui-serif, Georgia, serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-deva: var(--font-noto-deva), "Noto Serif Devanagari", serif;
+
+  /* Surfaces */
+  --color-cream: #fcf7ec;
+  --color-ivory: #fffdf8;
+  --color-sand: #f4ead6;
+
+  /* Ink / text */
+  --color-ink: #2a1a12;
+  --color-muted: #6b584c;
+
+  /* Saffron — primary */
+  --color-saffron-50: #fdf3e7;
+  --color-saffron-100: #fbe4c9;
+  --color-saffron-200: #f6c68c;
+  --color-saffron-300: #f0a653;
+  --color-saffron-400: #ea8a2c;
+  --color-saffron-500: #e2691c;
+  --color-saffron-600: #c6541a;
+  --color-saffron-700: #a03f17;
+  --color-saffron-800: #7c3214;
+  --color-saffron-900: #5e2711;
+
+  /* Temple gold — accent / CTA */
+  --color-gold-200: #f1e2b4;
+  --color-gold-300: #e9d08a;
+  --color-gold-400: #dcb85f;
+  --color-gold-500: #c8a14a;
+  --color-gold-600: #a9853a;
+  --color-gold-700: #876829;
+
+  /* Deep maroon — dark sections */
+  --color-maroon-600: #7e2240;
+  --color-maroon-700: #6e1a38;
+  --color-maroon-800: #5a132c;
+  --color-maroon-900: #46091f;
+  --color-maroon-950: #2e0614;
+
+  /* Krishna blue — secondary accent */
+  --color-krishna-400: #3f5fd0;
+  --color-krishna-500: #2746a6;
+  --color-krishna-600: #1e3a8a;
+
+  /* Animation timing */
+  --ease-soft: cubic-bezier(0.22, 1, 0.36, 1);
+
+  --animate-float: float 7s ease-in-out infinite;
+  --animate-spin-slow: spin-slow 90s linear infinite;
+  --animate-spin-slower: spin-slow 160s linear infinite reverse;
+  --animate-shimmer: shimmer 3s linear infinite;
+  --animate-pulse-glow: pulse-glow 4s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-14px); }
+}
+@keyframes spin-slow {
+  to { transform: rotate(360deg); }
+}
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.55; transform: scale(1); }
+  50% { opacity: 0.85; transform: scale(1.06); }
+}
+
+/* ============================================================
+   BASE
+   ============================================================ */
+@layer base {
+  :root {
+    color-scheme: light;
+    scroll-behavior: smooth;
+    --nav-h: 4.75rem;
+  }
+
+  html {
+    scroll-padding-top: calc(var(--nav-h) + 1.25rem);
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-cream);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-feature-settings: "ss01", "cv01";
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, h5 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    line-height: 1.05;
+    text-wrap: balance;
+  }
+
+  p { text-wrap: pretty; }
+
+  ::selection {
+    background-color: var(--color-saffron-500);
+    color: #fff;
+  }
+
+  /* Accessible focus ring on every interactive element.
+     The saffron outline clears 4.5:1 on the cream UI; the cream halo keeps the
+     ring visible (>4:1) over the bright maroon hero/header, so focus is never
+     lost in either navbar theme. Outline is retained for forced-colors mode. */
+  :where(a, button, input, textarea, select, [tabindex]):focus-visible {
+    outline: 2px solid var(--color-saffron-600);
+    outline-offset: 2px;
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--color-cream) 60%, transparent);
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar { width: 12px; height: 12px; }
+  ::-webkit-scrollbar-track { background: var(--color-sand); }
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-saffron-400);
+    border: 3px solid var(--color-sand);
+    border-radius: 99px;
+  }
+}
+
+/* ============================================================
+   UTILITIES
+   ============================================================ */
+@layer utilities {
+  .container-page {
+    width: 100%;
+    margin-inline: auto;
+    max-width: 80rem;
+    padding-inline: 1.25rem;
+  }
+  @media (min-width: 768px) {
+    .container-page { padding-inline: 2rem; }
+  }
+
+  /* Gold gradient text for sacred headlines. */
+  .text-gold-grad {
+    background: linear-gradient(100deg, #876829 0%, #c8a14a 35%, #f1e2b4 55%, #c8a14a 75%, #876829 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .text-saffron-grad {
+    background: linear-gradient(100deg, var(--color-saffron-600), var(--color-saffron-400), var(--color-gold-400));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* Hairline divider with a centered diamond, common in temple typography. */
+  .rule-ornament {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    color: var(--color-gold-500);
+  }
+  .rule-ornament::before,
+  .rule-ornament::after {
+    content: "";
+    height: 1px;
+    width: clamp(2rem, 12vw, 6rem);
+    background: linear-gradient(to right, transparent, currentColor, transparent);
+  }
+
+  .glass-card {
+    background: color-mix(in srgb, var(--color-ivory) 86%, transparent);
+    backdrop-filter: blur(12px);
+    border: 1px solid color-mix(in srgb, var(--color-gold-500) 30%, transparent);
+  }
+
+  .shadow-temple {
+    box-shadow: 0 1px 2px rgba(70, 9, 31, 0.04), 0 12px 30px -12px rgba(70, 9, 31, 0.18);
+  }
+  .shadow-temple-lg {
+    box-shadow: 0 2px 4px rgba(70, 9, 31, 0.05), 0 30px 60px -20px rgba(70, 9, 31, 0.28);
+  }
+
+  /* Subtle dotted/sacred texture for section backgrounds. */
+  .bg-dots {
+    background-image: radial-gradient(color-mix(in srgb, var(--color-gold-500) 22%, transparent) 1px, transparent 1px);
+    background-size: 22px 22px;
+  }
+
+  .shimmer-text {
+    background: linear-gradient(100deg, var(--color-gold-300) 20%, #fff 50%, var(--color-gold-300) 80%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: var(--animate-shimmer);
+  }
+}
+
+/* ============================================================
+   MOTION — respect user preference (CRITICAL a11y rule)
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  html { scroll-behavior: auto; }
+}

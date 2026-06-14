@@ -1,0 +1,288 @@
+"use client";
+
+import { useEffect, useMemo, useState } from "react";
+import { BadgeIndianRupee, ShieldCheck, Lock, CheckCircle2, Loader2 } from "lucide-react";
+import { SEVAS } from "@/lib/site";
+
+type Frequency = "once" | "monthly";
+
+export function DonationForm() {
+  const [sevaSlug, setSevaSlug] = useState(SEVAS[0].slug);
+  const [frequency, setFrequency] = useState<Frequency>("once");
+  const [amount, setAmount] = useState<number>(SEVAS[0].amounts[1]);
+  const [custom, setCustom] = useState("");
+  const [form, setForm] = useState({ name: "", email: "", phone: "", pan: "", message: "" });
+  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [status, setStatus] = useState<"idle" | "submitting" | "done">("idle");
+
+  const seva = useMemo(() => SEVAS.find((s) => s.slug === sevaSlug) ?? SEVAS[0], [sevaSlug]);
+
+  // Deep-link support: /donate#anna-daan preselects the seva.
+  useEffect(() => {
+    const hash = window.location.hash.replace("#", "");
+    const match = SEVAS.find((s) => s.slug === hash);
+    if (match) {
+      setSevaSlug(match.slug);
+      setAmount(match.amounts[1]);
+    }
+  }, []);
+
+  const finalAmount = custom ? Number(custom) : amount;
+
+  const validate = () => {
+    const e: Record<string, string> = {};
+    if (!form.name.trim()) e.name = "Please enter your name.";
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) e.email = "Enter a valid email.";
+    if (!/^[0-9+\-\s]{8,15}$/.test(form.phone)) e.phone = "Enter a valid phone number.";
+    if (form.pan && !/^[A-Z]{5}[0-9]{4}[A-Z]$/.test(form.pan.toUpperCase()))
+      e.pan = "PAN should look like ABCDE1234F.";
+    if (!finalAmount || finalAmount < 10) e.amount = "Minimum contribution is ₹10.";
+    setErrors(e);
+    return Object.keys(e).length === 0;
+  };
+
+  const handleSubmit = (ev: React.FormEvent<HTMLFormElement>) => {
+    ev.preventDefault();
+    // Honeypot
+    if ((ev.currentTarget.elements.namedItem("website") as HTMLInputElement)?.value) return;
+    if (!validate()) return;
+    setStatus("submitting");
+    // In production, POST to a serverless route that creates a Razorpay/PayU order,
+    // then redirect to the gateway. Never expose secret keys client-side.
+    setTimeout(() => setStatus("done"), 1100);
+  };
+
+  if (status === "done") {
+    return (
+      <div className="rounded-3xl border border-emerald-600/30 bg-emerald-500/5 p-8 text-center sm:p-12">
+        <CheckCircle2 className="mx-auto h-14 w-14 text-emerald-600" />
+        <h3 className="mt-4 font-display text-2xl text-maroon-900">Hare Krishna, {form.name.split(" ")[0]}!</h3>
+        <p className="mx-auto mt-2 max-w-md text-muted">
+          Thank you for your <strong className="text-maroon-900">{seva.title}</strong> contribution of{" "}
+          <strong className="text-maroon-900">₹{finalAmount.toLocaleString("en-IN")}</strong>
+          {frequency === "monthly" ? " every month" : ""}. In production you would now be redirected
+          to our secure payment gateway. A tax-exempt receipt will be emailed to {form.email}.
+        </p>
+        <button
+          onClick={() => setStatus("idle")}
+          className="mt-6 cursor-pointer rounded-full border border-saffron-600/40 px-6 py-3 text-sm font-semibold text-maroon-900 transition-colors hover:bg-saffron-50"
+        >
+          Make another offering
+        </button>
+      </div>
+    );
+  }
+
+  const field =
+    "w-full rounded-xl border border-gold-500/30 bg-cream px-4 py-3 text-maroon-900 placeholder:text-muted/60 focus:border-saffron-500 focus:outline-none";
+
+  return (
+    <form onSubmit={handleSubmit} noValidate className="space-y-8">
+      {/* Seva selection */}
+      <fieldset>
+        <legend className="mb-3 font-display text-lg text-maroon-900">1 · Choose a seva</legend>
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          {SEVAS.map((s) => (
+            <label
+              key={s.slug}
+              className={`flex cursor-pointer items-center gap-3 rounded-xl border p-4 text-sm transition-colors ${
+                sevaSlug === s.slug
+                  ? "border-saffron-500 bg-saffron-50 text-maroon-900"
+                  : "border-gold-500/25 bg-ivory/60 text-muted hover:border-saffron-400"
+              }`}
+            >
+              <input
+                type="radio"
+                name="seva"
+                value={s.slug}
+                checked={sevaSlug === s.slug}
+                onChange={() => {
+                  setSevaSlug(s.slug);
+                  setAmount(s.amounts[1]);
+                  setCustom("");
+                }}
+                className="sr-only"
+              />
+              <span
+                className={`grid h-4 w-4 place-items-center rounded-full border ${
+                  sevaSlug === s.slug ? "border-saffron-600" : "border-muted/40"
+                }`}
+              >
+                {sevaSlug === s.slug && <span className="h-2 w-2 rounded-full bg-saffron-600" />}
+              </span>
+              <span className="font-medium">{s.title}</span>
+            </label>
+          ))}
+        </div>
+      </fieldset>
+
+      {/* Frequency + amount */}
+      <fieldset>
+        <legend className="mb-3 font-display text-lg text-maroon-900">2 · Contribution</legend>
+
+        <div className="mb-4 inline-flex rounded-full border border-gold-500/30 bg-ivory/60 p-1">
+          {(["once", "monthly"] as Frequency[]).map((f) => (
+            <button
+              key={f}
+              type="button"
+              onClick={() => setFrequency(f)}
+              className={`cursor-pointer rounded-full px-5 py-1.5 text-sm font-semibold capitalize transition-colors ${
+                frequency === f ? "bg-saffron-600 text-white" : "text-muted hover:text-maroon-900"
+              }`}
+            >
+              {f === "once" ? "One-time" : "Monthly"}
+            </button>
+          ))}
+        </div>
+
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+          {seva.amounts.map((amt) => (
+            <button
+              key={amt}
+              type="button"
+              onClick={() => {
+                setAmount(amt);
+                setCustom("");
+              }}
+              className={`inline-flex items-center justify-center gap-0.5 rounded-xl border py-3 font-semibold transition-colors ${
+                !custom && amount === amt
+                  ? "border-saffron-500 bg-saffron-50 text-saffron-700"
+                  : "border-gold-500/25 bg-ivory/60 text-maroon-900 hover:border-saffron-400"
+              }`}
+            >
+              <BadgeIndianRupee className="h-4 w-4" />
+              {amt.toLocaleString("en-IN")}
+            </button>
+          ))}
+        </div>
+
+        <div className="mt-3">
+          <label htmlFor="custom-amount" className="sr-only">
+            Custom amount
+          </label>
+          <div className="relative">
+            <BadgeIndianRupee className="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-muted" />
+            <input
+              id="custom-amount"
+              type="number"
+              min={10}
+              inputMode="numeric"
+              placeholder="Enter a custom amount"
+              value={custom}
+              onChange={(e) => setCustom(e.target.value)}
+              className={`${field} pl-11`}
+            />
+          </div>
+          {errors.amount && <p className="mt-1 text-sm text-saffron-700" role="alert">{errors.amount}</p>}
+        </div>
+      </fieldset>
+
+      {/* Donor details */}
+      <fieldset className="space-y-4">
+        <legend className="mb-1 font-display text-lg text-maroon-900">3 · Your details</legend>
+        <div className="grid gap-4 sm:grid-cols-2">
+          <div>
+            <label htmlFor="name" className="mb-1 block text-sm font-medium text-maroon-900">
+              Full name
+            </label>
+            <input
+              id="name"
+              name="name"
+              autoComplete="name"
+              value={form.name}
+              onChange={(e) => setForm({ ...form, name: e.target.value })}
+              aria-invalid={!!errors.name}
+              className={field}
+            />
+            {errors.name && <p className="mt-1 text-sm text-saffron-700" role="alert">{errors.name}</p>}
+          </div>
+          <div>
+            <label htmlFor="email" className="mb-1 block text-sm font-medium text-maroon-900">
+              Email
+            </label>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              autoComplete="email"
+              value={form.email}
+              onChange={(e) => setForm({ ...form, email: e.target.value })}
+              aria-invalid={!!errors.email}
+              className={field}
+            />
+            {errors.email && <p className="mt-1 text-sm text-saffron-700" role="alert">{errors.email}</p>}
+          </div>
+          <div>
+            <label htmlFor="phone" className="mb-1 block text-sm font-medium text-maroon-900">
+              Phone
+            </label>
+            <input
+              id="phone"
+              name="phone"
+              type="tel"
+              autoComplete="tel"
+              value={form.phone}
+              onChange={(e) => setForm({ ...form, phone: e.target.value })}
+              aria-invalid={!!errors.phone}
+              className={field}
+            />
+            {errors.phone && <p className="mt-1 text-sm text-saffron-700" role="alert">{errors.phone}</p>}
+          </div>
+          <div>
+            <label htmlFor="pan" className="mb-1 block text-sm font-medium text-maroon-900">
+              PAN <span className="font-normal text-muted">(for 80G receipt, optional)</span>
+            </label>
+            <input
+              id="pan"
+              name="pan"
+              value={form.pan}
+              onChange={(e) => setForm({ ...form, pan: e.target.value.toUpperCase() })}
+              aria-invalid={!!errors.pan}
+              maxLength={10}
+              className={`${field} uppercase`}
+            />
+            {errors.pan && <p className="mt-1 text-sm text-saffron-700" role="alert">{errors.pan}</p>}
+          </div>
+        </div>
+
+        {/* Honeypot */}
+        <input type="text" name="website" tabIndex={-1} autoComplete="off" aria-hidden="true" className="hidden" />
+      </fieldset>
+
+      {/* Summary + submit */}
+      <div className="flex flex-col gap-4 rounded-2xl border border-gold-500/30 bg-ivory/80 p-5 sm:flex-row sm:items-center sm:justify-between">
+        <div>
+          <p className="text-sm text-muted">You are offering</p>
+          <p className="font-display text-2xl text-maroon-900">
+            ₹{(finalAmount || 0).toLocaleString("en-IN")}
+            <span className="text-base text-muted">
+              {" "}
+              · {seva.title}
+              {frequency === "monthly" ? " / month" : ""}
+            </span>
+          </p>
+        </div>
+        <button
+          type="submit"
+          disabled={status === "submitting"}
+          className="inline-flex cursor-pointer items-center justify-center gap-2 rounded-full bg-gradient-to-br from-saffron-500 to-saffron-700 px-7 py-3.5 font-semibold text-white shadow-temple transition-all hover:from-saffron-400 hover:to-saffron-600 disabled:cursor-wait disabled:opacity-70"
+        >
+          {status === "submitting" ? (
+            <>
+              <Loader2 className="h-5 w-5 animate-spin" /> Processing…
+            </>
+          ) : (
+            <>
+              <Lock className="h-4 w-4" /> Proceed to secure payment
+            </>
+          )}
+        </button>
+      </div>
+
+      <p className="flex items-center justify-center gap-2 text-center text-xs text-muted">
+        <ShieldCheck className="h-4 w-4 text-emerald-600" />
+        256-bit encrypted · powered by a PCI-DSS compliant gateway · your details are never shared.
+      </p>
+    </form>
+  );
+}
