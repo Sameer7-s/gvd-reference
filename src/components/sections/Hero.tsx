@@ -138,34 +138,16 @@ export function Hero() {
           transition={MOTION.heroReveal}
           style={{ willChange: "opacity, transform" }}
         >
-          <motion.div
-            className="absolute inset-0"
-            animate={
-              reduced
-                ? undefined
-                : {
-                    y: [-8, 8, -8],
-                    x: [-4, 4, -4],
-                  }
-            }
-            transition={{
-              duration: 14,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-            style={{ willChange: "transform" }}
-          >
-            <Image
-              src="/photos/krishna.png"
-              alt="Sri Sri Radha Krishna — Hare Krishna Movement Visakhapatnam"
-              fill
-              priority
-              quality={90}
-              className="object-cover object-center"
-              sizes="100vw"
-              style={{ objectPosition: "center center" }}
-            />
-          </motion.div>
+          <Image
+            src="/photos/krishna.png"
+            alt="Sri Sri Radha Krishna — Hare Krishna Movement Visakhapatnam"
+            fill
+            priority
+            quality={90}
+            className="object-cover object-center"
+            sizes="100vw"
+            style={{ objectPosition: "center center" }}
+          />
         </motion.div>
       </motion.div>
 
