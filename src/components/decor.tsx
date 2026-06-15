@@ -1,5 +1,7 @@
+"use client";
+
 /**
- * Original sacred-geometry SVG art. Pure server components (no JS shipped).
+ * Original sacred-geometry SVG art.
  * Everything uses currentColor so motifs inherit their surrounding text color.
  */
 

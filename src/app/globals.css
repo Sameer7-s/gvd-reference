@@ -1,103 +1,52 @@
 @import "tailwindcss";
 
-/* ============================================================
-   HKM VIZAG — DESIGN TOKENS
-   Authentic Vaishnava temple palette: saffron, temple gold,
-   deep maroon, Krishna blue, on warm cream.
-   ============================================================ */
 @theme {
-  /* Typography (CSS vars are injected by next/font in layout.tsx) */
-  --font-display: var(--font-marcellus), ui-serif, Georgia, serif;
+  /* Typography */
+  --font-display: var(--font-playfair), ui-serif, Georgia, serif;
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  --font-deva: var(--font-noto-deva), "Noto Serif Devanagari", serif;
 
   /* Surfaces */
-  --color-cream: #fcf7ec;
-  --color-ivory: #fffdf8;
-  --color-sand: #f4ead6;
+  --color-bg-primary: #FFFCF7;
+  --color-bg-secondary: #FAF7F0;
+  --color-bg-tertiary: #F5F1E8;
+  --color-bg-white: #FFFFFF;
 
-  /* Ink / text */
-  --color-ink: #2a1a12;
-  --color-muted: #6b584c;
+  /* Ink / Text */
+  --color-text-primary: #111111;
+  --color-text-secondary: #2A2A2A;
+  --color-text-muted: #555555;
 
-  /* Saffron — primary */
-  --color-saffron-50: #fdf3e7;
-  --color-saffron-100: #fbe4c9;
-  --color-saffron-200: #f6c68c;
-  --color-saffron-300: #f0a653;
-  --color-saffron-400: #ea8a2c;
-  --color-saffron-500: #e2691c;
-  --color-saffron-600: #c6541a;
-  --color-saffron-700: #a03f17;
-  --color-saffron-800: #7c3214;
-  --color-saffron-900: #5e2711;
+  /* Accents */
+  --color-accent-primary: #D4AF37;
+  --color-accent-secondary: #C9A227;
+  --color-accent-light: #E8C76A;
+  --color-accent-success: #4C8C5A;
 
-  /* Temple gold — accent / CTA */
-  --color-gold-200: #f1e2b4;
-  --color-gold-300: #e9d08a;
-  --color-gold-400: #dcb85f;
-  --color-gold-500: #c8a14a;
-  --color-gold-600: #a9853a;
-  --color-gold-700: #876829;
-
-  /* Deep maroon — dark sections */
-  --color-maroon-600: #7e2240;
-  --color-maroon-700: #6e1a38;
-  --color-maroon-800: #5a132c;
-  --color-maroon-900: #46091f;
-  --color-maroon-950: #2e0614;
-
-  /* Krishna blue — secondary accent */
-  --color-krishna-400: #3f5fd0;
-  --color-krishna-500: #2746a6;
-  --color-krishna-600: #1e3a8a;
+  /* Radius */
+  --radius-sm: 8px;
+  --radius-md: 20px;
+  --radius-card: 24px;
+  --radius-full: 999px;
 
   /* Animation timing */
   --ease-soft: cubic-bezier(0.22, 1, 0.36, 1);
-
-  --animate-float: float 7s ease-in-out infinite;
-  --animate-spin-slow: spin-slow 90s linear infinite;
-  --animate-spin-slower: spin-slow 160s linear infinite reverse;
-  --animate-shimmer: shimmer 3s linear infinite;
-  --animate-pulse-glow: pulse-glow 4s ease-in-out infinite;
+  --ease-luxury: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-14px); }
-}
-@keyframes spin-slow {
-  to { transform: rotate(360deg); }
-}
-@keyframes shimmer {
-  0% { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
-}
-@keyframes pulse-glow {
-  0%, 100% { opacity: 0.55; transform: scale(1); }
-  50% { opacity: 0.85; transform: scale(1.06); }
-}
-
-/* ============================================================
-   BASE
-   ============================================================ */
 @layer base {
   :root {
     color-scheme: light;
     scroll-behavior: smooth;
-    --nav-h: 4.75rem;
   }
 
   html {
-    scroll-padding-top: calc(var(--nav-h) + 1.25rem);
     -webkit-text-size-adjust: 100%;
   }
 
   body {
-    background-color: var(--color-cream);
-    color: var(--color-ink);
+    background-color: var(--color-bg-primary);
+    color: var(--color-text-primary);
     font-family: var(--font-sans);
-    font-feature-settings: "ss01", "cv01";
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
     overflow-x: hidden;
@@ -105,117 +54,76 @@
 
   h1, h2, h3, h4, h5 {
     font-family: var(--font-display);
-    font-weight: 400;
-    letter-spacing: -0.01em;
-    line-height: 1.05;
+    font-weight: 700;
+    letter-spacing: -0.02em;
     text-wrap: balance;
+    color: var(--color-text-primary);
   }
 
-  p { text-wrap: pretty; }
+  p { text-wrap: pretty; color: var(--color-text-muted); }
 
   ::selection {
-    background-color: var(--color-saffron-500);
+    background-color: var(--color-accent-primary);
     color: #fff;
-  }
-
-  /* Accessible focus ring on every interactive element.
-     The saffron outline clears 4.5:1 on the cream UI; the cream halo keeps the
-     ring visible (>4:1) over the bright maroon hero/header, so focus is never
-     lost in either navbar theme. Outline is retained for forced-colors mode. */
-  :where(a, button, input, textarea, select, [tabindex]):focus-visible {
-    outline: 2px solid var(--color-saffron-600);
-    outline-offset: 2px;
-    box-shadow: 0 0 0 4px color-mix(in srgb, var(--color-cream) 60%, transparent);
-    border-radius: 4px;
-  }
-
-  ::-webkit-scrollbar { width: 12px; height: 12px; }
-  ::-webkit-scrollbar-track { background: var(--color-sand); }
-  ::-webkit-scrollbar-thumb {
-    background: var(--color-saffron-400);
-    border: 3px solid var(--color-sand);
-    border-radius: 99px;
   }
 }
 
-/* ============================================================
-   UTILITIES
-   ============================================================ */
 @layer utilities {
+  .section-padding {
+    padding-top: 60px;
+    padding-bottom: 60px;
+  }
+  @media (min-width: 768px) {
+    .section-padding {
+      padding-top: 80px;
+      padding-bottom: 80px;
+    }
+  }
+  @media (min-width: 1024px) {
+    .section-padding {
+      padding-top: 120px;
+      padding-bottom: 120px;
+    }
+  }
+
   .container-page {
     width: 100%;
     margin-inline: auto;
-    max-width: 80rem;
-    padding-inline: 1.25rem;
+    max-width: 1200px;
+    padding-inline: 24px;
   }
-  @media (min-width: 768px) {
-    .container-page { padding-inline: 2rem; }
-  }
-
-  /* Gold gradient text for sacred headlines. */
-  .text-gold-grad {
-    background: linear-gradient(100deg, #876829 0%, #c8a14a 35%, #f1e2b4 55%, #c8a14a 75%, #876829 100%);
-    background-size: 200% auto;
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
+  @media (min-width: 1024px) {
+    .container-page { padding-inline: 40px; }
   }
 
-  .text-saffron-grad {
-    background: linear-gradient(100deg, var(--color-saffron-600), var(--color-saffron-400), var(--color-gold-400));
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
+  .shadow-luxury {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03), 0 1px 3px rgba(0, 0, 0, 0.02);
+  }
+  
+  .shadow-luxury-hover {
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06), 0 4px 6px rgba(0, 0, 0, 0.03);
   }
 
-  /* Hairline divider with a centered diamond, common in temple typography. */
-  .rule-ornament {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.75rem;
-    color: var(--color-gold-500);
-  }
-  .rule-ornament::before,
-  .rule-ornament::after {
-    content: "";
-    height: 1px;
-    width: clamp(2rem, 12vw, 6rem);
-    background: linear-gradient(to right, transparent, currentColor, transparent);
-  }
-
-  .glass-card {
-    background: color-mix(in srgb, var(--color-ivory) 86%, transparent);
-    backdrop-filter: blur(12px);
-    border: 1px solid color-mix(in srgb, var(--color-gold-500) 30%, transparent);
-  }
-
-  .shadow-temple {
-    box-shadow: 0 1px 2px rgba(70, 9, 31, 0.04), 0 12px 30px -12px rgba(70, 9, 31, 0.18);
-  }
-  .shadow-temple-lg {
-    box-shadow: 0 2px 4px rgba(70, 9, 31, 0.05), 0 30px 60px -20px rgba(70, 9, 31, 0.28);
-  }
-
-  /* Subtle dotted/sacred texture for section backgrounds. */
-  .bg-dots {
-    background-image: radial-gradient(color-mix(in srgb, var(--color-gold-500) 22%, transparent) 1px, transparent 1px);
-    background-size: 22px 22px;
-  }
-
-  .shimmer-text {
-    background: linear-gradient(100deg, var(--color-gold-300) 20%, #fff 50%, var(--color-gold-300) 80%);
-    background-size: 200% auto;
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    animation: var(--animate-shimmer);
+  .shadow-glow {
+    box-shadow: 0 0 40px rgba(212, 175, 55, 0.15);
   }
 }
 
-/* ============================================================
-   MOTION — respect user preference (CRITICAL a11y rule)
-   ============================================================ */
+/* Keyframes */
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes float-gentle {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 1s var(--ease-luxury) forwards;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.001ms !important;
@@ -224,4 +132,171 @@
     scroll-behavior: auto !important;
   }
   html { scroll-behavior: auto; }
+}
+
+/* -------------------------------------------------------------------------- */
+/* ULTRA PREMIUM NAVBAR COMPONENT STYLES                                      */
+/* -------------------------------------------------------------------------- */
+
+.ultra-navbar {
+  position: fixed;
+  top: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 120px);
+  max-width: 1600px;
+  height: 88px;
+  z-index: 999999;
+  
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(18px) saturate(140%);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 24px;
+  
+  box-shadow:
+    0 8px 30px rgba(0, 0, 0, 0.06),
+    0 2px 8px rgba(0, 0, 0, 0.04);
+    
+  transition: all 300ms cubic-bezier(0.22, 1, 0.36, 1);
+  
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 32px;
+}
+
+/* Subtle crystal edge reflection */
+.ultra-navbar::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.02));
+  pointer-events: none;
+}
+
+.ultra-navbar.is-scrolled {
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(24px) saturate(150%);
+  -webkit-backdrop-filter: blur(24px) saturate(150%);
+  box-shadow:
+    0 10px 36px rgba(0, 0, 0, 0.07),
+    0 2px 10px rgba(0, 0, 0, 0.04);
+}
+
+.hero-btn-secondary {
+  transition:
+    transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+    background-color 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.hero-btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.62) !important;
+  border-color: rgba(17, 17, 17, 0.18) !important;
+}
+
+.ultra-logo-circle {
+  width: 48px;
+  height: 48px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 50%;
+  transition: transform 500ms;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.ultra-logo-container:hover .ultra-logo-circle {
+  transform: scale(1.05);
+}
+
+.ultra-nav-list {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.ultra-nav-link {
+  font-size: 15px;
+  font-weight: 500;
+  color: rgba(35, 35, 35, 0.85);
+  transition: all 300ms cubic-bezier(0.22, 1, 0.36, 1);
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  font-family: var(--font-inter);
+  display: block;
+  position: relative;
+}
+
+.ultra-nav-link:hover:not(.active) {
+  background: rgba(255, 255, 255, 0.12);
+  transform: translateY(-1px);
+}
+
+.ultra-nav-link.active {
+  background: rgba(212, 175, 55, 0.10);
+  border: 1px solid rgba(212, 175, 55, 0.15);
+  color: #D4AF37;
+}
+
+.ultra-btn-primary {
+  height: 48px;
+  padding: 0 28px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #D4AF37, #E8C55A);
+  color: white;
+  font-size: 15px;
+  font-weight: 600;
+  box-shadow: 0 8px 20px rgba(212, 175, 55, 0.20);
+  transition: all 300ms cubic-bezier(0.22, 1, 0.36, 1);
+  font-family: var(--font-inter);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  position: relative;
+  z-index: 1; /* Stay above crystal edge */
+}
+
+.ultra-btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 25px rgba(212, 175, 55, 0.30);
+}
+
+.ultra-btn-secondary {
+  height: 48px;
+  padding: 0 24px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: var(--color-text-primary);
+  font-size: 15px;
+  font-weight: 500;
+  font-family: var(--font-inter);
+  transition: all 300ms cubic-bezier(0.22, 1, 0.36, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 1; /* Stay above crystal edge */
+}
+
+.ultra-btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.12);
+  transform: translateY(-1px);
+}
+
+@media (max-width: 1024px) {
+  .ultra-navbar {
+    width: calc(100% - 40px);
+    padding: 0 16px;
+    top: 16px;
+  }
 }

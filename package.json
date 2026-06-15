@@ -10,16 +10,21 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "framer-motion": "^12.40.0",
+    "lucide-react": "^0.511.0",
     "next": "^15.3.3",
     "react": "^19.1.0",
-    "react-dom": "^19.1.0",
-    "lucide-react": "^0.511.0"
+    "react-dom": "^19.1.0"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.1.8",
+    "@types/express": "^5.0.6",
     "@types/node": "^22.15.0",
     "@types/react": "^19.1.0",
     "@types/react-dom": "^19.1.0",
+    "@types/serve-static": "^2.2.0",
+    "@types/use-sync-external-store": "^1.5.0",
+    "@types/whatwg-url": "^13.0.0",
     "tailwindcss": "^4.1.8",
     "typescript": "^5.8.3"
   }

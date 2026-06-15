@@ -33,6 +33,7 @@ const nextConfig: NextConfig = {
   poweredByHeader: false,
   compress: true,
   productionBrowserSourceMaps: false,
+  devIndicators: false,
 
   images: {
     formats: ["image/avif", "image/webp"],

@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { headers } from "next/headers";
-import { Marcellus, Inter, Noto_Serif_Devanagari } from "next/font/google";
+import { Playfair_Display, Inter } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
@@ -8,23 +8,15 @@ import { JsonLd } from "@/components/JsonLd";
 import { SITE } from "@/lib/site";
 import { organizationJsonLd, websiteJsonLd, templeJsonLd } from "@/lib/seo";
 
-const marcellus = Marcellus({
-  weight: "400",
+const playfair = Playfair_Display({
   subsets: ["latin"],
-  variable: "--font-marcellus",
+  variable: "--font-playfair",
   display: "swap",
 });
 
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
-  display: "swap",
-});
-
-const deva = Noto_Serif_Devanagari({
-  weight: ["400", "600"],
-  subsets: ["devanagari"],
-  variable: "--font-noto-deva",
   display: "swap",
 });
 
@@ -67,8 +59,8 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#fcf7ec" },
-    { media: "(prefers-color-scheme: dark)", color: "#2e0614" },
+    { media: "(prefers-color-scheme: light)", color: "#FFFCF7" },
+    { media: "(prefers-color-scheme: dark)", color: "#111111" },
   ],
   colorScheme: "light",
 };
@@ -79,13 +71,13 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const jsonLd = [organizationJsonLd(), websiteJsonLd(), templeJsonLd()];
 
   return (
-    <html lang="en-IN" className={`${marcellus.variable} ${inter.variable} ${deva.variable}`}>
-      <body className="min-h-screen antialiased">
+    <html lang="en-IN" className={`${playfair.variable} ${inter.variable}`} suppressHydrationWarning>
+      <body className="min-h-screen antialiased bg-[#FFFCF7] text-[#111111] font-sans selection:bg-[#D4AF37] selection:text-white">
         <JsonLd data={jsonLd} nonce={nonce} />
 
         <a
           href="#main"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-maroon-900 focus:px-5 focus:py-3 focus:text-sm focus:font-semibold focus:text-cream"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-[#111111] focus:px-5 focus:py-3 focus:text-sm focus:font-semibold focus:text-white"
         >
           Skip to content
         </a>

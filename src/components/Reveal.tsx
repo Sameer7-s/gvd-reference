@@ -1,6 +1,8 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
+import { motion, useInView, useReducedMotion } from "framer-motion";
+import { EASE_LUXURY, MOTION } from "@/lib/motion";
 
 type RevealProps = {
   children: React.ReactNode;
@@ -12,47 +14,29 @@ type RevealProps = {
 };
 
 /**
- * Reveals children on scroll using IntersectionObserver.
+ * Scroll-triggered reveal with Framer Motion.
  * Honours prefers-reduced-motion by showing content immediately.
  */
 export function Reveal({ children, className = "", delay = 0, as = "div", y = 24 }: RevealProps) {
-  const ref = useRef<HTMLElement>(null);
-  const [shown, setShown] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-8% 0px", amount: 0.12 });
+  const reduced = useReducedMotion();
+  const visible = reduced || isInView;
 
-  useEffect(() => {
-    const prefersReduced =
-      typeof window !== "undefined" &&
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (prefersReduced) {
-      setShown(true);
-      return;
-    }
-    const el = ref.current;
-    if (!el) return;
-    const io = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setShown(true);
-          io.disconnect();
-        }
-      },
-      { threshold: 0.12, rootMargin: "0px 0px -8% 0px" },
-    );
-    io.observe(el);
-    return () => io.disconnect();
-  }, []);
+  const Tag = (motion[as as keyof typeof motion] ?? motion.div) as typeof motion.div;
 
-  const Tag = as as React.ElementType;
   return (
     <Tag
       ref={ref}
       className={className}
-      style={{
-        opacity: shown ? 1 : 0,
-        transform: shown ? "translateY(0)" : `translateY(${y}px)`,
-        transition: `opacity 0.7s var(--ease-soft) ${delay}ms, transform 0.7s var(--ease-soft) ${delay}ms`,
-        willChange: "opacity, transform",
+      initial={reduced ? false : { opacity: 0, y }}
+      animate={visible ? { opacity: 1, y: 0 } : { opacity: 0, y }}
+      transition={{
+        duration: MOTION.section.duration,
+        ease: EASE_LUXURY,
+        delay: reduced ? 0 : delay / 1000,
       }}
+      style={{ willChange: "opacity, transform" }}
     >
       {children}
     </Tag>
