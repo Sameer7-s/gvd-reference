@@ -1,61 +1,150 @@
-import { Heart, BookOpen, Users, Star } from "lucide-react";
-import { Reveal } from "@/components/Reveal";
+"use client";
 
-export function About() {
-  const features = [
-    {
-      icon: <Star size={28} className="text-[var(--color-accent-primary)]" />,
-      title: "Daily Worship",
-      desc: "Experience divine darshan and authentic spiritual practices.",
-    },
-    {
-      icon: <BookOpen size={28} className="text-[var(--color-accent-primary)]" />,
-      title: "Bhagavad Gita Wisdom",
-      desc: "Timeless teachings for modern challenges and inner peace.",
-    },
-    {
-      icon: <Heart size={28} className="text-[var(--color-accent-primary)]" />,
-      title: "Community Service",
-      desc: "Food distribution and selfless service to humanity.",
-    },
-    {
-      icon: <Users size={28} className="text-[var(--color-accent-primary)]" />,
-      title: "Spiritual Growth",
-      desc: "Join a supportive community of devotees and seekers.",
-    },
-  ];
+import { useRef } from "react";
+import { BookOpen, Heart, Star, Users, type LucideIcon } from "lucide-react";
+import { motion, useInView, useReducedMotion } from "framer-motion";
+import { EASE_LUXURY } from "@/lib/motion";
+
+type Experience = {
+  Icon: LucideIcon;
+  title: string;
+  desc: string;
+  floatDuration: number;
+  iconFloatDuration: number;
+  revealDelay: number;
+  staggerOffset?: boolean;
+};
+
+const EXPERIENCES: Experience[] = [
+  {
+    Icon: Star,
+    title: "Daily Worship",
+    desc: "Experience divine darshan and authentic spiritual practices.",
+    floatDuration: 14,
+    iconFloatDuration: 13,
+    revealDelay: 0,
+  },
+  {
+    Icon: BookOpen,
+    title: "Bhagavad Gita Wisdom",
+    desc: "Timeless teachings for modern challenges and inner peace.",
+    floatDuration: 17,
+    iconFloatDuration: 15,
+    revealDelay: 120,
+    staggerOffset: true,
+  },
+  {
+    Icon: Heart,
+    title: "Community Service",
+    desc: "Food distribution and selfless service to humanity.",
+    floatDuration: 15,
+    iconFloatDuration: 16,
+    revealDelay: 240,
+  },
+  {
+    Icon: Users,
+    title: "Spiritual Growth",
+    desc: "Join a supportive community of devotees and seekers.",
+    floatDuration: 18,
+    iconFloatDuration: 12,
+    revealDelay: 360,
+    staggerOffset: true,
+  },
+];
+
+function ExperienceCard({ experience }: { experience: Experience }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-10% 0px", amount: 0.2 });
+  const reduced = useReducedMotion();
+  const visible = reduced || isInView;
+  const { Icon, title, desc, floatDuration, iconFloatDuration, revealDelay, staggerOffset } =
+    experience;
 
   return (
-    <section className="w-full section-padding bg-[var(--color-bg-secondary)]">
-      <div className="container-page flex flex-col lg:flex-row gap-16 items-center">
-        <Reveal className="w-full lg:w-1/2">
-          <h2 className="text-[36px] md:text-[48px] leading-[1.2] mb-6">
-            A Journey Towards Inner Peace
-          </h2>
-          <p className="text-[18px] leading-[1.7] mb-8">
-            Our temple is more than a place of worship; it is a sanctuary for the soul. We offer a holistic path to spiritual awakening through devotion, education, and community service. Step out of the chaos of daily life and discover the profound peace that comes from a genuine connection with the divine.
-          </p>
-          <div className="w-[60px] h-[2px] bg-[var(--color-accent-primary)] rounded-full" />
-        </Reveal>
+    <motion.div
+      ref={ref}
+      className={staggerOffset ? "experience-card-float--offset" : undefined}
+      initial={reduced ? false : { opacity: 0, y: 30 }}
+      animate={visible ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+      transition={{
+        duration: 0.9,
+        ease: EASE_LUXURY,
+        delay: reduced ? 0 : revealDelay / 1000,
+      }}
+    >
+      <div
+        className="experience-card-float"
+        style={
+          reduced
+            ? undefined
+            : ({ "--float-duration": `${floatDuration}s` } as React.CSSProperties)
+        }
+      >
+        <article className="experience-card group">
+          <div
+            className="experience-card-icon-wrap"
+            style={
+              reduced
+                ? undefined
+                : ({ "--icon-float-duration": `${iconFloatDuration}s` } as React.CSSProperties)
+            }
+          >
+            <Icon size={24} strokeWidth={1.5} aria-hidden />
+          </div>
 
-        <div className="w-full lg:w-1/2 grid grid-cols-1 sm:grid-cols-2 gap-6">
-          {features.map((item, idx) => (
-            <Reveal key={idx} delay={idx * 80}>
-            <div 
-              className="bg-white p-8 rounded-[var(--radius-card)] shadow-luxury transition-all duration-300 hover:shadow-luxury-hover hover:-translate-y-2 group h-full"
-            >
-              <div className="mb-6 p-4 bg-[var(--color-bg-secondary)] inline-block rounded-2xl group-hover:bg-[var(--color-accent-primary)]/10 transition-colors">
-                {item.icon}
-              </div>
-              <h3 className="text-[20px] mb-3">{item.title}</h3>
-              <p className="text-[15px] leading-[1.6]">
-                {item.desc}
-              </p>
-            </div>
-            </Reveal>
+          <h3 className="experience-card-title">
+            {title}
+            <span className="experience-card-title-line" aria-hidden />
+          </h3>
+
+          <p className="experience-card-desc">{desc}</p>
+        </article>
+      </div>
+    </motion.div>
+  );
+}
+
+export function About() {
+  const leftRef = useRef<HTMLDivElement>(null);
+  const leftInView = useInView(leftRef, { once: true, margin: "-10% 0px", amount: 0.3 });
+  const reduced = useReducedMotion();
+  const leftVisible = reduced || leftInView;
+
+  return (
+    <section className="experience-section" aria-labelledby="experience-heading">
+      <div className="experience-container">
+        {/* Left — editorial narrative */}
+        <motion.div
+          ref={leftRef}
+          className="experience-left"
+          initial={reduced ? false : { opacity: 0, y: 30 }}
+          animate={leftVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          transition={{ duration: 0.9, ease: EASE_LUXURY }}
+        >
+          <p className="experience-eyebrow">Discover the Path</p>
+
+          <h2 id="experience-heading" className="experience-heading">
+            A Journey Towards
+            <br />
+            Inner Peace
+          </h2>
+
+          <p className="experience-description">
+            Our temple is more than a place of worship; it is a sanctuary for the soul. We offer a
+            holistic path to spiritual awakening through devotion, education, and community service.
+            Step out of the chaos of daily life and discover the profound peace that comes from a
+            genuine connection with the divine.
+          </p>
+
+          <div className="experience-divider" aria-hidden />
+        </motion.div>
+
+        {/* Right — curated experience grid */}
+        <div className="experience-grid">
+          {EXPERIENCES.map((item) => (
+            <ExperienceCard key={item.title} experience={item} />
           ))}
         </div>
-
       </div>
     </section>
   );
