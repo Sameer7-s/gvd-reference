@@ -34,6 +34,8 @@ const nextConfig: NextConfig = {
   compress: true,
   productionBrowserSourceMaps: false,
   devIndicators: false,
+  // Keep file tracing scoped to this app (avoids picking up D:\OneDrive\package-lock.json).
+  outputFileTracingRoot: import.meta.dirname,
 
   images: {
     formats: ["image/avif", "image/webp"],
