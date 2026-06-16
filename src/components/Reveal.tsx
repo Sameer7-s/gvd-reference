@@ -7,19 +7,22 @@ import { EASE_LUXURY, MOTION } from "@/lib/motion";
 type RevealProps = {
   children: React.ReactNode;
   className?: string;
+  /** stagger delay in ms */
   delay?: number;
   as?: keyof React.JSX.IntrinsicElements;
   y?: number;
 };
 
+/**
+ * Scroll-triggered reveal with Framer Motion.
+ * Honours prefers-reduced-motion by showing content immediately.
+ */
 export function Reveal({ children, className = "", delay = 0, as = "div", y = 24 }: RevealProps) {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-8% 0px", amount: 0.12 });
   const reduced = useReducedMotion();
   const visible = reduced || isInView;
 
-<<<<<<< HEAD
-=======
   let Tag: any = motion.div;
   if (as === "section") Tag = motion.section;
   else if (as === "article") Tag = motion.article;
@@ -32,9 +35,8 @@ export function Reveal({ children, className = "", delay = 0, as = "div", y = 24
   else if (as === "footer") Tag = motion.footer;
   else if (as === "nav") Tag = motion.nav;
 
->>>>>>> de2b0ea349b3e04e4c8c2e59930c22052f4fd53f
   return (
-    <motion.div
+    <Tag
       ref={ref}
       className={className}
       initial={reduced ? false : { opacity: 0, y }}
@@ -47,6 +49,6 @@ export function Reveal({ children, className = "", delay = 0, as = "div", y = 24
       style={{ willChange: "opacity, transform" }}
     >
       {children}
-    </motion.div>
+    </Tag>
   );
 }
