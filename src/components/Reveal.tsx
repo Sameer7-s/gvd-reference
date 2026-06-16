@@ -23,10 +23,8 @@ export function Reveal({ children, className = "", delay = 0, as = "div", y = 24
   const reduced = useReducedMotion();
   const visible = reduced || isInView;
 
-  const Tag = (motion[as as keyof typeof motion] ?? motion.div) as typeof motion.div;
-
   return (
-    <Tag
+    <motion.div
       ref={ref}
       className={className}
       initial={reduced ? false : { opacity: 0, y }}
@@ -39,6 +37,6 @@ export function Reveal({ children, className = "", delay = 0, as = "div", y = 24
       style={{ willChange: "opacity, transform" }}
     >
       {children}
-    </Tag>
+    </motion.div>
   );
 }

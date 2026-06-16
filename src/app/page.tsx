@@ -3,7 +3,6 @@ import { Hero } from "@/components/sections/Hero";
 import { About } from "@/components/sections/About";
 import { Programs } from "@/components/sections/Programs";
 import { Statistics } from "@/components/sections/Statistics";
-import { Gallery } from "@/components/sections/Gallery";
 import { Events } from "@/components/sections/Events";
 import { Testimonials } from "@/components/sections/Testimonials";
 import { Donate } from "@/components/sections/Donate";
@@ -21,7 +20,6 @@ export default async function HomePage() {
       <About />
       <Programs />
       <Statistics />
-      <Gallery />
       <Events />
       <Testimonials />
       <Donate />
