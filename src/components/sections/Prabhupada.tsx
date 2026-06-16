@@ -5,19 +5,19 @@ import { Lotus, Mandala } from "@/components/decor";
 
 export function Prabhupada() {
   return (
-    <section id="prabhupada" className="relative overflow-hidden bg-sand py-20 sm:py-28">
-      <Mandala className="pointer-events-none absolute -right-40 bottom-0 h-[30rem] w-[30rem] text-saffron-500/5" />
+    <section id="prabhupada" className="relative overflow-hidden bg-[var(--color-bg-secondary)] py-20 sm:py-28">
+      <Mandala className="pointer-events-none absolute -right-40 bottom-0 h-[30rem] w-[30rem] text-[var(--color-accent-primary)] opacity-10" />
 
       <div className="container-page relative grid items-center gap-14 lg:grid-cols-[0.9fr_1.1fr]">
         <Reveal className="relative mx-auto w-full max-w-sm">
           <AssetFrame
             label="Srila Prabhupada"
-            tone="saffron"
+            tone="gold"
             arched
-            className="aspect-[3/4] shadow-temple-lg ring-1 ring-gold-400/30"
+            className="aspect-[3/4] shadow-luxury ring-1 ring-[var(--color-accent-primary)]/30"
           />
-          <div className="absolute -bottom-5 left-1/2 -translate-x-1/2 rounded-full border border-gold-500/30 bg-ivory/95 px-5 py-2 text-center shadow-temple">
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-saffron-700">
+          <div className="absolute -bottom-5 left-1/2 -translate-x-1/2 rounded-full border border-[var(--color-accent-primary)]/30 bg-white/95 px-5 py-2 text-center shadow-luxury">
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--color-accent-primary)]">
               Founder-Acharya · ISKCON
             </p>
           </div>
@@ -30,7 +30,7 @@ export function Prabhupada() {
             title="His Divine Grace A. C. Bhaktivedanta Swami Prabhupada"
             className="max-w-none"
           />
-          <div className="space-y-4 text-base leading-relaxed text-muted">
+          <div className="space-y-4 text-base leading-relaxed text-[var(--color-text-muted)]">
             <p>
               In 1965, at the age of sixty-nine, Srila Prabhupada journeyed from India to the West
               with little more than a trunk of sacred books and unshakable faith in the holy name.
@@ -43,12 +43,12 @@ export function Prabhupada() {
             </p>
           </div>
 
-          <figure className="relative rounded-2xl border-l-4 border-gold-500 bg-ivory/80 p-6 shadow-temple">
-            <Quote className="absolute -top-3 left-4 h-8 w-8 text-gold-500/40" />
-            <blockquote className="font-display text-xl italic leading-relaxed text-maroon-900">
+          <figure className="relative rounded-2xl border-l-4 border-[var(--color-accent-primary)] bg-white/80 p-6 shadow-luxury">
+            <Quote className="absolute -top-3 left-4 h-8 w-8 text-[var(--color-accent-primary)]/40" />
+            <blockquote className="font-display text-xl italic leading-relaxed text-[var(--color-text-primary)]">
               &ldquo;Chant Hare Krishna and be happy.&rdquo;
             </blockquote>
-            <figcaption className="mt-3 flex items-center gap-2 text-sm font-semibold text-saffron-700">
+            <figcaption className="mt-3 flex items-center gap-2 text-sm font-semibold text-[var(--color-accent-primary)]">
               <Lotus className="h-4 w-4 rotate-180" />
               Srila Prabhupada
             </figcaption>
