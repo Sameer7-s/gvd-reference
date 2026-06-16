@@ -1,8 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import { Play } from "lucide-react";
-import { HeroPrimaryButton, HeroSecondaryButton } from "@/components/motion/HeroButtons";
 
 export function About() {
   return (
@@ -33,13 +31,6 @@ export function About() {
             into the presence of Krishna.
           </p>
 
-          <div className="sanctuary-cta-group">
-            <HeroPrimaryButton href="/visit">Explore Temple</HeroPrimaryButton>
-            <HeroSecondaryButton href="/visit" className="sanctuary-cta-secondary">
-              <Play size={16} className="mr-2 shrink-0" aria-hidden />
-              Watch Experience
-            </HeroSecondaryButton>
-          </div>
         </div>
 
         <div className="sanctuary-right sanctuary-reveal sanctuary-reveal--delayed">

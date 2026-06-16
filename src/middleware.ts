@@ -7,7 +7,7 @@ import { NextRequest, NextResponse } from "next/server";
  * with `strict-dynamic` and no `unsafe-inline`.
  */
 export function middleware(request: NextRequest) {
-  const nonce = Buffer.from(crypto.randomUUID()).toString("base64");
+  const nonce = btoa(crypto.randomUUID());
   const isDev = process.env.NODE_ENV !== "production";
 
   // PRODUCTION: strict nonce + strict-dynamic, no unsafe-inline for scripts.

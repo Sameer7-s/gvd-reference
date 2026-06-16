@@ -1,0 +1,5 @@
+Image with src "/photos/krishna.png" is using quality "90" which is not configured in images.qualities. This config will be required starting in Next.js 16.
+Read more: https://nextjs.org/docs/messages/next-image-unconfigured-qualities
+ ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+Image with src "/photos/krishna.png" is using quality "90" which is not configured in images.qualities. This config will be required starting in Next.js 16.
+Read more: https://nextjs.org/docs/messages/next-image-unconfigured-qualities
