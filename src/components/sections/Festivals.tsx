@@ -9,10 +9,10 @@ import { FESTIVALS, FEATURED_FESTIVAL } from "@/lib/site";
 
 export function Festivals() {
   const PAST_FESTIVALS = [
-    { name: "Janmashtami", img: "/images/prabhupada-portrait.jpg" },
-    { name: "Gaura Purnima", img: "/images/darshan-placeholder.jpg" },
-    { name: "Ratha Yatra", img: "/images/hero-1.jpg" },
-    { name: "Govardhan Puja", img: "/images/hero-2.jpg" },
+    { name: "Janmashtami", img: "https://images.unsplash.com/photo-1582645607373-f93ccaf28352?auto=format&fit=crop&q=80&w=800" },
+    { name: "Gaura Purnima", img: "https://images.unsplash.com/photo-1620853549646-cd13ed4a7428?auto=format&fit=crop&q=80&w=800" },
+    { name: "Ratha Yatra", img: "https://images.unsplash.com/photo-1601004890684-d8cbf643f5f2?auto=format&fit=crop&q=80&w=800" },
+    { name: "Govardhan Puja", img: "https://images.unsplash.com/photo-1542385151-efd9000785a0?auto=format&fit=crop&q=80&w=800" },
   ];
 
   return (
@@ -91,9 +91,6 @@ export function Festivals() {
                   src={festival.img} 
                   alt={festival.name}
                   className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  onError={(e) => {
-                    (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1582645607373-f93ccaf28352?auto=format&fit=crop&q=80&w=800';
-                  }}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-80 group-hover:opacity-90 transition-opacity" />
                 <div className="absolute bottom-6 left-6 right-6 translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
