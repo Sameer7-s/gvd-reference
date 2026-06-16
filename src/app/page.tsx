@@ -1,5 +1,5 @@
 import { headers } from "next/headers";
-import { Hero } from "@/components/sections/Hero";
+import { HeroCarousel } from "@/components/sections/HeroCarousel";
 import { About } from "@/components/sections/About";
 import { Programs } from "@/components/sections/Programs";
 import { Statistics } from "@/components/sections/Statistics";
@@ -18,7 +18,7 @@ export default async function HomePage() {
   return (
     <>
       <JsonLd data={faqJsonLd()} nonce={nonce} />
-      <Hero />
+      <HeroCarousel />
       <About />
       <Programs />
       <Statistics />
