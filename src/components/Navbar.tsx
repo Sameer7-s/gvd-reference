@@ -14,7 +14,6 @@ const NAV_ITEMS = [
   { label: "Sevas", href: "/#sevas" },
   { label: "Festivals", href: "/festivals" },
   { label: "Visit", href: "/visit" },
-  { label: "Donate", href: "/donate" },
 ];
 
 function NavLink({ href, label, isActive }: { href: string; label: string; isActive: boolean }) {
@@ -125,10 +124,10 @@ export function Navbar() {
         {/* Right: CTA */}
         <div className="hidden lg:flex items-center gap-3 relative z-10">
           <Link
-            href="/events"
+            href="/donate"
             className="h-[44px] px-5 rounded-xl bg-[var(--color-bg-tertiary)] border border-transparent text-[var(--color-text-primary)] text-[14px] font-medium flex items-center justify-center transition-all duration-200 hover:bg-[var(--color-accent-primary)]/10 hover:text-[var(--color-accent-primary)]"
           >
-            Explore Festivals
+            Donate
           </Link>
           <Link
             href="/visit"
@@ -203,11 +202,11 @@ export function Navbar() {
 
           <div className="flex flex-col gap-4">
             <Link
-              href="/events"
+              href="/donate"
               onClick={() => setOpen(false)}
               className="ultra-btn-secondary w-full"
             >
-              Explore Festivals
+              Donate
             </Link>
             <Link
               href="/visit"
