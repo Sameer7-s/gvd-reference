@@ -1,12 +1,19 @@
 import type { Metadata, Viewport } from "next";
 import { headers } from "next/headers";
-import { Playfair_Display, Inter } from "next/font/google";
+import { Cormorant_Garamond, Playfair_Display, Inter } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { JsonLd } from "@/components/JsonLd";
 import { SITE } from "@/lib/site";
 import { organizationJsonLd, websiteJsonLd, templeJsonLd } from "@/lib/seo";
+
+const cormorant = Cormorant_Garamond({
+  subsets: ["latin"],
+  weight: ["500", "600"],
+  variable: "--font-cormorant",
+  display: "swap",
+});
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -71,7 +78,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const jsonLd = [organizationJsonLd(), websiteJsonLd(), templeJsonLd()];
 
   return (
-    <html lang="en-IN" className={`${playfair.variable} ${inter.variable}`} suppressHydrationWarning>
+    <html lang="en-IN" className={`${cormorant.variable} ${playfair.variable} ${inter.variable}`} suppressHydrationWarning>
       <body className="min-h-screen antialiased bg-[#FFFCF7] text-[#111111] font-sans selection:bg-[#D4AF37] selection:text-white">
         <JsonLd data={jsonLd} nonce={nonce} />
 

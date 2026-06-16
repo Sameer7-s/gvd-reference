@@ -20,8 +20,8 @@ export function VisitCta() {
   ];
 
   return (
-    <section id="visit" className="relative overflow-hidden bg-maroon-950 py-20 text-cream sm:py-28">
-      <Mandala className="pointer-events-none absolute -right-32 -top-20 h-[30rem] w-[30rem] text-gold-500/[0.06] animate-spin-slower" />
+    <section id="visit" className="relative overflow-hidden bg-black py-20 text-white sm:py-28">
+      <Mandala className="pointer-events-none absolute -right-32 -top-20 h-[30rem] w-[30rem] text-[var(--color-accent-primary)] opacity-[0.06] animate-spin-slower" />
 
       <div className="container-page relative grid items-center gap-12 lg:grid-cols-2">
         <Reveal>
@@ -37,19 +37,19 @@ export function VisitCta() {
           <ul className="mt-8 space-y-4">
             {items.map((item) => (
               <li key={item.label} className="flex items-start gap-4">
-                <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl border border-gold-500/25 bg-gold-500/10 text-gold-300">
+                <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl border border-[var(--color-accent-primary)]/25 bg-[var(--color-accent-primary)]/10 text-[var(--color-accent-primary)]">
                   <item.icon className="h-5 w-5" />
                 </span>
                 <div>
-                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-gold-300">
+                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--color-accent-primary)]">
                     {item.label}
                   </p>
                   {item.href ? (
-                    <a href={item.href} className="text-cream/85 transition-colors hover:text-gold-300">
+                    <a href={item.href} className="text-white/85 transition-colors hover:text-[var(--color-accent-primary)]">
                       {item.value}
                     </a>
                   ) : (
-                    <p className="text-cream/85">{item.value}</p>
+                    <p className="text-white/85">{item.value}</p>
                   )}
                 </div>
               </li>
@@ -65,7 +65,7 @@ export function VisitCta() {
               href={`tel:${CONTACT.phonePrimaryRaw}`}
               variant="outline"
               size="md"
-              className="border-gold-300/40 bg-transparent text-cream hover:bg-gold-500/10"
+              className="border-[var(--color-accent-primary)]/40 bg-transparent text-white hover:bg-[var(--color-accent-primary)]/10"
             >
               <Phone className="h-4 w-4" />
               Call the Temple
@@ -74,7 +74,7 @@ export function VisitCta() {
         </Reveal>
 
         <Reveal delay={120}>
-          <div className="overflow-hidden rounded-[2rem] border border-gold-500/25 shadow-temple-lg">
+          <div className="overflow-hidden rounded-[2rem] border border-[var(--color-accent-primary)]/25 shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
             <iframe
               title="Map to Hare Krishna Vaikuntham Cultural Centre, Visakhapatnam"
               src={mapEmbed}

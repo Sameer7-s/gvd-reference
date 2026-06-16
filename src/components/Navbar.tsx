@@ -14,7 +14,6 @@ const NAV_ITEMS = [
   { label: "Sevas", href: "/#sevas" },
   { label: "Festivals", href: "/festivals" },
   { label: "Visit", href: "/visit" },
-  { label: "Donate", href: "/donate" },
 ];
 
 function NavLink({ href, label, isActive }: { href: string; label: string; isActive: boolean }) {
@@ -23,23 +22,23 @@ function NavLink({ href, label, isActive }: { href: string; label: string; isAct
   return (
     <Link
       href={href}
-      className={`relative block px-4 py-2 rounded-full text-[15px] font-medium font-sans border transition-[transform,background-color,border-color] duration-200 ${
+      className={`relative block px-4 py-2 rounded-full text-[14px] font-medium font-sans border transition-[transform,background-color,border-color,color] duration-200 ${
         isActive
-          ? "bg-[#D4AF37]/10 border-[#D4AF37]/20 text-[#D4AF37]"
-          : "text-[#232323]/85 border-transparent hover:bg-white/10"
+          ? "bg-[var(--color-accent-primary)]/10 border-[var(--color-accent-primary)]/20 text-[var(--color-accent-primary)]"
+          : "text-[var(--color-text-secondary)] border-transparent hover:bg-[var(--color-bg-tertiary)] hover:text-[var(--color-text-primary)]"
       }`}
       style={{ willChange: "transform" }}
     >
       <motion.span
         className="block"
-        whileHover={reduced ? undefined : { y: -2 }}
+        whileHover={reduced ? undefined : { y: -1 }}
         transition={{ duration: MOTION.navHover.duration }}
       >
         {label}
       </motion.span>
       {isActive && (
         <motion.span
-          className="absolute bottom-1 left-4 right-4 h-[2px] rounded-full bg-[#D4AF37]/70 origin-left"
+          className="absolute bottom-1 left-4 right-4 h-[2px] rounded-full bg-[var(--color-accent-primary)]/70 origin-left"
           initial={reduced ? false : { scaleX: 0 }}
           animate={{ scaleX: 1 }}
           transition={{ duration: MOTION.navUnderline.duration, ease: EASE_LUXURY }}
@@ -74,18 +73,18 @@ export function Navbar() {
     <>
       <header className={`ultra-navbar${scrolled ? " is-scrolled" : ""}`}>
         {/* Left: Logo */}
-        <Link href="/" className="flex items-center gap-4 relative z-10 group">
-          <div className="w-[48px] h-[48px] bg-white/10 backdrop-blur-md border border-white/20 rounded-full flex items-center justify-center shrink-0 transition-transform duration-500 group-hover:scale-105">
-            <LogoMark className="w-[30px] h-[30px] text-[#D4AF37]" />
+        <Link href="/" className="flex items-center gap-3 relative z-10 group">
+          <div className="w-[42px] h-[42px] bg-[var(--color-accent-primary)]/10 border border-[var(--color-accent-primary)]/20 rounded-full flex items-center justify-center shrink-0 transition-transform duration-500 group-hover:scale-105">
+            <LogoMark className="w-[26px] h-[26px] text-[var(--color-accent-primary)]" />
           </div>
           <div className="flex flex-col">
             <span
-              className="tracking-tight text-[#111111] transition-colors"
+              className="tracking-tight text-[var(--color-text-primary)] transition-colors"
               style={{
                 fontFamily: "var(--font-playfair)",
-                fontSize: "20px",
+                fontSize: "18px",
                 fontWeight: 600,
-                letterSpacing: "-0.02em",
+                letterSpacing: "-0.01em",
                 lineHeight: "1.1",
               }}
             >
@@ -94,10 +93,10 @@ export function Navbar() {
             <span
               style={{
                 fontFamily: "var(--font-inter)",
-                fontSize: "13px",
-                letterSpacing: "0.25em",
+                fontSize: "11px",
+                letterSpacing: "0.22em",
                 textTransform: "uppercase",
-                color: "#D4AF37",
+                color: "var(--color-accent-primary)",
                 fontWeight: 600,
                 marginTop: "2px",
                 lineHeight: "1",
@@ -109,7 +108,7 @@ export function Navbar() {
         </Link>
 
         {/* Center: Nav Links */}
-        <ul className="hidden lg:flex items-center gap-8 relative z-10">
+        <ul className="hidden lg:flex items-center gap-6 relative z-10">
           {NAV_ITEMS.map((item) => {
             const isActive =
               pathname === item.href ||
@@ -123,16 +122,16 @@ export function Navbar() {
         </ul>
 
         {/* Right: CTA */}
-        <div className="hidden lg:flex items-center gap-4 relative z-10">
+        <div className="hidden lg:flex items-center gap-3 relative z-10">
           <Link
-            href="/events"
-            className="h-[48px] px-6 rounded-2xl bg-white/10 border border-white/20 text-[#111111] text-[15px] font-medium flex items-center justify-center transition-all duration-200 hover:bg-white/15 hover:-translate-y-[2px]"
+            href="/donate"
+            className="h-[44px] px-5 rounded-xl bg-[var(--color-bg-tertiary)] border border-transparent text-[var(--color-text-primary)] text-[14px] font-medium flex items-center justify-center transition-all duration-200 hover:bg-[var(--color-accent-primary)]/10 hover:text-[var(--color-accent-primary)]"
           >
-            Explore Festivals
+            Donate
           </Link>
           <Link
             href="/visit"
-            className="h-[48px] px-7 rounded-2xl bg-gradient-to-br from-[#D4AF37] to-[#E8C55A] text-white text-[15px] font-semibold flex items-center justify-center shadow-[0_8px_20px_rgba(212,175,55,0.2)] transition-all duration-200 hover:-translate-y-[2px] hover:shadow-[0_12px_25px_rgba(212,175,55,0.3)] border-none"
+            className="h-[44px] px-6 rounded-xl bg-gradient-to-br from-[var(--color-accent-primary)] to-[var(--color-accent-secondary)] text-white text-[14px] font-semibold flex items-center justify-center shadow-luxury transition-all duration-200 hover:-translate-y-[2px] hover:shadow-luxury-hover border-none"
           >
             Visit Temple
           </Link>
@@ -142,10 +141,10 @@ export function Navbar() {
         <button
           type="button"
           onClick={() => setOpen((v) => !v)}
-          className="grid h-12 w-12 place-items-center rounded-full lg:hidden transition-colors relative z-10 bg-white/20 backdrop-blur-md border border-white/25 text-[#111111]"
+          className="grid h-10 w-10 place-items-center rounded-full lg:hidden transition-colors relative z-10 bg-[var(--color-bg-tertiary)] text-[var(--color-text-primary)]"
           aria-label={open ? "Close menu" : "Open menu"}
         >
-          {open ? <X size={22} /> : <Menu size={22} />}
+          {open ? <X size={20} /> : <Menu size={20} />}
         </button>
       </header>
 
@@ -203,11 +202,11 @@ export function Navbar() {
 
           <div className="flex flex-col gap-4">
             <Link
-              href="/events"
+              href="/donate"
               onClick={() => setOpen(false)}
               className="ultra-btn-secondary w-full"
             >
-              Explore Festivals
+              Donate
             </Link>
             <Link
               href="/visit"
