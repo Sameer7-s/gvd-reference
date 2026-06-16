@@ -10,32 +10,32 @@ export function SevaCard({ seva }: { seva: Seva }) {
   return (
     <article
       id={seva.slug}
-      className={`group relative flex h-full scroll-mt-28 flex-col overflow-hidden rounded-3xl border p-7 transition-all duration-300 ease-soft hover:-translate-y-1 hover:shadow-temple-lg ${
+      className={`group relative flex h-full scroll-mt-28 flex-col overflow-hidden rounded-3xl border p-7 transition-all duration-300 ease-soft hover:-translate-y-1 hover:shadow-luxury ${
         seva.highlight
-          ? "border-gold-500/50 bg-gradient-to-br from-maroon-900 to-maroon-950 text-cream"
-          : "border-gold-500/20 bg-ivory/80 text-maroon-900 shadow-temple hover:border-saffron-400"
+          ? "border-[var(--color-accent-primary)]/50 bg-gradient-to-br from-neutral-900 to-black text-white"
+          : "border-[var(--color-accent-primary)]/20 bg-white/80 text-[var(--color-text-primary)] shadow-luxury hover:border-[var(--color-accent-primary)]/50"
       }`}
     >
       {seva.highlight && (
-        <span className="absolute right-5 top-5 rounded-full bg-gold-500/20 px-3 py-1 text-[0.65rem] font-bold uppercase tracking-[0.16em] text-gold-300">
+        <span className="absolute right-5 top-5 rounded-full bg-[var(--color-accent-primary)]/20 px-3 py-1 text-[0.65rem] font-bold uppercase tracking-[0.16em] text-[var(--color-accent-primary)]">
           Most Needed
         </span>
       )}
       <span
         className={`grid h-14 w-14 place-items-center rounded-2xl ${
           seva.highlight
-            ? "bg-gold-500/15 text-gold-300"
-            : "bg-gradient-to-br from-saffron-500 to-maroon-700 text-cream"
+            ? "bg-[var(--color-accent-primary)]/15 text-[var(--color-accent-primary)]"
+            : "bg-gradient-to-br from-[var(--color-accent-primary)] to-[var(--color-accent-secondary)] text-white shadow-[0_4px_12px_rgba(212,175,55,0.2)]"
         }`}
       >
         <Icon name={seva.icon} className="h-7 w-7" />
       </span>
 
       <h3 className="mt-5 font-display text-2xl">{seva.title}</h3>
-      <p className={`text-sm font-semibold ${seva.highlight ? "text-saffron-300" : "text-saffron-600"}`}>
+      <p className={`text-sm font-semibold ${seva.highlight ? "text-[var(--color-accent-primary)]" : "text-[var(--color-accent-primary)]"}`}>
         {seva.tagline}
       </p>
-      <p className={`mt-3 text-sm leading-relaxed ${seva.highlight ? "text-cream/75" : "text-muted"}`}>
+      <p className={`mt-3 text-sm leading-relaxed ${seva.highlight ? "text-white/75" : "text-[var(--color-text-muted)]"}`}>
         {seva.description}
       </p>
 
@@ -45,8 +45,8 @@ export function SevaCard({ seva }: { seva: Seva }) {
             key={amt}
             className={`inline-flex items-center gap-0.5 rounded-full px-3 py-1 text-sm font-semibold ${
               seva.highlight
-                ? "bg-cream/10 text-gold-200"
-                : "bg-saffron-50 text-saffron-700"
+                ? "bg-white/10 text-[var(--color-accent-light)]"
+                : "bg-[var(--color-accent-primary)]/10 text-[var(--color-accent-primary)]"
             }`}
           >
             <BadgeIndianRupee className="h-3.5 w-3.5" />
@@ -71,8 +71,8 @@ export function SevaCard({ seva }: { seva: Seva }) {
 
 export function Seva() {
   return (
-    <section id="sevas" className="relative overflow-hidden bg-cream py-20 sm:py-28">
-      <Mandala className="pointer-events-none absolute -right-48 top-20 h-[32rem] w-[32rem] text-saffron-500/5 animate-spin-slower" />
+    <section id="sevas" className="relative overflow-hidden bg-[var(--color-bg-secondary)] py-20 sm:py-28">
+      <Mandala className="pointer-events-none absolute -right-48 top-20 h-[32rem] w-[32rem] text-[var(--color-accent-primary)] opacity-[0.05] animate-spin-slower" />
 
       <div className="container-page relative">
         <Reveal>
@@ -80,7 +80,7 @@ export function Seva() {
             eyebrow="Seva — Loving Service"
             title={
               <>
-                Be a part of the Lord&apos;s <span className="text-saffron-grad">service</span>
+                Be a part of the Lord&apos;s <span className="text-[var(--color-accent-primary)]">service</span>
               </>
             }
             intro="Every contribution, however small, becomes eternal devotional service. Choose a seva close to your heart and share in the merit."
@@ -96,10 +96,10 @@ export function Seva() {
         </div>
 
         <Reveal className="mt-12">
-          <div className="flex flex-col items-center justify-center gap-4 rounded-2xl border border-emerald-600/20 bg-emerald-500/5 px-6 py-5 text-center sm:flex-row sm:text-left">
+          <div className="flex flex-col items-center justify-center gap-4 rounded-2xl border border-emerald-600/20 bg-emerald-500/5 px-6 py-5 text-center sm:flex-row sm:text-left shadow-luxury">
             <ShieldCheck className="h-8 w-8 shrink-0 text-emerald-600" />
-            <p className="text-sm text-muted">
-              <strong className="text-maroon-900">100% secure &amp; tax-exempt.</strong> All
+            <p className="text-sm text-[var(--color-text-muted)]">
+              <strong className="text-[var(--color-text-primary)]">100% secure &amp; tax-exempt.</strong> All
               donations are processed over an encrypted connection and are eligible for tax exemption.
               A receipt is issued for every contribution.
             </p>
