@@ -1,4 +1,4 @@
-"use client";
+"use client"; // force HMR
 
 import { CalendarDays, ArrowRight } from "lucide-react";
 import { Reveal } from "@/components/Reveal";
