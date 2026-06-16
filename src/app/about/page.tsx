@@ -56,7 +56,7 @@ export default async function AboutPage() {
       />
 
       {/* Mission / Vision */}
-      <section className="bg-cream py-20 sm:py-24">
+      <section className="bg-[var(--color-bg-primary)] py-20 sm:py-24">
         <div className="container-page grid gap-6 md:grid-cols-2">
           {[
             { icon: Target, title: "Our Mission", text: SITE.mission },
@@ -67,12 +67,12 @@ export default async function AboutPage() {
             },
           ].map((b, i) => (
             <Reveal key={b.title} delay={i * 100}>
-              <div className="flex h-full flex-col gap-4 rounded-3xl border border-gold-500/20 bg-ivory/80 p-8 shadow-temple">
-                <span className="grid h-14 w-14 place-items-center rounded-2xl bg-gradient-to-br from-saffron-500 to-maroon-700 text-cream">
+              <div className="flex h-full flex-col gap-4 rounded-3xl border border-[var(--color-accent-primary)]/20 bg-white/80 p-8 shadow-luxury">
+                <span className="grid h-14 w-14 place-items-center rounded-2xl bg-gradient-to-br from-[var(--color-accent-primary)] to-[var(--color-accent-secondary)] text-white">
                   <b.icon className="h-7 w-7" />
                 </span>
-                <h2 className="font-display text-2xl text-maroon-900">{b.title}</h2>
-                <p className="leading-relaxed text-muted">{b.text}</p>
+                <h2 className="font-display text-2xl text-[var(--color-text-primary)]">{b.title}</h2>
+                <p className="leading-relaxed text-[var(--color-text-muted)]">{b.text}</p>
               </div>
             </Reveal>
           ))}
@@ -80,24 +80,24 @@ export default async function AboutPage() {
       </section>
 
       {/* Our story timeline */}
-      <section className="bg-sand py-20 sm:py-24">
+      <section className="bg-[var(--color-bg-secondary)] py-20 sm:py-24">
         <div className="container-page">
           <Reveal>
             <SectionHeading eyebrow="Our Journey" title="From humble beginnings" />
           </Reveal>
           <div className="mt-14 grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
             <Reveal className="relative mx-auto w-full max-w-sm">
-              <AssetFrame label="The dham through the years" tone="maroon" className="aspect-[4/5] shadow-temple-lg" />
+              <AssetFrame label="The dham through the years" tone="gold" className="aspect-[4/5] shadow-luxury" />
             </Reveal>
-            <ol className="relative space-y-8 border-l-2 border-gold-500/30 pl-8">
+            <ol className="relative space-y-8 border-l-2 border-[var(--color-accent-primary)]/30 pl-8">
               {timeline.map((t, i) => (
                 <Reveal as="li" key={t.year} delay={i * 90} className="relative">
-                  <span className="absolute -left-[2.6rem] grid h-8 w-8 place-items-center rounded-full border-2 border-gold-500 bg-cream text-xs font-bold text-saffron-700">
+                  <span className="absolute -left-[2.6rem] grid h-8 w-8 place-items-center rounded-full border-2 border-[var(--color-accent-primary)] bg-[var(--color-bg-primary)] text-xs font-bold text-[var(--color-accent-primary)]">
                     {i + 1}
                   </span>
-                  <p className="font-display text-2xl text-saffron-grad">{t.year}</p>
-                  <h3 className="mt-1 font-display text-xl text-maroon-900">{t.title}</h3>
-                  <p className="mt-1 text-muted">{t.text}</p>
+                  <p className="font-display text-2xl text-[var(--color-accent-primary)]">{t.year}</p>
+                  <h3 className="mt-1 font-display text-xl text-[var(--color-text-primary)]">{t.title}</h3>
+                  <p className="mt-1 text-[var(--color-text-muted)]">{t.text}</p>
                 </Reveal>
               ))}
             </ol>
@@ -106,7 +106,7 @@ export default async function AboutPage() {
       </section>
 
       {/* What we do */}
-      <section className="bg-cream py-20 sm:py-24">
+      <section className="bg-[var(--color-bg-primary)] py-20 sm:py-24">
         <div className="container-page">
           <Reveal>
             <SectionHeading
@@ -119,18 +119,18 @@ export default async function AboutPage() {
           <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {programs.map((p, i) => (
               <Reveal key={p.title} delay={i * 80}>
-                <div className="group flex h-full flex-col gap-3 rounded-2xl border border-gold-500/20 bg-ivory/70 p-6 transition-colors duration-300 hover:border-saffron-400 hover:bg-saffron-50">
-                  <span className="grid h-12 w-12 place-items-center rounded-xl bg-gradient-to-br from-saffron-500 to-maroon-700 text-cream">
+                <div className="group flex h-full flex-col gap-3 rounded-2xl border border-[var(--color-accent-primary)]/20 bg-white/70 p-6 transition-colors duration-300 hover:border-[var(--color-accent-primary)]/50 hover:bg-[var(--color-bg-tertiary)]">
+                  <span className="grid h-12 w-12 place-items-center rounded-xl bg-gradient-to-br from-[var(--color-accent-primary)] to-[var(--color-accent-secondary)] text-white">
                     <p.icon className="h-6 w-6" />
                   </span>
-                  <h3 className="font-display text-lg text-maroon-900">{p.title}</h3>
-                  <p className="text-sm text-muted">{p.text}</p>
+                  <h3 className="font-display text-lg text-[var(--color-text-primary)]">{p.title}</h3>
+                  <p className="text-sm text-[var(--color-text-muted)]">{p.text}</p>
                 </div>
               </Reveal>
             ))}
           </div>
-          <Reveal className="mt-10 flex items-center justify-center gap-2 text-sm text-muted">
-            <Users className="h-5 w-5 text-saffron-600" />
+          <Reveal className="mt-10 flex items-center justify-center gap-2 text-sm text-[var(--color-text-muted)]">
+            <Users className="h-5 w-5 text-[var(--color-accent-primary)]" />
             Powered by a community of 6,000+ life members and countless volunteers.
           </Reveal>
         </div>

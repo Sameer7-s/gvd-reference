@@ -7,9 +7,9 @@ const tones = ["night", "krishna", "gold"] as const;
 
 export function Deities() {
   return (
-    <section className="relative overflow-hidden bg-maroon-950 py-20 sm:py-28">
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(80%_60%_at_50%_0%,#5a132c_0%,transparent_60%)]" />
-      <Mandala className="pointer-events-none absolute left-1/2 top-0 h-[140%] w-auto -translate-x-1/2 text-gold-500/[0.06] animate-spin-slower" />
+    <section className="relative overflow-hidden bg-black py-20 sm:py-28">
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(80%_60%_at_50%_0%,rgba(212,175,55,0.1)_0%,transparent_60%)]" />
+      <Mandala className="pointer-events-none absolute left-1/2 top-0 h-[140%] w-auto -translate-x-1/2 text-[var(--color-accent-primary)] opacity-[0.06] animate-spin-slower" />
 
       <div className="container-page relative">
         <Reveal>
@@ -31,14 +31,14 @@ export function Deities() {
                     label={d.name}
                     tone={tones[i]}
                     arched
-                    className="aspect-[3/4] w-full shadow-temple-lg ring-1 ring-gold-400/25 transition-transform duration-500 ease-soft group-hover:-translate-y-1.5"
+                    className="aspect-[3/4] w-full shadow-[0_20px_50px_rgba(0,0,0,0.5)] ring-1 ring-[var(--color-accent-primary)]/25 transition-transform duration-500 ease-soft group-hover:-translate-y-1.5"
                   />
                 </div>
-                <h3 className="mt-6 font-display text-2xl text-gold-300">{d.name}</h3>
-                <p className="mt-1 text-xs font-semibold uppercase tracking-[0.2em] text-saffron-300/80">
+                <h3 className="mt-6 font-display text-2xl text-[var(--color-accent-primary)]">{d.name}</h3>
+                <p className="mt-1 text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-accent-secondary)]">
                   {d.role}
                 </p>
-                <p className="mt-3 max-w-xs text-sm leading-relaxed text-cream/65">{d.blurb}</p>
+                <p className="mt-3 max-w-xs text-sm leading-relaxed text-white/65">{d.blurb}</p>
               </article>
             </Reveal>
           ))}
