@@ -1,3 +1,5 @@
+"use client";
+
 import { CalendarDays, ArrowRight } from "lucide-react";
 import { Reveal } from "@/components/Reveal";
 import { SectionHeading, Button, AssetFrame } from "@/components/ui";
