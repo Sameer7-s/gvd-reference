@@ -89,6 +89,7 @@ export function Gallery() {
         </Reveal>
 
         <div className="tm-content">
+          {/* Column 1: Featured Image */}
           <Reveal className="tm-featured">
             <div className="tm-featured-image-wrap">
               <Image
@@ -96,7 +97,7 @@ export function Gallery() {
                 alt="Radha Krishna deities on the temple altar with warm golden lighting"
                 fill
                 className="object-cover object-center"
-                sizes="(max-width: 767px) 100vw, (max-width: 1023px) 70vw, 63vw"
+                sizes="(max-width: 767px) 100vw, (max-width: 1023px) 70vw, 55vw"
                 priority
               />
               <div className="tm-featured-badge">
@@ -112,12 +113,13 @@ export function Gallery() {
                 </p>
                 <div className="tm-overlay-divider" aria-hidden="true" />
                 <Link href="/visit" className="tm-overlay-cta">
-                  Explore Moments →
+                  Explore Moments <span aria-hidden="true">→</span>
                 </Link>
               </aside>
             </div>
           </Reveal>
 
+          {/* Column 2: Vertical Image Stack */}
           {timelineItems.map((item, index) => (
             <Reveal
               key={item.number}
@@ -130,12 +132,13 @@ export function Gallery() {
                   alt={item.alt}
                   fill
                   className="object-cover transition-[filter] duration-300 group-hover:brightness-110"
-                  sizes="(max-width: 767px) 100vw, (max-width: 1023px) 45vw, 12vw"
+                  sizes="(max-width: 767px) 100vw, (max-width: 1023px) 45vw, 15vw"
                 />
               </div>
             </Reveal>
           ))}
 
+          {/* Column 3: Timeline */}
           <div className="tm-timeline-column">
             <div className="tm-timeline-line" aria-hidden="true" />
 

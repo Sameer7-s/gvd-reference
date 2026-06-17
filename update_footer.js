@@ -1,39 +1,9 @@
-"use client";
+const fs = require('fs');
+const content = fs.readFileSync('src/components/Footer.tsx', 'utf-8');
 
-import Link from "next/link";
-import { SITE, SOCIALS, NAV } from "@/lib/site";
-import { BrandIcon } from "./brand";
-import { motion } from "framer-motion";
-import { useReducedMotion } from "framer-motion";
+let newContent = content.replace(/<footer className="luxury-footer overflow-hidden relative">/, `<div className="footer-area">`);
 
-const EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
-
-const staggerContainer = {
-  hidden: {},
-  visible: {
-    transition: {
-      staggerChildren: 0.1,
-    },
-  },
-};
-
-const columnVariant = {
-  hidden: { opacity: 0, y: 50 },
-  visible: { 
-    opacity: 1, 
-    y: 0, 
-    transition: { duration: 0.9, ease: EASE } 
-  },
-};
-
-export function Footer() {
-  const year = new Date().getFullYear();
-  const shouldReduceMotion = useReducedMotion();
-
-  return (
-    <div className="footer-area">
-      <style dangerouslySetInnerHTML={{ __html: `
-        /* --- Base Footer --- */
+newContent = newContent.replace(/\/\* --- Base Footer --- \*\/[\s\S]*?`\}\} \/>/, `/* --- Base Footer --- */
         .footer-area {
           position: relative;
           width: 100%;
@@ -125,7 +95,6 @@ export function Footer() {
           text-align: center;
           letter-spacing: -2px;
           filter: blur(5px);
-          display: none; /* Hidden since it's baked into background */
         }
         @media (max-width: 767px) {
           .luxury-watermark { display: none; }
@@ -143,7 +112,6 @@ export function Footer() {
           z-index: 3;
           pointer-events: none;
           animation: floatFeather 12s ease-in-out infinite;
-          display: none; /* Hidden since it's baked into background */
         }
         @keyframes floatFeather {
           0%, 100% { transform: translateY(0) scale(1); }
@@ -494,15 +462,18 @@ export function Footer() {
         @media (max-width: 767px) {
           .ornament-tl { width: 150px; height: 150px; opacity: 0.03; }
         }
-      `}} />
+      \`}} />`);
 
-      {/* Mantra Section */}
+newContent = newContent.replace(/\{\/\* Decorative Assets \*\/\}[\s\S]*?<motion\.div/m, `{/* Mantra Section */}
       <section className="mantra-section-wrap">
         <div className="mantra-particles">
           <div className="particle-layer layer-1" />
           <div className="particle-layer layer-2" />
           <div className="particle-layer layer-3" />
         </div>
+
+        <div className="luxury-watermark">HARE<br/>KRISHNA</div>
+        <img src="/images/footer/peacock.png" alt="" className="luxury-peacock" />
 
         <div className="mantra-container">
           <div className="mantra-top-divider">
@@ -516,10 +487,8 @@ export function Footer() {
           </div>
 
           <div className="mantra-text">
-            HARE KRISHNA HARE KRISHNA<br />
-            KRISHNA KRISHNA HARE HARE<br />
-            HARE RAMA HARE RAMA<br />
-            RAMA RAMA HARE HARE
+            HARE KRISHNA HARE KRISHNA<br className="md:hidden" /> KRISHNA KRISHNA HARE HARE<br/>
+            HARE RAMA HARE RAMA<br className="md:hidden" /> RAMA RAMA HARE HARE
           </div>
         </div>
 
@@ -531,153 +500,10 @@ export function Footer() {
         <div className="ornament-tl" />
 
         {/* Main Grid */}
-        <motion.div 
-        className="luxury-footer-grid"
-        variants={staggerContainer}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
-      >
-        
-        {/* Column 1 - Brand */}
-        <motion.div variants={shouldReduceMotion ? {} : columnVariant} className="luxury-col col-brand">
-          <div className="brand-logo-container" />
-          
-          <h3 className="luxury-brand-heading">
-            Hare Krishna<br/>Movement
-          </h3>
-          
-          <div className="luxury-divider" style={{ justifyContent: 'flex-start' }}>
-            <div className="line" style={{ flex: 'none', width: '40px' }} />
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C9A54A" strokeWidth="1.5">
-              <path d="M12 22c-4.4 0-8-3.6-8-8 0-4.4 3.6-8 8-8s8 3.6 8 8c0 4.4-3.6 8-8 8z" opacity="0.2"/>
-              <path d="M12 14c-1.1 0-2-.9-2-2 0-2.2 2-6 2-6s2 3.8 2 6c0 1.1-.9 2-2 2z" fill="#C9A54A"/>
-              <path d="M12 22c-2.2 0-4-1.8-4-4 0-3.3 4-8 4-8s4 4.7 4 8c0 2.2-1.8 4-4 4z"/>
-            </svg>
-            <div className="line" style={{ flex: 'none', width: '40px' }} />
-          </div>
+        <motion.div`);
 
-          <p className="luxury-brand-desc mb-8">
-            A sanctuary of devotion, wisdom, culture and timeless Krishna consciousness.
-          </p>
-          
-          <div className="flex items-center gap-4 mt-2">
-            {SOCIALS.map((s) => (
-              <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" className="luxury-social-icon" aria-label={s.label}>
-                <BrandIcon name={s.icon} className="h-5 w-5" />
-              </a>
-            ))}
-          </div>
-        </motion.div>
+newContent = newContent.replace(/\{\/\* Mantra Strip \*\/\}[\s\S]*?\{\/\* Legal Bar \*\/\}/m, `{/* Legal Bar */}`);
 
-        {/* Column 2 - Quick Links */}
-        <motion.div variants={shouldReduceMotion ? {} : columnVariant} className="luxury-col">
-          <h3 className="luxury-col-title">QUICK LINKS</h3>
-          
-          <div className="luxury-divider" style={{ justifyContent: 'flex-start' }}>
-            <div className="line" style={{ flex: 'none', width: '40px' }} />
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C9A54A" strokeWidth="1.5">
-              <path d="M12 22c-4.4 0-8-3.6-8-8 0-4.4 3.6-8 8-8s8 3.6 8 8c0 4.4-3.6 8-8 8z" opacity="0.2"/>
-              <path d="M12 14c-1.1 0-2-.9-2-2 0-2.2 2-6 2-6s2 3.8 2 6c0 1.1-.9 2-2 2z" fill="#C9A54A"/>
-              <path d="M12 22c-2.2 0-4-1.8-4-4 0-3.3 4-8 4-8s4 4.7 4 8c0 2.2-1.8 4-4 4z"/>
-            </svg>
-            <div className="line" style={{ flex: 'none', width: '40px' }} />
-          </div>
+newContent = newContent.replace(/<\/footer>\s*\);\s*\}\s*$/, `</footer>\n    </div>\n  );\n}`);
 
-          <ul className="flex flex-col w-full mt-2">
-            {NAV.map((item) => (
-              <li key={item.href}>
-                <Link href={item.href} className="luxury-link-item">
-                  {item.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </motion.div>
-
-        {/* Column 3 - Contact */}
-        <motion.div variants={shouldReduceMotion ? {} : columnVariant} className="luxury-col">
-          <h3 className="luxury-col-title">CONTACT</h3>
-          
-          <div className="luxury-divider" style={{ justifyContent: 'flex-start' }}>
-            <div className="line" style={{ flex: 'none', width: '40px' }} />
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C9A54A" strokeWidth="1.5">
-              <path d="M12 22c-4.4 0-8-3.6-8-8 0-4.4 3.6-8 8-8s8 3.6 8 8c0 4.4-3.6 8-8 8z" opacity="0.2"/>
-              <path d="M12 14c-1.1 0-2-.9-2-2 0-2.2 2-6 2-6s2 3.8 2 6c0 1.1-.9 2-2 2z" fill="#C9A54A"/>
-              <path d="M12 22c-2.2 0-4-1.8-4-4 0-3.3 4-8 4-8s4 4.7 4 8c0 2.2-1.8 4-4 4z"/>
-            </svg>
-            <div className="line" style={{ flex: 'none', width: '40px' }} />
-          </div>
-          
-          <div className="contact-block mt-2">
-            <span className="contact-label">PHONE</span>
-            <span className="contact-value">+91 XXXXX XXXXX</span>
-          </div>
-
-          <div className="contact-block">
-            <span className="contact-label">EMAIL</span>
-            <span className="contact-value">
-              <a href="mailto:info@guptvrindavandham.org" className="transition-colors">info@guptvrindavandham.org</a>
-            </span>
-          </div>
-
-          <div className="contact-block">
-            <span className="contact-label">VISIT</span>
-            <span className="contact-value">
-              Gupt Vrindavan Dham<br />
-              Parikrama Marg, Vrindavan<br />
-              Uttar Pradesh, India
-            </span>
-          </div>
-        </motion.div>
-
-        {/* Column 4 - Darshan Hours */}
-        <motion.div variants={shouldReduceMotion ? {} : columnVariant} className="luxury-col">
-          <h3 className="luxury-col-title">HOURS</h3>
-          
-          <div className="luxury-divider" style={{ justifyContent: 'flex-start' }}>
-            <div className="line" style={{ flex: 'none', width: '40px' }} />
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C9A54A" strokeWidth="1.5">
-              <path d="M12 22c-4.4 0-8-3.6-8-8 0-4.4 3.6-8 8-8s8 3.6 8 8c0 4.4-3.6 8-8 8z" opacity="0.2"/>
-              <path d="M12 14c-1.1 0-2-.9-2-2 0-2.2 2-6 2-6s2 3.8 2 6c0 1.1-.9 2-2 2z" fill="#C9A54A"/>
-              <path d="M12 22c-2.2 0-4-1.8-4-4 0-3.3 4-8 4-8s4 4.7 4 8c0 2.2-1.8 4-4 4z"/>
-            </svg>
-            <div className="line" style={{ flex: 'none', width: '40px' }} />
-          </div>
-
-          <div className="contact-block mt-2">
-            <span className="contact-label">DARSHAN HOURS</span>
-            <div className="contact-sub-label">Morning:</div>
-            <span className="contact-value">4:00 AM – 1:00 PM</span>
-            <div className="contact-separator" />
-            <div className="contact-sub-label">Evening:</div>
-            <span className="contact-value">4:00 PM – 9:00 PM</span>
-          </div>
-          
-          <div className="contact-block mt-4">
-            <span className="contact-label">OFFICE HOURS</span>
-            <span className="contact-value">9:00 AM – 6:00 PM</span>
-          </div>
-        </motion.div>
-
-      </motion.div>
-
-      {/* Legal Bar */}
-      <div className="legal-bar">
-        <div>© {year} Hare Krishna Movement</div>
-        
-        <svg className="legal-lotus" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C9A54A" strokeWidth="1.5" opacity="0.8">
-          <path d="M12 22c-4.4 0-8-3.6-8-8 0-4.4 3.6-8 8-8s8 3.6 8 8c0 4.4-3.6 8-8 8z" opacity="0.2"/>
-          <path d="M12 14c-1.1 0-2-.9-2-2 0-2.2 2-6 2-6s2 3.8 2 6c0 1.1-.9 2-2 2z" fill="currentColor"/>
-        </svg>
-
-        <div className="legal-links">
-          <Link href="/privacy">Privacy Policy</Link>
-          <Link href="/terms">Terms of Service</Link>
-          <Link href="/contact">Contact</Link>
-        </div>
-      </div>
-    </footer>
-    </div>
-  );
-}
+fs.writeFileSync('src/components/Footer.tsx', newContent);

@@ -1,201 +1,482 @@
 "use client";
 
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import useEmblaCarousel from "embla-carousel-react";
-import Autoplay from "embla-carousel-autoplay";
+import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { motion } from "framer-motion";
 
-const slides = [
+/* ─── Slide data ─────────────────────────────────────────────────── */
+const SLIDES = [
   {
-    id: "vishwam",
-    image: "/photos/WhatsApp-Image-2026-06-16-at-21.33.08.jpeg",
-    title: "VISHWAMBHARA",
-    subtitle: "A NOVEL ON THE LIFE OF SRI CHAITANYA MAHAPRABHU",
-    author: "By Na. Mogasale, Karnataka Sahitya Academy awardee",
-    ctaText: "BUY NOW",
-    ctaLink: "#",
-    gradient: "from-[#FADFBA]/80 to-[#FADFBA]/20",
-    textDark: true,
+    id: "darshan",
+    image: "/images/darshan-new.jpg",
+    focal: "70% center",
+    eyebrow: "DIVINE DARSHAN",
+    title: "Experience the Eternal Beauty of Radha Krishna",
+    subtitle: "Immerse yourself in devotion, kirtan, wisdom and the divine presence of Sri Sri Radha Krishna.",
+    primaryCTA: { text: "Visit Temple", link: "/visit" },
+    secondaryCTA: { text: "Explore Sevas", link: "/#sevas" },
+    atm: { bg: "radial-gradient(ellipse 80% 70% at 30% 50%, rgba(10,28,80,0.95) 0%, rgba(3,8,22,1) 100%)" },
   },
   {
-    id: "book-prabhupada",
-    image: "/photos/WhatsApp-Image-2026-06-16-at-21.33.08-(1).jpeg",
-    title: "SING, DANCE AND LEAD",
-    subtitle: "LEADERSHIP LESSONS FROM THE TEACHINGS OF SRILA PRABHUPADA",
-    author: "By Multiple-award-winning Author & Historian Dr Hindol Sengupta",
-    ctaText: "Order Now",
-    ctaLink: "#",
-    gradient: "from-[#FADFBA]/90 to-transparent",
-    textDark: true,
+    id: "architecture",
+    image: "/images/temple_architecture_4k.png",
+    focal: "center center",
+    eyebrow: "SACRED ARCHITECTURE",
+    title: "Discover the Majesty of Timeless Temples",
+    subtitle: "Witness exquisite temple craftsmanship inspired by centuries of Vaishnava devotion.",
+    primaryCTA: { text: "Plan Visit", link: "/visit" },
+    secondaryCTA: { text: "View Gallery", link: "/#gallery" },
+    atm: { bg: "radial-gradient(ellipse 80% 70% at 30% 50%, rgba(55,30,8,0.95) 0%, rgba(12,6,2,1) 100%)" },
   },
   {
-    id: "struggle",
-    image: "/photos/WhatsApp-Image-2026-06-16-at-21.33.08-(2).jpeg",
-    title: "25 YEARS OF STRUGGLE",
-    subtitle: "OF ISKCON-BANGALORE DEVOTEES SUCCESSFUL",
-    author: "WITH THE SUPREME COURT VERDICT",
-    ctaText: "READ HERE",
-    ctaLink: "#",
-    gradient: "from-blue-900/90 to-blue-900/30",
-    textDark: false,
+    id: "kirtan",
+    image: "/images/kirtan_gathering_4k.png",
+    focal: "center center",
+    eyebrow: "HOLY KIRTAN",
+    title: "Experience the Joy of Collective Devotion",
+    subtitle: "Join uplifting kirtans that awaken the heart through the power of sacred sound.",
+    primaryCTA: { text: "Join Kirtan", link: "/#programs" },
+    secondaryCTA: { text: "Learn More", link: "/about" },
+    atm: { bg: "radial-gradient(ellipse 80% 70% at 30% 50%, rgba(30,10,72,0.95) 0%, rgba(6,2,18,1) 100%)" },
   },
   {
-    id: "annadana",
-    image: "/photos/WhatsApp-Image-2026-06-16-at-21.33.08-(3).jpeg",
-    title: "Offer Annadana Seva",
-    subtitle: "Help us feed up to 1000 pilgrims daily",
-    author: "80G tax exemption",
-    ctaText: "DONATE NOW",
-    ctaLink: "/donate",
-    gradient: "from-[#FFF5E6]/90 to-[#FFF5E6]/10",
-    textDark: true,
+    id: "festival",
+    image: "/images/festival_celebration_4k.png",
+    focal: "center center",
+    eyebrow: "FESTIVAL CELEBRATION",
+    title: "Celebrate the Divine Through Sacred Festivals",
+    subtitle: "Experience vibrant festivals filled with devotion, culture and pure spiritual joy.",
+    primaryCTA: { text: "View Festivals", link: "/festivals" },
+    secondaryCTA: { text: "Upcoming Events", link: "/#events" },
+    atm: { bg: "radial-gradient(ellipse 80% 70% at 30% 50%, rgba(80,25,5,0.95) 0%, rgba(18,5,0,1) 100%)" },
+  },
+  {
+    id: "wisdom",
+    image: "/images/spiritual_wisdom_4k.png",
+    focal: "center center",
+    eyebrow: "ETERNAL WISDOM",
+    title: "Transform Life Through Bhagavad Gita",
+    subtitle: "Explore timeless teachings of Srila Prabhupada that guide the journey toward inner peace.",
+    primaryCTA: { text: "Read Wisdom", link: "/about" },
+    secondaryCTA: { text: "Explore Classes", link: "/#programs" },
+    atm: { bg: "radial-gradient(ellipse 80% 70% at 30% 50%, rgba(5,50,30,0.95) 0%, rgba(1,10,6,1) 100%)" },
   },
 ];
 
+const TOTAL = SLIDES.length;
+const EASE  = [0.22, 1, 0.36, 1] as const;
+
+/* ─── Text animation variants (only used for active slide) ─────── */
+const textWrap = {
+  hidden:  {},
+  visible: { transition: { staggerChildren: 0.14 } },
+  exit:    { transition: { staggerChildren: 0.06, staggerDirection: -1 } },
+};
+const eyebrowV = {
+  hidden:  { opacity: 0, y: 28 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.75, ease: EASE } },
+  exit:    { opacity: 0, y: -14, transition: { duration: 0.38, ease: EASE } },
+};
+const headingV = {
+  hidden:  { opacity: 0, y: 64 },
+  visible: { opacity: 1, y: 0, transition: { duration: 1.2, ease: EASE } },
+  exit:    { opacity: 0, y: -22, transition: { duration: 0.42, ease: EASE } },
+};
+const descV = {
+  hidden:  { opacity: 0, y: 38 },
+  visible: { opacity: 1, y: 0, transition: { duration: 1.0, ease: EASE, delay: 0.18 } },
+  exit:    { opacity: 0, y: -12, transition: { duration: 0.32, ease: EASE } },
+};
+const btnV = {
+  hidden:  { opacity: 0, y: 24 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.85, ease: EASE, delay: 0.38 } },
+  exit:    { opacity: 0, y: -8,  transition: { duration: 0.28, ease: EASE } },
+};
+
+/* ─── Component ─────────────────────────────────────────────────── */
 export function HeroCarousel() {
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, duration: 40 }, [
-    Autoplay({ delay: 5000, stopOnInteraction: true }),
-  ]);
+  const [current, setCurrent]     = useState(0);
+  const [mounted, setMounted]     = useState(false);
+  const [autoplay, setAutoplay]   = useState(true);
 
-  const [selectedIndex, setSelectedIndex] = useState(0);
+  // ── Mount guard (prevents hydration mismatch) ──────────────────
+  useEffect(() => { setMounted(true); }, []);
 
-  const scrollPrev = useCallback(() => {
-    if (emblaApi) emblaApi.scrollPrev();
-  }, [emblaApi]);
+  const next = useCallback(() => setCurrent((c) => (c + 1) % TOTAL), []);
+  const prev = useCallback(() => setCurrent((c) => (c - 1 + TOTAL) % TOTAL), []);
+  const goTo = (i: number) => { setCurrent(i); setAutoplay(false); };
 
-  const scrollNext = useCallback(() => {
-    if (emblaApi) emblaApi.scrollNext();
-  }, [emblaApi]);
-
-  const scrollTo = useCallback(
-    (index: number) => {
-      if (emblaApi) emblaApi.scrollTo(index);
-    },
-    [emblaApi]
-  );
-
-  const onSelect = useCallback(() => {
-    if (!emblaApi) return;
-    setSelectedIndex(emblaApi.selectedScrollSnap());
-  }, [emblaApi, setSelectedIndex]);
-
+  // ── Autoplay ───────────────────────────────────────────────────
   useEffect(() => {
-    if (!emblaApi) return;
-    onSelect();
-    emblaApi.on("select", onSelect);
-    emblaApi.on("reInit", onSelect);
-  }, [emblaApi, onSelect]);
+    if (!autoplay || !mounted) return;
+    const t = setInterval(next, 6500);
+    return () => clearInterval(t);
+  }, [autoplay, next, mounted]);
+
+  // ── Touch swipe ────────────────────────────────────────────────
+  const tx = useRef(0);
+  const onTouchStart = (e: React.TouchEvent) => { tx.current = e.touches[0].clientX; };
+  const onTouchEnd   = (e: React.TouchEvent) => {
+    const dx = tx.current - e.changedTouches[0].clientX;
+    if (Math.abs(dx) > 50) { dx > 0 ? next() : prev(); }
+    setAutoplay(false);
+  };
+
+  // ── SSR shell ──────────────────────────────────────────────────
+  if (!mounted) {
+    return (
+      <section
+        aria-label="Hero gallery"
+        style={{ position: "relative", width: "100%", height: "100svh", minHeight: 700, background: "#030816" }}
+      />
+    );
+  }
+
+  // ── position helper (relative to current) ─────────────────────
+  const pos = (i: number) => {
+    const d = ((i - current) % TOTAL + TOTAL) % TOTAL;
+    if (d === 0)         return "active";
+    if (d === 1)         return "next";
+    if (d === TOTAL - 1) return "prev";
+    return "hidden";
+  };
 
   return (
-    <section className="relative w-full h-[80vh] min-h-[600px] overflow-hidden bg-[var(--color-bg-primary)]">
-      <div className="overflow-hidden h-full" ref={emblaRef}>
-        <div className="flex h-full touch-pan-y">
-          {slides.map((slide, index) => (
+    <section
+      onMouseEnter={() => setAutoplay(false)}
+      onMouseLeave={() => setAutoplay(true)}
+      onTouchStart={onTouchStart}
+      onTouchEnd={onTouchEnd}
+      aria-label="Hero gallery"
+      style={{
+        position: "relative",
+        width: "100%",
+        height: "100svh",
+        minHeight: 700,
+        overflow: "hidden",
+        background: "#030816",
+      }}
+    >
+
+      {/* ── Adaptive atmosphere background ─────────────────────── */}
+      <AnimatePresence mode="sync">
+        <motion.div
+          key={`atm-${current}`}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 1.2, ease: "easeInOut" }}
+          style={{
+            position: "absolute", inset: 0, zIndex: 0,
+            background: SLIDES[current].atm.bg,
+            pointerEvents: "none",
+          }}
+        />
+      </AnimatePresence>
+
+      {/* ── 3D Gallery Stage ────────────────────────────────────── */}
+      <div
+        style={{
+          position: "absolute", inset: 0, zIndex: 1,
+          display: "flex", alignItems: "center", justifyContent: "center",
+          perspective: "2500px",
+        }}
+      >
+        {SLIDES.map((slide, i) => {
+          const p       = pos(i);
+          const isActive = p === "active";
+
+          /* Per-position style */
+          const styleMap: Record<string, React.CSSProperties> = {
+            active: {
+              transform: "translateX(0%) scale(1) rotateY(0deg)",
+              opacity: 1,
+              filter: "brightness(1)",
+              zIndex: 10,
+              boxShadow: "0 60px 140px rgba(0,0,0,0.45)",
+            },
+            prev: {
+              transform: "translateX(-78%) scale(0.88) rotateY(10deg)",
+              opacity: 0.78,
+              filter: "brightness(0.70)",
+              zIndex: 5,
+              boxShadow: "0 20px 60px rgba(0,0,0,0.30)",
+            },
+            next: {
+              transform: "translateX(78%) scale(0.88) rotateY(-10deg)",
+              opacity: 0.78,
+              filter: "brightness(0.70)",
+              zIndex: 5,
+              boxShadow: "0 20px 60px rgba(0,0,0,0.30)",
+            },
+            hidden: {
+              transform: "translateX(0%) scale(0.7)",
+              opacity: 0,
+              filter: "brightness(0.4)",
+              zIndex: 0,
+              boxShadow: "none",
+            },
+          };
+
+          return (
             <div
               key={slide.id}
-              className="relative flex-[0_0_100%] h-full min-w-0"
+              onClick={() => { if (!isActive) goTo(i); }}
+              style={{
+                position: "absolute",
+                /* Fixed card dimensions — centered via left + marginLeft */
+                width: "68%",
+                height: "82%",
+                top: "9%",
+                left: "50%",
+                marginLeft: "-34%",
+                borderRadius: 20,
+                overflow: "hidden",
+                transformStyle: "preserve-3d",
+                willChange: "transform, opacity, filter",
+                cursor: isActive ? "default" : "pointer",
+                border: isActive ? "1px solid rgba(255,255,255,0.10)" : "none",
+                transition: "transform 1200ms cubic-bezier(0.22,1,0.36,1), opacity 1000ms cubic-bezier(0.22,1,0.36,1), filter 1000ms ease, box-shadow 1000ms ease",
+                ...styleMap[p],
+              }}
             >
-              {/* Background Image */}
-              <div className="absolute inset-0 z-0">
-                <Image
-                  src={slide.image}
-                  alt={slide.title}
-                  fill
-                  priority={index === 0}
-                  className="object-cover object-center"
-                  sizes="100vw"
-                />
-              </div>
-
-              {/* Gradient Overlay */}
-              <div
-                className={`absolute inset-0 z-[1] bg-gradient-to-r ${slide.gradient}`}
+              {/* ── Slide image ──────────────────────────────── */}
+              <Image
+                src={slide.image}
+                alt={slide.title}
+                fill
+                priority={i === 0}
+                unoptimized
+                style={{ objectFit: "cover", objectPosition: slide.focal }}
               />
 
-              {/* Content */}
-              <div className="relative z-[2] w-full h-full flex items-center">
-                <div className="container-page flex flex-col items-start text-left">
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.8, delay: 0.2 }}
-                    className={`max-w-[700px] ${
-                      slide.textDark ? "text-slate-900" : "text-white"
-                    }`}
-                  >
-                    <h2
-                      className="text-[32px] sm:text-[48px] md:text-[64px] font-bold leading-[1.1] mb-4 tracking-tight uppercase"
-                      style={{ fontFamily: "var(--font-playfair)" }}
-                    >
-                      {slide.title}
-                    </h2>
-                    <p
-                      className="text-[18px] sm:text-[22px] md:text-[26px] font-semibold mb-2"
-                      style={{ fontFamily: "var(--font-inter)" }}
-                    >
-                      {slide.subtitle}
-                    </p>
-                    <p
-                      className={`text-[15px] sm:text-[18px] mb-8 font-medium ${
-                        slide.textDark ? "text-slate-700" : "text-white/90"
-                      }`}
-                    >
-                      {slide.author}
-                    </p>
+              {/* ── Gradient overlay (active only is deeper) ─── */}
+              <div
+                style={{
+                  position: "absolute", inset: 0, zIndex: 1, pointerEvents: "none",
+                  background: isActive
+                    ? "linear-gradient(90deg, rgba(4,10,28,0.82) 0%, rgba(4,10,28,0.55) 30%, rgba(4,10,28,0.15) 62%, rgba(4,10,28,0) 100%)"
+                    : "rgba(4,8,22,0.35)",
+                  transition: "background 800ms ease",
+                }}
+              />
 
-                    <Link
-                      href={slide.ctaLink}
-                      className={`inline-flex items-center justify-center px-8 py-4 rounded-full text-[15px] font-bold tracking-wider uppercase transition-transform hover:-translate-y-1 shadow-lg ${
-                        slide.textDark
-                          ? "bg-gradient-to-br from-[#9c2e2e] to-[#6b1e1e] text-white hover:shadow-[#9c2e2e]/30"
-                          : "bg-white text-blue-900 hover:shadow-white/30"
-                      }`}
+              {/* ── Content — ONLY rendered & visible when active ── */}
+              {isActive && (
+                <div
+                  style={{
+                    position: "absolute", inset: 0, zIndex: 2,
+                    display: "flex", alignItems: "center",
+                    paddingLeft: "clamp(36px, 6%, 88px)",
+                    paddingRight: "50%",
+                    paddingTop: "clamp(80px, 12vh, 130px)",
+                    paddingBottom: "clamp(60px, 8vh, 100px)",
+                  }}
+                >
+                  <AnimatePresence mode="wait">
+                    <motion.div
+                      key={`c-${current}`}
+                      variants={textWrap}
+                      initial="hidden"
+                      animate="visible"
+                      exit="exit"
+                      style={{ display: "flex", flexDirection: "column", alignItems: "flex-start", maxWidth: 600 }}
                     >
-                      {slide.ctaText}
-                    </Link>
-                  </motion.div>
+                      {/* Eyebrow */}
+                      <motion.div
+                        variants={eyebrowV}
+                        style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 20 }}
+                      >
+                        <span style={{ display: "block", width: 26, height: 1.5, background: "linear-gradient(90deg, transparent, #D4AF37)" }}/>
+                        <span style={{
+                          fontFamily: "'Inter', sans-serif", fontSize: 12, fontWeight: 600,
+                          letterSpacing: "0.45em", color: "#D4AF37", textTransform: "uppercase",
+                        }}>
+                          {slide.eyebrow}
+                        </span>
+                        <span style={{ display: "block", width: 26, height: 1.5, background: "linear-gradient(90deg, #D4AF37, transparent)" }}/>
+                      </motion.div>
+
+                      {/* Heading */}
+                      <motion.h2
+                        variants={headingV}
+                        style={{
+                          fontFamily: "'Cormorant Garamond', serif", fontWeight: 500,
+                          fontSize: "clamp(44px, 4.8vw, 92px)",
+                          lineHeight: 0.93, letterSpacing: "-0.04em",
+                          color: "#FFFFFF", maxWidth: 620,
+                          textShadow: "0 4px 40px rgba(0,0,0,0.5)",
+                          margin: 0,
+                        }}
+                      >
+                        {slide.title}
+                      </motion.h2>
+
+                      {/* Subtitle */}
+                      <motion.p
+                        variants={descV}
+                        style={{
+                          fontFamily: "'Inter', sans-serif", fontSize: "clamp(15px, 1.2vw, 20px)",
+                          lineHeight: 1.72, color: "rgba(255,255,255,0.88)",
+                          maxWidth: 520, marginTop: 24, fontWeight: 400,
+                        }}
+                      >
+                        {slide.subtitle}
+                      </motion.p>
+
+                      {/* Buttons */}
+                      <motion.div
+                        variants={btnV}
+                        style={{ display: "flex", flexWrap: "wrap", gap: 16, marginTop: 36 }}
+                      >
+                        <Link
+                          href={slide.primaryCTA.link}
+                          style={{
+                            display: "inline-flex", alignItems: "center", justifyContent: "center",
+                            height: 58, padding: "0 32px", borderRadius: 999,
+                            background: "linear-gradient(135deg, #CFA63A, #F2D46E)",
+                            boxShadow: "0 14px 36px rgba(207,166,58,0.35)",
+                            color: "#fff", fontSize: 14, fontWeight: 600,
+                            letterSpacing: "0.05em", fontFamily: "'Inter', sans-serif",
+                            textDecoration: "none",
+                            transition: "transform 350ms cubic-bezier(0.22,1,0.36,1), box-shadow 350ms ease",
+                          }}
+                          onMouseEnter={e => {
+                            (e.currentTarget as HTMLAnchorElement).style.transform = "translateY(-3px) scale(1.03)";
+                            (e.currentTarget as HTMLAnchorElement).style.boxShadow = "0 22px 48px rgba(207,166,58,0.45)";
+                          }}
+                          onMouseLeave={e => {
+                            (e.currentTarget as HTMLAnchorElement).style.transform = "";
+                            (e.currentTarget as HTMLAnchorElement).style.boxShadow = "0 14px 36px rgba(207,166,58,0.35)";
+                          }}
+                        >
+                          {slide.primaryCTA.text}
+                        </Link>
+
+                        <Link
+                          href={slide.secondaryCTA.link}
+                          style={{
+                            display: "inline-flex", alignItems: "center", justifyContent: "center",
+                            height: 58, padding: "0 32px", borderRadius: 999,
+                            background: "rgba(255,255,255,0.08)",
+                            backdropFilter: "blur(18px)", WebkitBackdropFilter: "blur(18px)",
+                            border: "1px solid rgba(255,255,255,0.26)",
+                            color: "#fff", fontSize: 14, fontWeight: 500,
+                            letterSpacing: "0.05em", fontFamily: "'Inter', sans-serif",
+                            textDecoration: "none",
+                            transition: "all 350ms cubic-bezier(0.22,1,0.36,1)",
+                          }}
+                          onMouseEnter={e => {
+                            (e.currentTarget as HTMLAnchorElement).style.background = "rgba(255,255,255,0.96)";
+                            (e.currentTarget as HTMLAnchorElement).style.color = "#050F28";
+                            (e.currentTarget as HTMLAnchorElement).style.transform = "translateY(-3px)";
+                          }}
+                          onMouseLeave={e => {
+                            (e.currentTarget as HTMLAnchorElement).style.background = "rgba(255,255,255,0.08)";
+                            (e.currentTarget as HTMLAnchorElement).style.color = "#fff";
+                            (e.currentTarget as HTMLAnchorElement).style.transform = "";
+                          }}
+                        >
+                          {slide.secondaryCTA.text}
+                        </Link>
+                      </motion.div>
+                    </motion.div>
+                  </AnimatePresence>
                 </div>
-              </div>
+              )}
             </div>
-          ))}
-        </div>
+          );
+        })}
       </div>
 
-      {/* Navigation Arrows */}
-      <button
-        onClick={scrollPrev}
-        className="absolute left-4 sm:left-8 top-1/2 -translate-y-1/2 z-10 w-12 h-12 flex items-center justify-center rounded-full bg-black/20 text-white backdrop-blur-md border border-white/20 hover:bg-black/40 transition-colors"
-        aria-label="Previous slide"
-      >
-        <ChevronLeft size={24} />
-      </button>
+      {/* ── Navigation arrows ───────────────────────────────────── */}
+      {[{ dir: "prev", side: "left", fn: () => { prev(); setAutoplay(false); } },
+        { dir: "next", side: "right", fn: () => { next(); setAutoplay(false); } }].map(({ dir, side, fn }) => (
+        <button
+          key={dir}
+          onClick={fn}
+          aria-label={`${dir === "prev" ? "Previous" : "Next"} slide`}
+          style={{
+            position: "absolute",
+            [side]: 20,
+            top: "50%",
+            transform: "translateY(-50%)",
+            zIndex: 30,
+            width: 68, height: 68,
+            borderRadius: "50%",
+            background: "rgba(255,255,255,0.12)",
+            backdropFilter: "blur(20px)",
+            WebkitBackdropFilter: "blur(20px)",
+            border: "1px solid rgba(255,255,255,0.20)",
+            color: "#fff",
+            display: "flex", alignItems: "center", justifyContent: "center",
+            cursor: "pointer",
+            transition: "all 400ms cubic-bezier(0.22,1,0.36,1)",
+          }}
+          onMouseEnter={e => {
+            const el = e.currentTarget as HTMLButtonElement;
+            el.style.background = "linear-gradient(135deg, #CFA63A, #F2D46E)";
+            el.style.borderColor = "#CFA63A";
+            el.style.boxShadow = "0 0 36px rgba(207,166,58,0.45)";
+            el.style.transform = "translateY(-50%) scale(1.1)";
+          }}
+          onMouseLeave={e => {
+            const el = e.currentTarget as HTMLButtonElement;
+            el.style.background = "rgba(255,255,255,0.12)";
+            el.style.borderColor = "rgba(255,255,255,0.20)";
+            el.style.boxShadow = "none";
+            el.style.transform = "translateY(-50%) scale(1)";
+          }}
+        >
+          {dir === "prev"
+            ? <ChevronLeft  size={28} strokeWidth={1.5} />
+            : <ChevronRight size={28} strokeWidth={1.5} />
+          }
+        </button>
+      ))}
 
-      <button
-        onClick={scrollNext}
-        className="absolute right-4 sm:right-8 top-1/2 -translate-y-1/2 z-10 w-12 h-12 flex items-center justify-center rounded-full bg-black/20 text-white backdrop-blur-md border border-white/20 hover:bg-black/40 transition-colors"
-        aria-label="Next slide"
+      {/* ── Luxury capsule pagination ────────────────────────────── */}
+      <div
+        style={{
+          position: "absolute", bottom: 28, left: 0, right: 0, zIndex: 30,
+          display: "flex", justifyContent: "center", alignItems: "center", gap: 10,
+        }}
       >
-        <ChevronRight size={24} />
-      </button>
-
-      {/* Pagination Dots */}
-      <div className="absolute bottom-8 left-0 right-0 z-10 flex justify-center gap-3">
-        {slides.map((_, index) => (
+        {SLIDES.map((_, i) => (
           <button
-            key={index}
-            onClick={() => scrollTo(index)}
-            className={`transition-all duration-300 rounded-full ${
-              index === selectedIndex
-                ? "w-8 h-2 bg-white"
-                : "w-2 h-2 bg-white/50 hover:bg-white/80"
-            }`}
-            aria-label={`Go to slide ${index + 1}`}
+            key={i}
+            onClick={() => goTo(i)}
+            aria-label={`Slide ${i + 1}`}
+            style={{
+              borderRadius: 999,
+              border: "none",
+              cursor: "pointer",
+              padding: 0,
+              transition: "all 550ms cubic-bezier(0.22,1,0.36,1)",
+              width:  i === current ? 48 : 9,
+              height: 8,
+              background: i === current
+                ? "linear-gradient(90deg, #CFA63A, #F2D46E)"
+                : "rgba(255,255,255,0.38)",
+              boxShadow: i === current ? "0 0 16px rgba(207,166,58,0.55)" : "none",
+            }}
           />
         ))}
+      </div>
+
+      {/* ── Slide counter ────────────────────────────────────────── */}
+      <div
+        style={{
+          position: "absolute", bottom: 28, right: 28, zIndex: 30,
+          display: "flex", alignItems: "center", gap: 6,
+          fontFamily: "'Inter', sans-serif", fontSize: 12, color: "rgba(255,255,255,0.45)",
+        }}
+      >
+        <span style={{ color: "#CFA63A", fontWeight: 600 }}>{String(current + 1).padStart(2, "0")}</span>
+        <span>/</span>
+        <span>{String(TOTAL).padStart(2, "0")}</span>
       </div>
     </section>
   );
