@@ -21,7 +21,7 @@ export default async function HomePage() {
       <JsonLd data={faqJsonLd()} nonce={nonce} />
       <HeroCarousel />
       <About />
-      <SectionBlurTransition fromColor="#041120" toColor="#EBF2F8" height={160} />
+      <SectionBlurTransition fromColor="#010F1C" toColor="#EBF2F8" height={240} />
       <Gallery />
 
       <Programs />

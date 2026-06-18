@@ -38,8 +38,14 @@ export function SectionBlurTransition({
         position: "relative",
         height,
         overflow: "hidden",
-        // Hard gradient: from-section colour → to-section colour
-        background: `linear-gradient(to bottom, ${fromColor} 0%, ${toColor} 100%)`,
+        // Smooth OKLAB gradient to prevent muddy grey transitions
+        background: `linear-gradient(to bottom, 
+          ${fromColor} 0%, 
+          color-mix(in oklab, ${fromColor} 85%, ${toColor}) 20%,
+          color-mix(in oklab, ${fromColor} 65%, ${toColor}) 40%,
+          color-mix(in oklab, ${fromColor} 40%, ${toColor}) 60%,
+          color-mix(in oklab, ${fromColor} 15%, ${toColor}) 80%,
+          ${toColor} 100%)`,
         zIndex: 2,
       }}
     >
@@ -59,16 +65,6 @@ export function SectionBlurTransition({
           background:
             "radial-gradient(ellipse at center, rgba(100,160,230,0.18) 0%, rgba(100,160,230,0.06) 55%, transparent 100%)",
           filter: "blur(40px)",
-          pointerEvents: "none",
-        }}
-      />
-
-      {/* Soft vignette edges left & right so orb doesn't feel clipped */}
-      <div
-        style={{
-          position: "absolute",
-          inset: 0,
-          background: `linear-gradient(to right, ${fromColor}55 0%, transparent 20%, transparent 80%, ${toColor}55 100%)`,
           pointerEvents: "none",
         }}
       />
