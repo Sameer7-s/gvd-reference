@@ -253,7 +253,7 @@ export function Navbar() {
           background: rgba(255, 255, 255, 0.97);
           backdrop-filter: blur(30px) saturate(180%);
           -webkit-backdrop-filter: blur(30px) saturate(180%);
-          border: 1px solid rgba(212, 175, 55, 0.15);
+          border: 1px solid rgba(29, 92, 150, 0.15);
           border-radius: 24px;
           box-shadow: 0 30px 80px rgba(0, 0, 0, 0.12);
           padding: 32px;
@@ -302,7 +302,7 @@ export function Navbar() {
           font-size: 13px;
           letter-spacing: 0.1em;
           text-transform: uppercase;
-          color: #C9A54A;
+          color: #1D5C96;
           margin-bottom: 16px;
           padding-left: 16px;
         }
@@ -326,7 +326,7 @@ export function Navbar() {
           left: 20%;
           width: 60%;
           height: 2px;
-          background: #D4AF37;
+          background: #1D5C96;
           border-radius: 2px;
         }
 
@@ -352,37 +352,13 @@ export function Navbar() {
       >
         {/* Left: Logo */}
         <Link href="/" className="flex items-center gap-3 relative z-10 group">
-          <div className="w-[48px] h-[48px] bg-[var(--color-accent-primary)]/10 border border-[var(--color-accent-primary)]/20 rounded-full flex items-center justify-center shrink-0 transition-transform duration-500 group-hover:scale-105">
-            <LogoMark className="w-[28px] h-[28px] text-[var(--color-accent-primary)]" />
-          </div>
-          <div className="flex flex-col">
-            <span
-              className="tracking-tight text-[var(--color-text-primary)] transition-colors"
-              style={{
-                fontFamily: "var(--font-playfair)",
-                fontSize: "19px",
-                fontWeight: 600,
-                letterSpacing: "-0.01em",
-                lineHeight: "1.1",
-              }}
-            >
-              Hare Krishna
-            </span>
-            <span
-              style={{
-                fontFamily: "var(--font-inter)",
-                fontSize: "11px",
-                letterSpacing: "0.22em",
-                textTransform: "uppercase",
-                color: "var(--color-accent-primary)",
-                fontWeight: 600,
-                marginTop: "2px",
-                lineHeight: "1",
-              }}
-            >
-              MOVEMENT
-            </span>
-          </div>
+          <img
+            src="/images/logo.png"
+            alt="Srila Prabhupada ISKCON Gambheeram logo"
+            width={180}
+            height={56}
+            className="object-contain object-left transition-transform duration-500 group-hover:scale-[1.02]"
+          />
         </Link>
 
         {/* Center: Navigation */}
@@ -425,8 +401,9 @@ export function Navbar() {
                       transition={{ duration: 0.45, ease: EASE }}
                       style={{ 
                         width: item.isMega ? "900px" : item.dropdownColumns ? "max-content" : "320px",
-                        left: item.isMega ? "50%" : "0%",
-                        transform: item.isMega ? "translateX(-50%)" : "translateX(-20%)",
+                        left: item.isMega ? "50%" : (item.label === "Get Involved" || item.label === "Activities") ? "auto" : "0%",
+                        right: (item.label === "Get Involved" || item.label === "Activities") ? "0%" : "auto",
+                        transform: item.isMega ? "translateX(-50%)" : (item.label === "Get Involved" || item.label === "Activities") ? "none" : "translateX(-20%)",
                       }}
                     >
                       {/* Simple List (About Us) */}
@@ -478,7 +455,7 @@ export function Navbar() {
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                                 <div className="absolute bottom-4 left-5 right-5 text-white">
-                                  <div className="text-[11px] font-bold uppercase tracking-widest text-[#D4AF37] mb-1">{item.featuredCard.date}</div>
+                                  <div className="text-[11px] font-bold uppercase tracking-widest text-[var(--color-accent-primary)] mb-1">{item.featuredCard.date}</div>
                                   <div className="font-serif text-lg font-medium leading-tight">{item.featuredCard.title}</div>
                                 </div>
                               </div>
@@ -486,7 +463,7 @@ export function Navbar() {
                                 <p className="text-sm text-gray-500 mb-4">{item.featuredCard.desc}</p>
                                 <Link 
                                   href={item.featuredCard.href}
-                                  className="text-[13px] font-semibold text-[#123A8C] uppercase tracking-wider flex items-center gap-2 group-hover:text-[#D4AF37] transition-colors"
+                                  className="text-[13px] font-semibold text-[#123A8C] uppercase tracking-wider flex items-center gap-2 group-hover:text-[var(--color-accent-primary)] transition-colors"
                                   onClick={() => setActiveDropdown(null)}
                                 >
                                   View Festival <ArrowRight size={14} className="transition-transform group-hover:translate-x-1" />
@@ -552,13 +529,13 @@ export function Navbar() {
           >
             <div className="flex items-center justify-between p-6 border-b border-gray-100">
               <Link href="/" className="flex items-center gap-3" onClick={() => setMobileMenuOpen(false)}>
-                <div className="w-[42px] h-[42px] bg-[#123A8C]/10 rounded-full flex items-center justify-center">
-                  <LogoMark className="w-[24px] h-[24px] text-[#123A8C]" />
-                </div>
-                <div className="flex flex-col">
-                  <span className="font-serif text-lg font-bold text-[#123A8C] leading-none">Hare Krishna</span>
-                  <span className="font-sans text-[10px] tracking-widest text-[#D4AF37] font-bold mt-1">MOVEMENT</span>
-                </div>
+                <img
+                  src="/images/logo.png"
+                  alt="Srila Prabhupada ISKCON Gambheeram logo"
+                  width={150}
+                  height={48}
+                  className="object-contain object-left"
+                />
               </Link>
               <button
                 onClick={() => setMobileMenuOpen(false)}
@@ -583,7 +560,7 @@ export function Navbar() {
                             onClick={() => setMobileAccordion(isOpen ? null : item.label)}
                           >
                             {item.label}
-                            <ChevronDown size={20} className={`transition-transform duration-300 ${isOpen ? "rotate-180 text-[#D4AF37]" : "text-gray-400"}`} />
+                            <ChevronDown size={20} className={`transition-transform duration-300 ${isOpen ? "rotate-180 text-[var(--color-accent-primary)]" : "text-gray-400"}`} />
                           </button>
                           
                           <AnimatePresence>
@@ -616,7 +593,7 @@ export function Navbar() {
                                     <div className="flex flex-col gap-6">
                                       {item.dropdownColumns.map((col, idx) => (
                                         <div key={idx} className="flex flex-col">
-                                          <div className="text-[11px] font-bold tracking-widest uppercase text-[#D4AF37] mb-3">{col.header}</div>
+                                          <div className="text-[11px] font-bold tracking-widest uppercase text-[var(--color-accent-primary)] mb-3">{col.header}</div>
                                           <div className="flex flex-col gap-3">
                                             {col.items.map(link => (
                                               <Link 

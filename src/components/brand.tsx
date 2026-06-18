@@ -32,23 +32,23 @@ export function LogoMark({ className }: { className?: string }) {
   return (
     <svg viewBox="0 0 64 64" className={className} aria-hidden="true">
       <defs>
-        <linearGradient id="hkm-gold" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#e9d08a" />
-          <stop offset="55%" stopColor="#c8a14a" />
-          <stop offset="100%" stopColor="#a9853a" />
+        <linearGradient id="hkm-blue" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#D4E5F2" />
+          <stop offset="55%" stopColor="#90B4CE" />
+          <stop offset="100%" stopColor="#5D809E" />
         </linearGradient>
       </defs>
-      <circle cx="32" cy="32" r="30" fill="none" stroke="url(#hkm-gold)" strokeWidth="2" />
+      <circle cx="32" cy="32" r="30" fill="none" stroke="url(#hkm-blue)" strokeWidth="2" />
       {/* gopuram */}
       <path
         d="M32 10 l3 5 -3 0 -3 0 z M24 44 V30 C24 24 27.6 19 32 19 C36.4 19 40 24 40 30 V44 Z"
-        fill="url(#hkm-gold)"
+        fill="url(#hkm-blue)"
       />
-      <path d="M22 44 h20 v3 h-20 z M20 47 h24 v3 h-24 z" fill="url(#hkm-gold)" />
+      <path d="M22 44 h20 v3 h-20 z M20 47 h24 v3 h-24 z" fill="url(#hkm-blue)" />
       {/* lotus base */}
       <path
         d="M32 56 c-5 0-9-2-11-5 c4 1 7 0 11-3 c4 3 7 4 11 3 c-2 3-6 5-11 5 z"
-        fill="url(#hkm-gold)"
+        fill="url(#hkm-blue)"
         opacity="0.9"
       />
     </svg>
@@ -56,8 +56,8 @@ export function LogoMark({ className }: { className?: string }) {
 }
 
 export function Logo({ className, mode = "dark" }: { className?: string; mode?: "dark" | "light" }) {
-  const titleColor = mode === "light" ? "text-cream" : "text-maroon-900";
-  const subColor = mode === "light" ? "text-gold-300" : "text-saffron-600";
+  const titleColor = mode === "light" ? "text-bg-primary" : "text-text-primary";
+  const subColor = mode === "light" ? "text-accent-light" : "text-accent-primary";
   return (
     <Link
       href="/"

@@ -8,15 +8,15 @@ type ButtonSize = "sm" | "md" | "lg";
 
 const VARIANTS: Record<ButtonVariant, string> = {
   primary:
-    "bg-gradient-to-br from-saffron-500 to-saffron-700 text-white shadow-temple hover:from-saffron-400 hover:to-saffron-600 hover:shadow-temple-lg",
-  gold: "bg-gradient-to-br from-gold-400 to-gold-600 text-maroon-950 shadow-temple hover:from-gold-300 hover:to-gold-500",
+    "bg-gradient-to-br from-accent-secondary to-accent-primary text-white shadow-temple hover:from-accent-primary hover:to-accent-secondary hover:shadow-temple-lg",
+  gold: "bg-gradient-to-br from-accent-light to-accent-primary text-text-primary shadow-temple hover:from-accent-light hover:to-accent-secondary",
   outline:
-    "border border-saffron-600/40 bg-ivory/60 text-maroon-900 hover:border-saffron-600 hover:bg-saffron-50",
+    "border border-accent-primary/40 bg-bg-secondary/60 text-text-primary hover:border-accent-primary hover:bg-bg-tertiary/50",
   "outline-light":
-    "border border-gold-300/40 bg-transparent text-cream hover:border-gold-300 hover:bg-cream/10",
-  ghost: "text-maroon-900 hover:bg-saffron-50",
+    "border border-accent-light/40 bg-transparent text-bg-primary hover:border-accent-light hover:bg-bg-primary/10",
+  ghost: "text-text-primary hover:bg-bg-secondary/50",
   light:
-    "bg-cream text-maroon-900 shadow-temple hover:bg-ivory border border-gold-500/30",
+    "bg-bg-primary text-text-primary shadow-temple hover:bg-bg-secondary border border-accent-primary/30",
 };
 
 const SIZES: Record<ButtonSize, string> = {
@@ -77,7 +77,7 @@ export function Eyebrow({ children, light = false }: { children: React.ReactNode
   return (
     <span
       className={`inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.28em] ${
-        light ? "text-gold-300" : "text-saffron-600"
+        light ? "text-accent-light" : "text-accent-primary"
       }`}
     >
       <Lotus className="h-3.5 w-3.5 rotate-180" />
@@ -107,13 +107,13 @@ export function SectionHeading({
       {eyebrow && <Eyebrow light={light}>{eyebrow}</Eyebrow>}
       <h2
         className={`text-3xl leading-[1.08] sm:text-4xl md:text-[2.75rem] ${
-          light ? "text-cream" : "text-maroon-900"
+          light ? "text-bg-primary" : "text-text-primary"
         }`}
       >
         {title}
       </h2>
       {intro && (
-        <p className={`text-base leading-relaxed sm:text-lg ${light ? "text-cream/75" : "text-muted"}`}>
+        <p className={`text-base leading-relaxed sm:text-lg ${light ? "text-bg-primary/75" : "text-text-muted"}`}>
           {intro}
         </p>
       )}
@@ -128,11 +128,11 @@ export function SectionHeading({
 */
 
 const TONE_GRAD: Record<string, string> = {
-  saffron: "from-saffron-300 via-saffron-500 to-maroon-800",
-  maroon: "from-maroon-700 via-maroon-900 to-maroon-950",
-  gold: "from-gold-300 via-gold-500 to-saffron-700",
-  krishna: "from-krishna-400 via-krishna-600 to-maroon-900",
-  night: "from-krishna-600 via-maroon-900 to-maroon-950",
+  saffron: "from-accent-light via-accent-primary to-accent-secondary",
+  maroon: "from-accent-primary via-accent-secondary to-text-primary",
+  gold: "from-accent-light via-accent-primary to-accent-secondary",
+  krishna: "from-accent-light via-accent-primary to-text-primary",
+  night: "from-accent-secondary via-text-primary to-black",
 };
 
 export function AssetFrame({

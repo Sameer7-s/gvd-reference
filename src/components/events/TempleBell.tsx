@@ -13,21 +13,21 @@ function BellSvg({ className, gradId }: { className?: string; gradId: string }) 
     <svg viewBox="0 0 48 72" className={className} aria-hidden="true">
       <defs>
         <linearGradient id={gradId} x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stopColor="#F5D98A" />
-          <stop offset="35%" stopColor="#D4AF37" />
-          <stop offset="70%" stopColor="#B8892A" />
-          <stop offset="100%" stopColor="#8B6914" />
+          <stop offset="0%" stopColor="#D4E5F2" />
+          <stop offset="35%" stopColor="#90B4CE" />
+          <stop offset="70%" stopColor="#5D809E" />
+          <stop offset="100%" stopColor="#3E5B75" />
         </linearGradient>
       </defs>
-      <line x1="24" y1="0" x2="24" y2="14" stroke="#C9A227" strokeWidth="2" />
-      <circle cx="24" cy="16" r="3" fill="#E8C55A" />
+      <line x1="24" y1="0" x2="24" y2="14" stroke="#7898B0" strokeWidth="2" />
+      <circle cx="24" cy="16" r="3" fill="#B6D0E6" />
       <path
         d="M12 22 C12 18, 18 14, 24 14 C30 14, 36 18, 36 22 L38 52 C38 58, 32 62, 24 62 C16 62, 10 58, 10 52 Z"
         fill={`url(#${gradId})`}
       />
-      <ellipse cx="24" cy="22" rx="10" ry="3" fill="#F0D070" opacity="0.6" />
-      <path d="M18 62 Q24 68 30 62" fill="none" stroke="#A67C00" strokeWidth="2" />
-      <circle cx="24" cy="66" r="2.5" fill="#D4AF37" />
+      <ellipse cx="24" cy="22" rx="10" ry="3" fill="#D4E5F2" opacity="0.6" />
+      <path d="M18 62 Q24 68 30 62" fill="none" stroke="#3E5B75" strokeWidth="2" />
+      <circle cx="24" cy="66" r="2.5" fill="#5D809E" />
     </svg>
   );
 }

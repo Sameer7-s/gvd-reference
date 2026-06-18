@@ -1,30 +1,37 @@
 "use client";
 
-import React, { useRef } from "react";
+import React, { useRef, useState, useEffect } from "react";
+
 import Image from "next/image";
 import Link from "next/link";
 import { motion, useInView } from "framer-motion";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
-// Floating gold particle data
+// Seeded deterministic pseudo-random — avoids SSR/CSR hydration mismatch
+function seededRandom(seed: number): number {
+  const x = Math.sin(seed + 1) * 10000;
+  return x - Math.floor(x);
+}
+
 const PARTICLES = Array.from({ length: 18 }, (_, i) => ({
   id: i,
-  x: Math.random() * 100,
-  y: Math.random() * 100,
-  size: 2 + Math.random() * 4,
-  duration: 10 + Math.random() * 8,
-  delay: Math.random() * 6,
+  x: seededRandom(i * 7 + 1) * 100,
+  y: seededRandom(i * 7 + 2) * 100,
+  size: 2 + seededRandom(i * 7 + 3) * 4,
+  duration: 10 + seededRandom(i * 7 + 4) * 8,
+  delay: seededRandom(i * 7 + 5) * 6,
 }));
+
 
 // SVG Mandala corner decoration
 function Mandala({ size = 200, opacity = 0.04 }: { size?: number; opacity?: number }) {
   return (
     <svg width={size} height={size} viewBox="0 0 200 200" fill="none" style={{ opacity }}>
-      <circle cx="100" cy="100" r="90" stroke="#D4AF37" strokeWidth="0.5" />
-      <circle cx="100" cy="100" r="70" stroke="#D4AF37" strokeWidth="0.5" />
-      <circle cx="100" cy="100" r="50" stroke="#D4AF37" strokeWidth="0.5" />
-      <circle cx="100" cy="100" r="30" stroke="#D4AF37" strokeWidth="0.8" />
+      <circle cx="100" cy="100" r="90" stroke="#7898B0" strokeWidth="0.5" />
+      <circle cx="100" cy="100" r="70" stroke="#7898B0" strokeWidth="0.5" />
+      <circle cx="100" cy="100" r="50" stroke="#7898B0" strokeWidth="0.5" />
+      <circle cx="100" cy="100" r="30" stroke="#7898B0" strokeWidth="0.8" />
       {Array.from({ length: 16 }).map((_, i) => {
         const angle = (i * 360) / 16;
         const rad = (angle * Math.PI) / 180;
@@ -32,7 +39,7 @@ function Mandala({ size = 200, opacity = 0.04 }: { size?: number; opacity?: numb
         const y1 = 100 + 30 * Math.sin(rad);
         const x2 = 100 + 90 * Math.cos(rad);
         const y2 = 100 + 90 * Math.sin(rad);
-        return <line key={i} x1={x1} y1={y1} x2={x2} y2={y2} stroke="#D4AF37" strokeWidth="0.4" />;
+        return <line key={i} x1={x1} y1={y1} x2={x2} y2={y2} stroke="#7898B0" strokeWidth="0.4" />;
       })}
     </svg>
   );
@@ -77,6 +84,9 @@ function TempleSilhouette() {
 export function Donate() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-15%" });
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => { setMounted(true); }, []);
 
   return (
     <section
@@ -86,7 +96,7 @@ export function Donate() {
         minHeight: "720px",
         height: "100vh",
         maxHeight: "850px",
-        background: "#F8F7F3",
+        background: "#F4F8FC",
       }}
     >
       <style dangerouslySetInnerHTML={{ __html: `
@@ -128,7 +138,7 @@ export function Donate() {
       {/* ── BACKGROUND SYSTEM ── */}
 
       {/* Layer 1 — Luxury parchment */}
-      <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse 80% 70% at 60% 40%, #FAFAF8 0%, #F5F3EE 50%, #F0EDE6 100%)" }} />
+      <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse 80% 70% at 60% 40%, #F4F8FC 0%, #E2EBF4 50%, #D4E2F0 100%)" }} />
 
       {/* Layer 2 — Watercolor cloud wash */}
       <div
@@ -139,34 +149,36 @@ export function Donate() {
         }}
       />
 
-      {/* Layer 3 — Golden mist */}
+      {/* Layer 3 — Sky-blue mist */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
-          background: "radial-gradient(ellipse 50% 55% at 20% 75%, #F2E7C7 0%, #E8D9AE 20%, transparent 65%)",
-          opacity: 0.13,
+          background: "radial-gradient(ellipse 50% 55% at 20% 75%, #DCE9FF 0%, #B8D3EB 20%, transparent 65%)",
+          opacity: 0.25,
         }}
       />
 
-      {/* Layer 4 — Micro floating particles */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        {PARTICLES.map((p) => (
-          <motion.div
-            key={p.id}
-            className="absolute rounded-full"
-            style={{
-              left: `${p.x}%`,
-              top: `${p.y}%`,
-              width: p.size,
-              height: p.size,
-              background: "radial-gradient(circle, #D4AF37, transparent)",
-              opacity: 0.35,
-            }}
-            animate={{ y: [0, -28, 0], opacity: [0.2, 0.45, 0.2] }}
-            transition={{ duration: p.duration, delay: p.delay, repeat: Infinity, ease: "easeInOut" }}
-          />
-        ))}
-      </div>
+      {/* Layer 4 — Micro floating particles (client-only to avoid hydration mismatch) */}
+      {mounted && (
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          {PARTICLES.map((p) => (
+            <motion.div
+              key={p.id}
+              className="absolute rounded-full"
+              style={{
+                left: `${p.x}%`,
+                top: `${p.y}%`,
+                width: p.size,
+                height: p.size,
+                background: "radial-gradient(circle, #90E0EF, transparent)",
+                opacity: 0.35,
+              }}
+              animate={{ y: [0, -28, 0], opacity: [0.2, 0.45, 0.2] }}
+              transition={{ duration: p.duration, delay: p.delay, repeat: Infinity, ease: "easeInOut" }}
+            />
+          ))}
+        </div>
+      )}
 
       {/* Layer 5 — Mandala corners */}
       <div className="absolute top-0 left-0 pointer-events-none"><Mandala size={240} opacity={0.045} /></div>
@@ -179,7 +191,7 @@ export function Donate() {
           fontFamily: "'Cormorant Garamond', serif",
           fontWeight: 500,
           fontSize: "clamp(120px, 16vw, 240px)",
-          color: "#D5D0C6",
+          color: "#B8D3EB",
           opacity: 0.03, // 2-4% per PRD
           lineHeight: 0.88,
           textAlign: "right",
@@ -255,7 +267,7 @@ export function Donate() {
             with Krishna.
           </motion.h2>
 
-          {/* Gold divider line */}
+          {/* Blue divider line */}
           <motion.div
             initial={{ opacity: 0, scaleX: 0 }}
             animate={isInView ? { opacity: 1, scaleX: 1 } : {}}
@@ -263,7 +275,7 @@ export function Donate() {
             style={{
               width: 80,
               height: 1.5,
-              background: "linear-gradient(90deg, #D4AF37, #F2D675, #D4AF37)",
+              background: "linear-gradient(90deg, #1D5C96, #90E0EF, #1D5C96)",
               marginTop: 40,
               marginBottom: 40,
               transformOrigin: "left",
@@ -318,13 +330,13 @@ export function Donate() {
             {/* Secondary */}
             <Link
               href="/about"
-              className="inline-flex items-center justify-center gap-2 font-semibold tracking-widest transition-all duration-300 hover:bg-[rgba(212,175,55,0.08)] hover:-translate-y-1"
+              className="inline-flex items-center justify-center gap-2 font-semibold tracking-widest transition-all duration-300 hover:bg-[rgba(29,92,150,0.08)] hover:-translate-y-1"
               style={{
                 height: 56,
                 padding: "0 36px",
                 borderRadius: 999,
-                border: "1px solid #D4AF37",
-                color: "#B78A2A",
+                border: "1px solid #1D5C96",
+                color: "#1D5C96",
                 fontSize: 13,
                 letterSpacing: "0.15em",
                 fontFamily: "'Inter', sans-serif",

@@ -66,7 +66,7 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#FFFCF7" },
+    { media: "(prefers-color-scheme: light)", color: "#F4F8FC" },
     { media: "(prefers-color-scheme: dark)", color: "#111111" },
   ],
   colorScheme: "light",
@@ -79,7 +79,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 
   return (
     <html lang="en-IN" className={`${cormorant.variable} ${playfair.variable} ${inter.variable}`} suppressHydrationWarning>
-      <body className="min-h-screen antialiased bg-[#FFFCF7] text-[#111111] font-sans selection:bg-[#D4AF37] selection:text-white">
+      <body className="min-h-screen antialiased bg-[#F4F8FC] text-[#0F1D36] font-sans selection:bg-[#1D5C96] selection:text-white">
         <JsonLd data={jsonLd} nonce={nonce} />
 
         <a

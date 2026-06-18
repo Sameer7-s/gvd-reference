@@ -49,7 +49,7 @@ const timelineItems = [
 function EyebrowLabel() {
   return (
     <div className="tm-eyebrow-wrap">
-      <Lotus className="tm-eyebrow-lotus text-[#C9A15B]" />
+      <Lotus className="tm-eyebrow-lotus text-accent-primary" />
       <div className="tm-eyebrow-row">
         <div className="tm-eyebrow-rule" aria-hidden="true">
           <span className="tm-eyebrow-line" />
@@ -74,7 +74,7 @@ export function Gallery() {
     >
       <div className="tm-paper-texture" aria-hidden="true" />
       <PeacockFeather className="tm-peacock" aria-hidden="true" />
-      <Mandala className="tm-mandala text-[#C9A15B]" petals={24} aria-hidden="true" />
+      <Mandala className="tm-mandala text-accent-primary/20" petals={24} aria-hidden="true" />
 
       <div className="tm-container">
         <Reveal className="tm-header">
@@ -105,7 +105,7 @@ export function Gallery() {
                 <span>Most Visited</span>
               </div>
               <aside className="tm-overlay-card">
-                <Lotus className="h-5 w-5 text-[#C9A15B]" aria-hidden="true" />
+                <Lotus className="h-5 w-5 text-accent-primary" aria-hidden="true" />
                 <h3 className="tm-overlay-title">Daily Darshan Experience</h3>
                 <p className="tm-overlay-description">
                   Witness the divine presence of Radha Krishna and experience the sacred atmosphere
