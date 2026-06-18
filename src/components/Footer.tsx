@@ -45,7 +45,7 @@ export function Footer() {
           position: relative;
           width: 100%;
           height: auto;
-          background: linear-gradient(180deg, #FDFCF8 0%, #FAF8F2 50%, #F7F4EC 100%);
+          background: linear-gradient(180deg, #F4F8FC 0%, #E2EBF4 50%, #D4E2F0 100%);
           padding-top: 0;
           padding-bottom: 0;
         }
@@ -85,7 +85,7 @@ export function Footer() {
         }
         .particle-layer {
           position: absolute;
-          background-image: radial-gradient(circle, #D4AF37 1.5px, transparent 1.5px);
+          background-image: radial-gradient(circle, #90E0EF 1.5px, transparent 1.5px);
           background-size: 40px 40px;
         }
         .particle-layer.layer-1 {
@@ -117,7 +117,7 @@ export function Footer() {
           font-weight: 300;
           font-size: 240px;
           line-height: 0.85;
-          color: #E2C785;
+          color: #B8D3EB;
           opacity: 0.02;
           z-index: 2;
           pointer-events: none;
@@ -184,12 +184,12 @@ export function Footer() {
           width: 100%;
           max-width: 220px;
           opacity: 0.85;
-          filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.4));
+          filter: drop-shadow(0 0 8px rgba(29, 92, 150, 0.4));
         }
         .mantra-top-divider .line {
           flex: 1;
           height: 1px;
-          background: linear-gradient(90deg, transparent, #E2C785, transparent);
+          background: linear-gradient(90deg, transparent, #B8D3EB, transparent);
         }
 
         .mantra-text {
@@ -198,7 +198,7 @@ export function Footer() {
           letter-spacing: 0.08em;
           line-height: 1.6;
           font-weight: 500;
-          background: linear-gradient(180deg, #FFF3D3 0%, #E2C785 50%, #B8860B 100%);
+          background: linear-gradient(180deg, #EBF3FC 0%, #76A8D6 50%, #123A8C 100%);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
           text-shadow: 0 4px 20px rgba(0,0,0,0.4);
@@ -217,7 +217,7 @@ export function Footer() {
           left: 0;
           width: 100%;
           height: 120px;
-          background: linear-gradient(180deg, rgba(2,22,63,0) 0%, rgba(253,252,248,1) 100%);
+          background: linear-gradient(180deg, rgba(2,22,63,0) 0%, #F4F8FC 100%);
           pointer-events: none;
           z-index: 20;
           backdrop-filter: blur(2px);
@@ -226,7 +226,7 @@ export function Footer() {
           content: "";
           position: absolute;
           inset: 0;
-          background-image: radial-gradient(circle, #D4AF37 1.5px, transparent 1.5px);
+          background-image: radial-gradient(circle, #90E0EF 1.5px, transparent 1.5px);
           background-size: 30px 30px;
           opacity: 0.15;
           mask-image: linear-gradient(180deg, black 0%, transparent 100%);
@@ -284,7 +284,7 @@ export function Footer() {
         .luxury-divider .line {
           flex: 1;
           height: 1px;
-          background: #C9A54A;
+          background: #1D5C96;
         }
         @media (max-width: 767px) {
           .luxury-divider { margin: 20px auto; }
@@ -329,7 +329,7 @@ export function Footer() {
           width: 52px;
           height: 52px;
           border-radius: 50%;
-          border: 1px solid rgba(214, 177, 77, 0.3);
+          border: 1px solid rgba(29, 92, 150, 0.3);
           background: rgba(255, 255, 255, 0.85);
           color: #123A8C;
           transition: all 500ms cubic-bezier(0.22, 1, 0.36, 1);
@@ -337,8 +337,8 @@ export function Footer() {
 
         .luxury-social-icon:hover {
           transform: translateY(-6px);
-          box-shadow: 0 20px 50px rgba(212, 175, 55, 0.25);
-          border-color: rgba(214, 177, 77, 0.8);
+          box-shadow: 0 20px 50px rgba(18, 58, 140, 0.25);
+          border-color: rgba(29, 92, 150, 0.8);
         }
 
         /* Links Columns */
@@ -371,7 +371,7 @@ export function Footer() {
           bottom: 4px;
           width: 100%;
           height: 1px;
-          background: #C9A54A;
+          background: #1D5C96;
           transform: scaleX(0);
           transform-origin: left;
           transition: transform 400ms cubic-bezier(0.22, 1, 0.36, 1);
@@ -401,7 +401,7 @@ export function Footer() {
           font-size: 12px;
           letter-spacing: 0.2em;
           text-transform: uppercase;
-          color: #C9A54A;
+          color: #1D5C96;
           margin-bottom: 8px;
           font-weight: 500;
         }
@@ -429,11 +429,11 @@ export function Footer() {
         .contact-separator {
           width: 100%;
           height: 1px;
-          background: linear-gradient(90deg, rgba(201,165,74,0.15), transparent);
+          background: linear-gradient(90deg, rgba(29,92,150,0.15), transparent);
           margin: 14px 0;
         }
         @media (max-width: 767px) {
-          .contact-separator { background: linear-gradient(90deg, transparent, rgba(201,165,74,0.15), transparent); }
+          .contact-separator { background: linear-gradient(90deg, transparent, rgba(29,92,150,0.15), transparent); }
         }
 
         /* --- Legal Bar --- */
@@ -441,7 +441,7 @@ export function Footer() {
           position: relative;
           width: 100%;
           height: 80px;
-          border-top: 1px solid rgba(212, 175, 55, 0.15);
+          border-top: 1px solid rgba(29, 92, 150, 0.15);
           padding: 0 64px;
           display: flex;
           align-items: center;
@@ -471,7 +471,7 @@ export function Footer() {
           transition: color 300ms ease;
         }
         .legal-links a:hover {
-          color: #C9A54A;
+          color: #1D5C96;
         }
         
         /* --- Decorative Assets (Footer) --- */
@@ -507,9 +507,9 @@ export function Footer() {
         <div className="mantra-container">
           <div className="mantra-top-divider">
             <div className="line" />
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#E2C785" strokeWidth="1.5">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#B8D3EB" strokeWidth="1.5">
               <path d="M12 22c-4.4 0-8-3.6-8-8 0-4.4 3.6-8 8-8s8 3.6 8 8c0 4.4-3.6 8-8 8z" opacity="0.2"/>
-              <path d="M12 14c-1.1 0-2-.9-2-2 0-2.2 2-6 2-6s2 3.8 2 6c0 1.1-.9 2-2 2z" fill="#E2C785"/>
+              <path d="M12 14c-1.1 0-2-.9-2-2 0-2.2 2-6 2-6s2 3.8 2 6c0 1.1-.9 2-2 2z" fill="#B8D3EB"/>
               <path d="M12 22c-2.2 0-4-1.8-4-4 0-3.3 4-8 4-8s4 4.7 4 8c0 2.2-1.8 4-4 4z"/>
             </svg>
             <div className="line" />
@@ -549,9 +549,9 @@ export function Footer() {
           
           <div className="luxury-divider" style={{ justifyContent: 'flex-start' }}>
             <div className="line" style={{ flex: 'none', width: '40px' }} />
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C9A54A" strokeWidth="1.5">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1D5C96" strokeWidth="1.5">
               <path d="M12 22c-4.4 0-8-3.6-8-8 0-4.4 3.6-8 8-8s8 3.6 8 8c0 4.4-3.6 8-8 8z" opacity="0.2"/>
-              <path d="M12 14c-1.1 0-2-.9-2-2 0-2.2 2-6 2-6s2 3.8 2 6c0 1.1-.9 2-2 2z" fill="#C9A54A"/>
+              <path d="M12 14c-1.1 0-2-.9-2-2 0-2.2 2-6 2-6s2 3.8 2 6c0 1.1-.9 2-2 2z" fill="#1D5C96"/>
               <path d="M12 22c-2.2 0-4-1.8-4-4 0-3.3 4-8 4-8s4 4.7 4 8c0 2.2-1.8 4-4 4z"/>
             </svg>
             <div className="line" style={{ flex: 'none', width: '40px' }} />
@@ -576,9 +576,9 @@ export function Footer() {
           
           <div className="luxury-divider" style={{ justifyContent: 'flex-start' }}>
             <div className="line" style={{ flex: 'none', width: '40px' }} />
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C9A54A" strokeWidth="1.5">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1D5C96" strokeWidth="1.5">
               <path d="M12 22c-4.4 0-8-3.6-8-8 0-4.4 3.6-8 8-8s8 3.6 8 8c0 4.4-3.6 8-8 8z" opacity="0.2"/>
-              <path d="M12 14c-1.1 0-2-.9-2-2 0-2.2 2-6 2-6s2 3.8 2 6c0 1.1-.9 2-2 2z" fill="#C9A54A"/>
+              <path d="M12 14c-1.1 0-2-.9-2-2 0-2.2 2-6 2-6s2 3.8 2 6c0 1.1-.9 2-2 2z" fill="#1D5C96"/>
               <path d="M12 22c-2.2 0-4-1.8-4-4 0-3.3 4-8 4-8s4 4.7 4 8c0 2.2-1.8 4-4 4z"/>
             </svg>
             <div className="line" style={{ flex: 'none', width: '40px' }} />
@@ -601,9 +601,9 @@ export function Footer() {
           
           <div className="luxury-divider" style={{ justifyContent: 'flex-start' }}>
             <div className="line" style={{ flex: 'none', width: '40px' }} />
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C9A54A" strokeWidth="1.5">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1D5C96" strokeWidth="1.5">
               <path d="M12 22c-4.4 0-8-3.6-8-8 0-4.4 3.6-8 8-8s8 3.6 8 8c0 4.4-3.6 8-8 8z" opacity="0.2"/>
-              <path d="M12 14c-1.1 0-2-.9-2-2 0-2.2 2-6 2-6s2 3.8 2 6c0 1.1-.9 2-2 2z" fill="#C9A54A"/>
+              <path d="M12 14c-1.1 0-2-.9-2-2 0-2.2 2-6 2-6s2 3.8 2 6c0 1.1-.9 2-2 2z" fill="#1D5C96"/>
               <path d="M12 22c-2.2 0-4-1.8-4-4 0-3.3 4-8 4-8s4 4.7 4 8c0 2.2-1.8 4-4 4z"/>
             </svg>
             <div className="line" style={{ flex: 'none', width: '40px' }} />
@@ -637,9 +637,9 @@ export function Footer() {
           
           <div className="luxury-divider" style={{ justifyContent: 'flex-start' }}>
             <div className="line" style={{ flex: 'none', width: '40px' }} />
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C9A54A" strokeWidth="1.5">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1D5C96" strokeWidth="1.5">
               <path d="M12 22c-4.4 0-8-3.6-8-8 0-4.4 3.6-8 8-8s8 3.6 8 8c0 4.4-3.6 8-8 8z" opacity="0.2"/>
-              <path d="M12 14c-1.1 0-2-.9-2-2 0-2.2 2-6 2-6s2 3.8 2 6c0 1.1-.9 2-2 2z" fill="#C9A54A"/>
+              <path d="M12 14c-1.1 0-2-.9-2-2 0-2.2 2-6 2-6s2 3.8 2 6c0 1.1-.9 2-2 2z" fill="#1D5C96"/>
               <path d="M12 22c-2.2 0-4-1.8-4-4 0-3.3 4-8 4-8s4 4.7 4 8c0 2.2-1.8 4-4 4z"/>
             </svg>
             <div className="line" style={{ flex: 'none', width: '40px' }} />
@@ -666,7 +666,7 @@ export function Footer() {
       <div className="legal-bar">
         <div>© {year} Hare Krishna Movement</div>
         
-        <svg className="legal-lotus" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C9A54A" strokeWidth="1.5" opacity="0.8">
+        <svg className="legal-lotus" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1D5C96" strokeWidth="1.5" opacity="0.8">
           <path d="M12 22c-4.4 0-8-3.6-8-8 0-4.4 3.6-8 8-8s8 3.6 8 8c0 4.4-3.6 8-8 8z" opacity="0.2"/>
           <path d="M12 14c-1.1 0-2-.9-2-2 0-2.2 2-6 2-6s2 3.8 2 6c0 1.1-.9 2-2 2z" fill="currentColor"/>
         </svg>

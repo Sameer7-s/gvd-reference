@@ -13,12 +13,12 @@ export function DiyaLamp({ className }: DiyaLampProps) {
     <div className={className} aria-hidden="true">
       <div className="sg-diya-glow" />
       <svg viewBox="0 0 56 48" className="sg-diya-svg">
-        <ellipse cx="28" cy="38" rx="22" ry="8" fill="#C4A062" opacity="0.5" />
+        <ellipse cx="28" cy="38" rx="22" ry="8" fill="#8CA8BF" opacity="0.5" />
         <path
           d="M8 34 C8 28, 16 24, 28 24 C40 24, 48 28, 48 34 C48 38, 40 42, 28 42 C16 42, 8 38, 8 34 Z"
-          fill="#D4AF37"
+          fill="#1D5C96"
         />
-        <path d="M12 34 C12 30, 18 28, 28 28 C38 28, 44 30, 44 34" fill="#E8C76A" opacity="0.5" />
+        <path d="M12 34 C12 30, 18 28, 28 28 C38 28, 44 30, 44 34" fill="#4EA8DE" opacity="0.5" />
         <motion.path
           d="M28 24 C26 16, 28 8, 28 4 C28 8, 30 16, 28 24"
           fill="#FF8C2A"

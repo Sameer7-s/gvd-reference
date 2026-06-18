@@ -78,7 +78,7 @@ export function DarshanStatus({
 
   return (
     <div
-      className={`inline-flex items-center gap-2.5 whitespace-nowrap rounded-full border border-gold-500/30 bg-ivory/85 px-4 py-1.5 text-sm shadow-temple backdrop-blur ${className}`}
+      className={`inline-flex items-center gap-2.5 whitespace-nowrap rounded-full border border-accent-primary/20 bg-bg-secondary/85 px-4 py-1.5 text-sm shadow-temple backdrop-blur ${className}`}
       role="status"
       aria-live="polite"
     >
@@ -88,13 +88,13 @@ export function DarshanStatus({
         )}
         <span
           className={`relative inline-flex h-2.5 w-2.5 rounded-full ${
-            open ? "bg-emerald-600" : "bg-saffron-500"
+            open ? "bg-emerald-600" : "bg-amber-500"
           }`}
         />
       </span>
-      <span className="font-semibold text-maroon-900">{label}</span>
-      {!compact && <span className="hidden text-muted sm:inline">·</span>}
-      {!compact && <span className="hidden text-muted sm:inline">{detail}</span>}
+      <span className="font-semibold text-text-primary">{label}</span>
+      {!compact && <span className="hidden text-text-muted sm:inline">·</span>}
+      {!compact && <span className="hidden text-text-muted sm:inline">{detail}</span>}
     </div>
   );
 }

@@ -14,9 +14,9 @@ function Pillar({ className, flip }: { className?: string; flip?: boolean }) {
     >
       <defs>
         <linearGradient id={gradId} x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0%" stopColor="#D4BC8A" />
-          <stop offset="50%" stopColor="#E7D3AB" />
-          <stop offset="100%" stopColor="#C9A86E" />
+          <stop offset="0%" stopColor="#A8C4D8" />
+          <stop offset="50%" stopColor="#D4E5F2" />
+          <stop offset="100%" stopColor="#8CA8BF" />
         </linearGradient>
       </defs>
       <rect x="18" y="24" width="44" height="12" rx="2" fill={`url(#${gradId})`} />
@@ -26,11 +26,11 @@ function Pillar({ className, flip }: { className?: string; flip?: boolean }) {
       <rect x="10" y="190" width="60" height="10" rx="1" fill={`url(#${gradId})`} opacity="0.85" />
       {[58, 72, 86, 100, 114, 128, 142, 156].map((y) => (
         <g key={y}>
-          <ellipse cx="40" cy={y} rx="18" ry="5" fill="none" stroke="#C4A062" strokeWidth="0.75" opacity="0.55" />
+          <ellipse cx="40" cy={y} rx="18" ry="5" fill="none" stroke="#7898B0" strokeWidth="0.75" opacity="0.55" />
           <path
             d={`M28 ${y} Q40 ${y - 4} 52 ${y}`}
             fill="none"
-            stroke="#B8924F"
+            stroke="#5F7E96"
             strokeWidth="0.5"
             opacity="0.45"
           />

@@ -8,7 +8,9 @@ import { EventsSection as Events } from "@/components/events/EventsSection";
 import { Testimonials } from "@/components/sections/Testimonials";
 import { Seva } from "@/components/sections/Seva";
 import { Donate } from "@/components/sections/Donate";
+import { SectionBlurTransition } from "@/components/SectionBlurTransition";
 import { JsonLd } from "@/components/JsonLd";
+
 import { faqJsonLd } from "@/lib/seo";
 
 export default async function HomePage() {
@@ -19,7 +21,9 @@ export default async function HomePage() {
       <JsonLd data={faqJsonLd()} nonce={nonce} />
       <HeroCarousel />
       <About />
+      <SectionBlurTransition fromColor="#041120" toColor="#EBF2F8" height={160} />
       <Gallery />
+
       <Programs />
       <Statistics />
       <Events />

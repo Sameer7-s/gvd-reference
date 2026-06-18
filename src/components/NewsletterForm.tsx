@@ -39,7 +39,7 @@ export function NewsletterForm() {
       <label htmlFor="nl-email" className="sr-only">
         Email address for temple updates
       </label>
-      <div className="flex overflow-hidden rounded-full border border-gold-500/30 bg-maroon-950/40 focus-within:border-gold-400">
+      <div className="flex overflow-hidden rounded-full border border-accent-primary/20 bg-bg-white/80 focus-within:border-accent-primary">
         <input
           id="nl-email"
           type="email"
@@ -54,7 +54,7 @@ export function NewsletterForm() {
           }}
           aria-invalid={!!error}
           aria-describedby={error ? "nl-error" : undefined}
-          className="min-w-0 flex-1 bg-transparent px-4 py-3 text-sm text-cream placeholder:text-cream/40 focus:outline-none"
+          className="min-w-0 flex-1 bg-transparent px-4 py-3 text-sm text-text-primary placeholder:text-text-muted/50 focus:outline-none"
         />
         {/* honeypot */}
         <input
@@ -67,14 +67,14 @@ export function NewsletterForm() {
         />
         <button
           type="submit"
-          className="inline-flex items-center gap-1.5 bg-gradient-to-br from-gold-400 to-gold-600 px-5 text-sm font-semibold text-maroon-950 transition-colors hover:from-gold-300 hover:to-gold-500 cursor-pointer"
+          className="inline-flex items-center gap-1.5 bg-gradient-to-br from-accent-secondary to-accent-primary px-5 text-sm font-semibold text-white transition-colors hover:from-accent-primary hover:to-accent-secondary cursor-pointer"
         >
           <Send className="h-4 w-4" />
           <span className="hidden sm:inline">Subscribe</span>
         </button>
       </div>
       {error && (
-        <span id="nl-error" role="alert" className="px-2 text-xs text-saffron-300">
+        <span id="nl-error" role="alert" className="px-2 text-xs text-red-600">
           {error}
         </span>
       )}

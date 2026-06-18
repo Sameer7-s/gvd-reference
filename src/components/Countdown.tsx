@@ -16,10 +16,10 @@ function diff(target: number): Parts {
 
 const Cell = ({ value, label }: { value: number; label: string }) => (
   <div className="flex flex-col items-center">
-    <span className="font-display text-2xl tabular-nums text-cream sm:text-4xl">
+    <span className="font-display text-2xl tabular-nums text-white sm:text-4xl">
       {String(value).padStart(2, "0")}
     </span>
-    <span className="mt-1 text-[0.62rem] font-semibold uppercase tracking-[0.18em] text-gold-300">
+    <span className="mt-1 text-[0.62rem] font-semibold uppercase tracking-[0.18em] text-accent-light">
       {label}
     </span>
   </div>
@@ -40,11 +40,11 @@ export function Countdown({ iso, className = "" }: { iso: string; className?: st
   return (
     <div className={`flex items-center gap-2 sm:gap-5 ${className}`} aria-label="Countdown to festival">
       <Cell value={p.days} label="Days" />
-      <span className="font-display text-2xl text-gold-400/60">:</span>
+      <span className="font-display text-2xl text-accent-light/60">:</span>
       <Cell value={p.hours} label="Hrs" />
-      <span className="font-display text-2xl text-gold-400/60">:</span>
+      <span className="font-display text-2xl text-accent-light/60">:</span>
       <Cell value={p.minutes} label="Min" />
-      <span className="font-display text-2xl text-gold-400/60">:</span>
+      <span className="font-display text-2xl text-accent-light/60">:</span>
       <Cell value={p.seconds} label="Sec" />
     </div>
   );

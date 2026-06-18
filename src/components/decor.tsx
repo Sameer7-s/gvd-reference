@@ -134,7 +134,7 @@ export function PeacockFeather({ className, ...props }: SvgProps) {
 export function LotusDivider({ className }: { className?: string }) {
   return (
     <div className={`rule-ornament ${className ?? ""}`} aria-hidden="true">
-      <Lotus className="h-5 w-5 rotate-180 text-gold-500" />
+      <Lotus className="h-5 w-5 rotate-180 text-accent-primary" />
     </div>
   );
 }
@@ -143,8 +143,8 @@ export function LotusDivider({ className }: { className?: string }) {
 export function DivineGlow({ className }: { className?: string }) {
   return (
     <div className={className} aria-hidden="true">
-      <div className="absolute inset-0 rounded-full bg-[radial-gradient(circle,var(--color-gold-300),transparent_60%)] opacity-60 blur-2xl animate-pulse-glow" />
-      <div className="absolute inset-[12%] rounded-full bg-[radial-gradient(circle,var(--color-saffron-300),transparent_65%)] opacity-50 blur-xl" />
+      <div className="absolute inset-0 rounded-full bg-[radial-gradient(circle,var(--color-accent-light),transparent_60%)] opacity-60 blur-2xl animate-pulse-glow" />
+      <div className="absolute inset-[12%] rounded-full bg-[radial-gradient(circle,var(--color-accent-primary),transparent_65%)] opacity-50 blur-xl" />
     </div>
   );
 }

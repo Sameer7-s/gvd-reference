@@ -6,7 +6,7 @@ export function FinalCta() {
     <section 
       className="w-full section-padding relative overflow-hidden flex items-center justify-center text-center"
       style={{
-        background: "linear-gradient(to bottom, #FAF7F0 0%, #FFFCF7 100%)"
+        background: "linear-gradient(to bottom, #E2EBF4 0%, #F4F8FC 100%)"
       }}
     >
       <Reveal className="container-page relative z-10 flex flex-col items-center">
