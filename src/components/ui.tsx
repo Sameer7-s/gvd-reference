@@ -8,21 +8,23 @@ type ButtonSize = "sm" | "md" | "lg";
 
 const VARIANTS: Record<ButtonVariant, string> = {
   primary:
-    "bg-gradient-to-br from-accent-secondary to-accent-primary text-white shadow-temple hover:from-accent-primary hover:to-accent-secondary hover:shadow-temple-lg",
-  gold: "bg-gradient-to-br from-accent-light to-accent-primary text-text-primary shadow-temple hover:from-accent-light hover:to-accent-secondary",
+    "bg-[#123A8C] text-white shadow-[0_4px_20px_rgba(18,58,140,0.3)] hover:shadow-[0_8px_25px_rgba(18,58,140,0.4)] hover:bg-[#0f2d70] border border-[#123A8C]/20",
+  gold: 
+    "bg-[#d4af37] text-[#0f2d70] shadow-[0_4px_20px_rgba(212,175,55,0.3)] hover:shadow-[0_8px_25px_rgba(212,175,55,0.4)] hover:bg-[#e0bc45] border border-[#d4af37]/50",
   outline:
-    "border border-accent-primary/40 bg-bg-secondary/60 text-text-primary hover:border-accent-primary hover:bg-bg-tertiary/50",
+    "bg-white border-2 border-[#123A8C]/20 text-[#123A8C] shadow-sm hover:border-[#123A8C] hover:bg-[#f4f8fc]",
   "outline-light":
-    "border border-accent-light/40 bg-transparent text-bg-primary hover:border-accent-light hover:bg-bg-primary/10",
-  ghost: "text-text-primary hover:bg-bg-secondary/50",
+    "bg-transparent border-2 border-white/30 text-white hover:bg-white hover:text-[#123A8C] hover:border-white shadow-sm backdrop-blur-md",
+  ghost: 
+    "bg-transparent text-[#123A8C] hover:bg-[#123A8C]/5",
   light:
-    "bg-bg-primary text-text-primary shadow-temple hover:bg-bg-secondary border border-accent-primary/30",
+    "bg-white text-[#123A8C] shadow-[0_4px_15px_rgba(0,0,0,0.05)] hover:shadow-[0_8px_25px_rgba(0,0,0,0.1)] border border-gray-100",
 };
 
 const SIZES: Record<ButtonSize, string> = {
-  sm: "px-4 py-2 text-sm",
-  md: "px-6 py-3 text-[0.95rem]",
-  lg: "px-8 py-4 text-base",
+  sm: "px-5 py-2 text-sm",
+  md: "px-7 py-3 text-[15px]",
+  lg: "px-9 py-4 text-base",
 };
 
 type ButtonProps = {
@@ -43,7 +45,7 @@ export function Button({
   external = false,
   ...rest
 }: ButtonProps) {
-  const cls = `group/btn inline-flex items-center justify-center gap-2 rounded-full font-semibold tracking-wide transition-all duration-300 ease-soft cursor-pointer focus-visible:outline-none ${VARIANTS[variant]} ${SIZES[size]} ${className}`;
+  const cls = `group inline-flex items-center justify-center gap-2 rounded-full font-bold tracking-wide transition-all duration-300 hover:-translate-y-[2px] active:translate-y-0 active:scale-95 cursor-pointer focus-visible:outline-none ${VARIANTS[variant]} ${SIZES[size]} ${className}`;
 
   if (href) {
     if (external || href.startsWith("http") || href.startsWith("tel:") || href.startsWith("mailto:")) {

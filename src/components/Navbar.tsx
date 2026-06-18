@@ -2,391 +2,160 @@
 
 import Link from "next/link";
 import { useState, useEffect } from "react";
-import { Menu, X, ChevronDown, ArrowRight } from "lucide-react";
+import { ChevronDown, Moon, Heart, Mail, MessageCircle, Home, Landmark, Globe, Sparkles, LayoutGrid, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import { LogoMark } from "@/components/brand";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
 
-// Mega Menu Data Structure
 const NAV_DATA = [
-  { label: "Home", href: "/", isMega: false },
+  { label: "Home", href: "/", icon: Home },
   {
     label: "About Us",
     href: "/about",
-    isMega: false,
     dropdown: [
-      { title: "About Temple", desc: "Learn about our spiritual sanctuary", href: "/about/temple" },
-      { title: "Our Mission", desc: "Our core values and vision", href: "/about/mission" },
-      { title: "Our History", desc: "The journey of our movement", href: "/about/history" },
-      { title: "Founder Acharya", desc: "Srila Prabhupada's legacy", href: "/about/founder" },
-      { title: "Temple Architecture", desc: "Explore the sacred design and heritage", href: "/about/architecture" },
-      { title: "Leadership Team", desc: "Meet the devotees guiding our mission", href: "/about/leadership" },
-      { title: "Governance", desc: "Transparency and administrative structure", href: "/about/governance" },
-      { title: "Global ISKCON Movement", desc: "Our worldwide community", href: "/about/iskcon" },
-      { title: "Contact Us", desc: "Get in touch with us", href: "/contact" },
+      { title: "About Temple", href: "/about/temple" },
+      { title: "Our Centers", href: "/about/centers" },
+      { title: "Our History", href: "/about/history" },
+      { title: "Founder Acharya", href: "/about/founder" },
+      { title: "Leadership Team", href: "/about/leadership" },
     ],
   },
   {
-    label: "Sevas",
-    href: "/sevas",
-    isMega: false,
-    dropdownColumns: [
-      {
-        header: "Daily Worship",
-        items: [
-          { title: "Mangala Aarti", href: "/sevas/mangala" },
-          { title: "Tulasi Aarti", href: "/sevas/tulasi" },
-          { title: "Raj Bhoga Offering", href: "/sevas/raj-bhoga" },
-          { title: "Sandhya Aarti", href: "/sevas/sandhya" },
-          { title: "Shayana Aarti", href: "/sevas/shayana" },
-        ],
-      },
-      {
-        header: "Offerings",
-        items: [
-          { title: "Annadanam Seva", href: "/sevas/annadanam" },
-          { title: "Gau Seva", href: "/sevas/gau" },
-          { title: "Flower Seva", href: "/sevas/flower" },
-          { title: "Deepa Seva", href: "/sevas/deepa" },
-          { title: "Festival Sponsorship", href: "/sevas/festival" },
-        ],
-      },
-      {
-        header: "Devotional Services",
-        items: [
-          { title: "Book Distribution", href: "/sevas/books" },
-          { title: "Temple Volunteering", href: "/sevas/volunteer" },
-          { title: "Bhajan Seva", href: "/sevas/bhajan" },
-          { title: "Sponsorship Opportunities", href: "/sevas/sponsorship" },
-        ],
-      },
-    ],
-  },
-  {
-    label: "Festivals",
-    href: "/festivals",
-    isMega: true,
-    dropdownColumns: [
-      {
-        header: "Featured Festivals",
-        items: [
-          { title: "Janmashtami", href: "/festivals/janmashtami" },
-          { title: "Ratha Yatra", href: "/festivals/ratha-yatra" },
-          { title: "Gaura Purnima", href: "/festivals/gaura-purnima" },
-          { title: "Radhashtami", href: "/festivals/radhashtami" },
-          { title: "Nityananda Trayodashi", href: "/festivals/nityananda" },
-        ],
-      },
-      {
-        header: "Yearly Celebrations",
-        items: [
-          { title: "Kartik Month", href: "/festivals/kartik" },
-          { title: "Govardhan Puja", href: "/festivals/govardhan" },
-          { title: "Narasimha Chaturdashi", href: "/festivals/narasimha" },
-          { title: "Rama Navami", href: "/festivals/rama-navami" },
-          { title: "Ekadashi Calendar", href: "/festivals/ekadashi" },
-        ],
-      },
-    ],
-    featuredCard: {
-      image: "/images/festival_celebration_4k.png",
-      date: "August 26, 2026",
-      title: "Sri Krishna Janmashtami",
-      desc: "Join us for the grandest celebration of Lord Krishna's appearance day.",
-      href: "/festivals/janmashtami",
-    },
-  },
-  {
-    label: "Visit",
+    label: "Mandir",
     href: "/visit",
-    isMega: false,
-    dropdownColumns: [
-      {
-        header: "Temple Information",
-        items: [
-          { title: "Darshan Timings", href: "/visit/darshan" },
-          { title: "Temple Schedule", href: "/visit/schedule" },
-          { title: "Daily Programs", href: "/visit/programs" },
-          { title: "Aarti Timings", href: "/visit/aarti" },
-        ],
-      },
-      {
-        header: "Visitor Guide",
-        items: [
-          { title: "First Time Visitors", href: "/visit/first-time" },
-          { title: "Dress Code", href: "/visit/dress-code" },
-          { title: "Temple Etiquette", href: "/visit/etiquette" },
-          { title: "Frequently Asked Questions", href: "/visit/faq" },
-        ],
-      },
-      {
-        header: "Location",
-        items: [
-          { title: "Directions", href: "/visit/directions" },
-          { title: "Parking Information", href: "/visit/parking" },
-          { title: "Nearby Attractions", href: "/visit/attractions" },
-          { title: "Accommodation", href: "/visit/accommodation" },
-        ],
-      },
+    icon: Landmark,
+    dropdown: [
+      { title: "Darshan Timings", href: "/visit/darshan" },
+      { title: "Daily Programs", href: "/visit/programs" },
+      { title: "Visitor Guide", href: "/visit/first-time" },
+      { title: "Location", href: "/visit/directions" },
+    ],
+  },
+  {
+    label: "Prabhupada",
+    href: "/prabhupada",
+    icon: Globe,
+    dropdown: [
+      { title: "Biography", href: "/prabhupada/biography" },
+      { title: "Books", href: "/prabhupada/books" },
+      { title: "Quotes", href: "/prabhupada/quotes" },
+      { title: "Milestone Timeline", href: "/prabhupada/timeline" },
+      { title: "Sampradaya", href: "/prabhupada/sampradaya" },
     ],
   },
   {
     label: "Activities",
     href: "/activities",
-    isMega: false,
-    dropdownColumns: [
-      {
-        header: "Education",
-        items: [
-          { title: "Bhagavad Gita Classes", href: "/activities/gita" },
-          { title: "Srimad Bhagavatam Classes", href: "/activities/bhavagatam" },
-          { title: "Youth Programs", href: "/activities/youth" },
-          { title: "Children's Classes", href: "/activities/children" },
-        ],
-      },
-      {
-        header: "Community",
-        items: [
-          { title: "Sunday Feast", href: "/activities/sunday-feast" },
-          { title: "Spiritual Retreats", href: "/activities/retreats" },
-          { title: "Cultural Events", href: "/activities/cultural" },
-          { title: "Community Gatherings", href: "/activities/gatherings" },
-        ],
-      },
-      {
-        header: "Outreach",
-        items: [
-          { title: "Harinam Sankirtan", href: "/activities/harinam" },
-          { title: "Food Distribution", href: "/activities/food" },
-          { title: "Prison Outreach", href: "/activities/prison" },
-          { title: "College Programs", href: "/activities/college" },
-        ],
-      },
+    icon: Sparkles,
+    dropdown: [
+      { title: "Gita Classes", href: "/activities/gita" },
+      { title: "Sunday Feast", href: "/activities/sunday-feast" },
+      { title: "Cow Care", href: "/activities/cow-care" },
+      { title: "Food Distribution", href: "/activities/food" },
     ],
   },
+  { label: "Festivals", href: "/festivals" },
   {
     label: "Get Involved",
     href: "/get-involved",
-    isMega: false,
-    dropdownColumns: [
-      {
-        header: "Volunteer",
-        items: [
-          { title: "Become a Volunteer", href: "/get-involved/volunteer" },
-          { title: "Event Support", href: "/get-involved/events" },
-          { title: "Temple Services", href: "/get-involved/services" },
-          { title: "Community Outreach", href: "/get-involved/outreach" },
-        ],
-      },
-      {
-        header: "Donate",
-        items: [
-          { title: "One-Time Donation", href: "/donate/one-time" },
-          { title: "Monthly Donation", href: "/donate/monthly" },
-          { title: "Sponsor a Program", href: "/donate/sponsor" },
-          { title: "Legacy Giving", href: "/donate/legacy" },
-        ],
-      },
-      {
-        header: "Membership",
-        items: [
-          { title: "Devotee Membership", href: "/get-involved/membership/devotee" },
-          { title: "Community Membership", href: "/get-involved/membership/community" },
-          { title: "Youth Membership", href: "/get-involved/membership/youth" },
-        ],
-      },
+    dropdown: [
+      { title: "Volunteer", href: "/get-involved/volunteer" },
+      { title: "Membership", href: "/get-involved/membership" },
+      { title: "Sponsor", href: "/donate/sponsor" },
     ],
   },
 ];
 
-const EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
+const EASE = [0.22, 1, 0.36, 1] as const;
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  
+  // Desktop
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  
+  // Mobile Bottom Nav Popup State
+  const [activeMobilePopup, setActiveMobilePopup] = useState<string | null>(null);
   const [mobileAccordion, setMobileAccordion] = useState<string | null>(null);
+
   const pathname = usePathname();
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 48);
+    const onScroll = () => setScrolled(window.scrollY > 20);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // Close popups when navigating
   useEffect(() => {
-    document.body.style.overflow = mobileMenuOpen ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
-  }, [mobileMenuOpen]);
+    setActiveMobilePopup(null);
+  }, [pathname]);
 
-  // Mobile drawer animation variants
-  const drawerVariants = {
-    hidden: { x: "100%", opacity: 0 },
+  const popupVariants = {
+    hidden: { y: "100%", opacity: 0 },
     visible: { 
-      x: 0, 
+      y: 0, 
       opacity: 1,
-      transition: { duration: 0.5, ease: EASE, staggerChildren: 0.05, delayChildren: 0.1 }
+      transition: { duration: 0.3, ease: EASE }
     },
     exit: { 
-      x: "100%", 
+      y: "100%", 
       opacity: 0,
-      transition: { duration: 0.4, ease: EASE }
+      transition: { duration: 0.25, ease: EASE }
     }
   };
 
-  const itemVariants = {
-    hidden: { x: 20, opacity: 0 },
-    visible: { x: 0, opacity: 1, transition: { duration: 0.4, ease: EASE } }
-  };
+  // Helper to get dropdown data
+  const getDropdownData = (label: string) => NAV_DATA.find(item => item.label === label)?.dropdown;
 
   return (
     <>
-      <style dangerouslySetInnerHTML={{ __html: `
-        /* Mega Menu Core Styles */
-        .mega-dropdown-panel {
-          position: absolute;
-          top: 100%;
-          left: 50%;
-          transform: translateX(-50%);
-          background: rgba(255, 255, 255, 0.97);
-          backdrop-filter: blur(30px) saturate(180%);
-          -webkit-backdrop-filter: blur(30px) saturate(180%);
-          border: 1px solid rgba(29, 92, 150, 0.15);
-          border-radius: 24px;
-          box-shadow: 0 30px 80px rgba(0, 0, 0, 0.12);
-          padding: 32px;
-          z-index: 100;
-          cursor: default;
-          pointer-events: auto;
-          margin-top: 16px;
-        }
-
-        .mega-link-item {
-          display: block;
-          padding: 12px 16px;
-          border-radius: 12px;
-          color: #4A4A4A;
-          font-family: var(--font-inter);
-          transition: all 300ms ease;
-          text-decoration: none;
-        }
-
-        .mega-link-item:hover {
-          background: rgba(18, 58, 140, 0.04);
-          color: #123A8C;
-        }
-
-        .mega-link-title {
-          font-weight: 500;
-          font-size: 15px;
-          margin-bottom: 2px;
-          display: flex;
-          align-items: center;
-          gap: 6px;
-        }
-
-        .mega-link-item:hover .mega-link-title {
-          color: #123A8C;
-        }
-        
-        .mega-link-desc {
-          font-size: 13px;
-          color: #888;
-        }
-
-        .mega-col-header {
-          font-family: var(--font-inter);
-          font-weight: 600;
-          font-size: 13px;
-          letter-spacing: 0.1em;
-          text-transform: uppercase;
-          color: #1D5C96;
-          margin-bottom: 16px;
-          padding-left: 16px;
-        }
-
-        /* Nav Link Active State */
-        .desktop-nav-link {
-          position: relative;
-          color: #1F1F1F;
-          font-family: var(--font-inter);
-          font-weight: 500;
-          font-size: 16px;
-          transition: color 300ms ease;
-          padding: 8px 12px;
-        }
-        .desktop-nav-link:hover {
-          color: #123A8C;
-        }
-        .desktop-nav-link .active-line {
-          position: absolute;
-          bottom: -2px;
-          left: 20%;
-          width: 60%;
-          height: 2px;
-          background: #1D5C96;
-          border-radius: 2px;
-        }
-
-        /* Mobile Accordion */
-        .mobile-accordion-btn {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          width: 100%;
-          padding: 16px 0;
-          font-size: 20px;
-          font-family: var(--font-inter);
-          font-weight: 500;
-          color: #1F1F1F;
-          border-bottom: 1px solid rgba(0,0,0,0.05);
-        }
-      `}} />
-
-      {/* ── DESKTOP HEADER ── */}
+      {/* =========================================
+          DESKTOP NAVBAR (Hidden on Mobile)
+          ========================================= */}
       <header 
-        className={`ultra-navbar ${scrolled ? "is-scrolled" : ""}`}
+        className={`hidden xl:flex fixed left-1/2 -translate-x-1/2 w-[95%] max-w-[1400px] h-[72px] z-[9999] transition-all duration-500 items-center justify-between px-6 rounded-full border shadow-lg ${
+          scrolled ? "top-4 bg-white/95 backdrop-blur-md border-gray-200/50 shadow-[0_8px_30px_rgb(0,0,0,0.08)]" : "top-6 bg-white/80 backdrop-blur-md border-white/60 shadow-[0_8px_30px_rgb(0,0,0,0.04)]"
+        }`}
         onMouseLeave={() => setActiveDropdown(null)}
       >
         {/* Left: Logo */}
-        <Link href="/" className="flex items-center gap-3 relative z-10 group">
-          <img
+        <Link href="/" className="flex items-center relative z-10 group shrink-0">
+          <Image
             src="/images/logo.png"
-            alt="Srila Prabhupada ISKCON Gambheeram logo"
-            width={180}
-            height={56}
-            className="object-contain object-left transition-transform duration-500 group-hover:scale-[1.02]"
+            alt="ISKCON Logo"
+            width={140}
+            height={44}
+            className="object-contain transition-transform duration-500 group-hover:scale-105"
           />
         </Link>
 
-        {/* Center: Navigation */}
-        <nav className="hidden xl:flex items-center gap-6 relative h-full">
+        {/* Center: Navigation Links */}
+        <nav className="flex items-center gap-1 xl:gap-3 absolute left-1/2 -translate-x-1/2 h-full">
           {NAV_DATA.map((item) => {
             const isActive = pathname === item.href || (item.href !== "/" && pathname?.startsWith(item.href));
-            const hasDropdown = item.dropdown || item.dropdownColumns;
+            const hasDropdown = !!item.dropdown;
             const isHovered = activeDropdown === item.label;
 
             return (
               <div 
                 key={item.label} 
-                className="h-full flex items-center relative"
+                className="h-full flex items-center relative group/navitem"
                 onMouseEnter={() => hasDropdown && setActiveDropdown(item.label)}
               >
                 <Link 
                   href={item.href}
-                  className="desktop-nav-link flex items-center gap-1.5"
+                  className={`flex items-center gap-1.5 px-3 py-2 rounded-full text-[14px] font-medium transition-colors ${
+                    isActive ? "text-[#123A8C] bg-[#ebf0f8]" : "text-gray-700 hover:text-[#123A8C]"
+                  }`}
                 >
                   {item.label}
                   {hasDropdown && (
                     <ChevronDown 
                       size={14} 
-                      className={`transition-transform duration-300 ${isHovered ? "rotate-180 text-[#123A8C]" : "text-gray-400"}`} 
+                      className={`transition-transform duration-300 ${isHovered ? "rotate-180 text-[#123A8C]" : "text-gray-400 group-hover/navitem:text-[#123A8C]"}`} 
                     />
-                  )}
-                  {isActive && (
-                    <motion.div layoutId="activeNavLine" className="active-line" />
                   )}
                 </Link>
 
@@ -394,85 +163,24 @@ export function Navbar() {
                 <AnimatePresence>
                   {isHovered && hasDropdown && (
                     <motion.div
-                      className="mega-dropdown-panel"
-                      initial={{ opacity: 0, y: 15, scale: 0.98 }}
+                      initial={{ opacity: 0, y: 10, scale: 0.98 }}
                       animate={{ opacity: 1, y: 0, scale: 1 }}
                       exit={{ opacity: 0, y: 10, scale: 0.98 }}
-                      transition={{ duration: 0.45, ease: EASE }}
-                      style={{ 
-                        width: item.isMega ? "900px" : item.dropdownColumns ? "max-content" : "320px",
-                        left: item.isMega ? "50%" : (item.label === "Get Involved" || item.label === "Activities") ? "auto" : "0%",
-                        right: (item.label === "Get Involved" || item.label === "Activities") ? "0%" : "auto",
-                        transform: item.isMega ? "translateX(-50%)" : (item.label === "Get Involved" || item.label === "Activities") ? "none" : "translateX(-20%)",
-                      }}
+                      transition={{ duration: 0.2 }}
+                      className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-56 bg-[#f4f8fc]/95 backdrop-blur-md rounded-2xl shadow-xl border border-white/60 p-2"
                     >
-                      {/* Simple List (About Us) */}
-                      {item.dropdown && (
-                        <div className="flex flex-col gap-1">
-                          {item.dropdown.map((link) => (
-                            <Link key={link.href} href={link.href} className="mega-link-item group/item" onClick={() => setActiveDropdown(null)}>
-                              <div className="mega-link-title justify-between">
-                                <span>{link.title}</span>
-                                <ArrowRight size={14} className="text-[#123A8C] opacity-0 -translate-x-2 transition-all duration-300 group-hover/item:opacity-100 group-hover/item:translate-x-0 group-hover/item:-rotate-45" />
-                              </div>
-                              {link.desc && <div className="mega-link-desc">{link.desc}</div>}
-                            </Link>
-                          ))}
-                        </div>
-                      )}
-
-                      {/* Column Layout (Sevas, Visit, Activities, Get Involved, Festivals) */}
-                      {item.dropdownColumns && (
-                        <div className="flex gap-12">
-                          <div className="flex gap-8">
-                            {item.dropdownColumns.map((col, idx) => (
-                              <div key={idx} className="flex flex-col min-w-[200px]">
-                                <div className="mega-col-header">{col.header}</div>
-                                <div className="flex flex-col gap-1">
-                                  {col.items.map((link) => (
-                                    <Link key={link.title} href={link.href} className="mega-link-item group/item" onClick={() => setActiveDropdown(null)}>
-                                      <span className="mega-link-title justify-between">
-                                        <span>{link.title}</span>
-                                        <ArrowRight size={14} className="text-[#123A8C] opacity-0 -translate-x-2 transition-all duration-300 group-hover/item:opacity-100 group-hover/item:translate-x-0 group-hover/item:-rotate-45" />
-                                      </span>
-                                    </Link>
-                                  ))}
-                                </div>
-                              </div>
-                            ))}
-                          </div>
-
-                          {/* Featured Card for Mega Menu */}
-                          {item.featuredCard && (
-                            <div className="w-[320px] rounded-[16px] overflow-hidden bg-gray-50 flex flex-col group relative">
-                              <div className="h-[160px] w-full bg-gray-200 relative overflow-hidden">
-                                <Image 
-                                  src={item.featuredCard.image} 
-                                  alt={item.featuredCard.title} 
-                                  fill 
-                                  className="object-cover transition-transform duration-700 group-hover:scale-105"
-                                  unoptimized
-                                />
-                                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                                <div className="absolute bottom-4 left-5 right-5 text-white">
-                                  <div className="text-[11px] font-bold uppercase tracking-widest text-[var(--color-accent-primary)] mb-1">{item.featuredCard.date}</div>
-                                  <div className="font-serif text-lg font-medium leading-tight">{item.featuredCard.title}</div>
-                                </div>
-                              </div>
-                              <div className="p-5 flex flex-col flex-1 justify-between bg-white border border-t-0 border-gray-100 rounded-b-[16px]">
-                                <p className="text-sm text-gray-500 mb-4">{item.featuredCard.desc}</p>
-                                <Link 
-                                  href={item.featuredCard.href}
-                                  className="text-[13px] font-semibold text-[#123A8C] uppercase tracking-wider flex items-center gap-2 group-hover:text-[var(--color-accent-primary)] transition-colors"
-                                  onClick={() => setActiveDropdown(null)}
-                                >
-                                  View Festival <ArrowRight size={14} className="transition-transform group-hover:translate-x-1" />
-                                </Link>
-                              </div>
-                            </div>
-                          )}
-                        </div>
-                      )}
+                      <div className="flex flex-col gap-1">
+                        {item.dropdown!.map((link) => (
+                          <Link 
+                            key={link.href} 
+                            href={link.href} 
+                            className="block px-4 py-2.5 text-sm font-medium text-gray-700 hover:bg-white hover:text-[#123A8C] rounded-xl transition-colors"
+                            onClick={() => setActiveDropdown(null)}
+                          >
+                            {link.title}
+                          </Link>
+                        ))}
+                      </div>
                     </motion.div>
                   )}
                 </AnimatePresence>
@@ -481,174 +189,211 @@ export function Navbar() {
           })}
         </nav>
 
-        {/* Right: CTA */}
-        <div className="hidden xl:flex items-center gap-4 relative z-10">
+        {/* Right: CTA Buttons */}
+        <div className="flex items-center gap-3 relative z-10 shrink-0">
+          <button className="h-10 w-10 rounded-full bg-[#123A8C] text-white flex items-center justify-center hover:bg-[#1D5C96] transition-colors shadow-sm">
+            <Moon size={18} fill="currentColor" />
+          </button>
           <Link
             href="/donate"
-            className="ultra-btn-secondary h-[48px] px-6"
-            style={{ 
-              borderRadius: 999, 
-              border: "1px solid rgba(0,0,0,0.1)", 
-              fontFamily: "var(--font-inter)", 
-              fontWeight: 500,
-              display: "flex",
-              alignItems: "center"
-            }}
+            className="h-10 px-6 rounded-full bg-[#123A8C] text-white text-[14px] font-semibold flex items-center gap-2 hover:bg-[#1D5C96] transition-colors shadow-sm"
           >
-            Donate
-          </Link>
-          <Link
-            href="/visit"
-            className="ultra-btn-primary h-[48px] px-7"
-            style={{ fontFamily: "var(--font-inter)", fontWeight: 500, display: "flex", alignItems: "center" }}
-          >
-            Visit Temple
+            <Heart size={16} fill="currentColor" /> Donate Now
           </Link>
         </div>
-
-        {/* Mobile Burger */}
-        <button
-          type="button"
-          onClick={() => setMobileMenuOpen(true)}
-          className="grid h-12 w-12 place-items-center rounded-full xl:hidden transition-colors bg-gray-50 hover:bg-gray-100"
-          aria-label="Open mobile menu"
-        >
-          <Menu size={24} />
-        </button>
       </header>
 
-      {/* ── MOBILE FULLSCREEN DRAWER ── */}
+
+      {/* =========================================
+          MOBILE NAVBAR (Visible on < 1024px)
+          ========================================= */}
+      <div className="flex xl:hidden flex-col w-full z-[8000] relative">
+        {/* Top Contact Bar */}
+        <div className="w-full bg-[#f4f8fc] h-[34px] flex items-center px-4 gap-5 text-[11px] sm:text-xs font-semibold text-gray-700 overflow-hidden shrink-0 border-b border-[#e2e8f0]">
+          <a href="mailto:info@harekrishnamandir.org" className="flex items-center gap-1.5 whitespace-nowrap hover:text-[#123A8C]">
+            <Mail size={13} /> <span className="hidden sm:inline">info@harekrishnamandir.org</span>
+          </a>
+          <a href="https://wa.me/919799999881" className="flex items-center gap-1.5 whitespace-nowrap hover:text-[#123A8C]">
+            <MessageCircle size={13} /> +91-97999 99881
+          </a>
+        </div>
+
+        {/* Main Sticky Header */}
+        <header className={`sticky top-0 w-full h-[64px] bg-white flex items-center justify-between px-4 z-[8000] transition-shadow ${scrolled ? 'shadow-md border-b border-gray-100' : ''}`}>
+          <Link href="/" className="flex items-center shrink-0">
+            <Image
+              src="/images/logo.png"
+              alt="Logo"
+              width={110}
+              height={34}
+              className="object-contain"
+            />
+          </Link>
+          
+          <div className="flex items-center gap-2.5">
+            <button className="h-[38px] w-[38px] rounded-xl bg-[#123A8C] text-white flex items-center justify-center shadow-sm active:scale-95 transition-transform">
+              <Moon size={18} fill="currentColor" />
+            </button>
+            <Link
+              href="/donate"
+              className="h-[38px] px-4 rounded-xl bg-[#123A8C] text-white text-[13px] font-bold flex items-center gap-1.5 shadow-sm active:scale-95 transition-transform"
+            >
+              <Heart size={14} fill="currentColor" /> <span className="hidden sm:inline">Donate Now</span><span className="sm:hidden">Donate</span>
+            </Link>
+          </div>
+        </header>
+      </div>
+
+      {/* =========================================
+          MOBILE BOTTOM NAV BAR & POPUPS
+          ========================================= */}
+
+      {/* Overlay behind popups */}
       <AnimatePresence>
-        {mobileMenuOpen && (
+        {activeMobilePopup && (
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/20 z-[8500] xl:hidden"
+            onClick={() => setActiveMobilePopup(null)}
+          />
+        )}
+      </AnimatePresence>
+
+      {/* Bottom Up Popups */}
+      <AnimatePresence>
+        {activeMobilePopup && (
           <motion.div
-            className="fixed inset-0 z-[100000] bg-white flex flex-col overflow-hidden"
-            variants={drawerVariants}
+            className="fixed inset-x-0 bottom-[68px] z-[8600] bg-[#f5f3ff] rounded-t-[2rem] shadow-[0_-10px_40px_rgba(0,0,0,0.12)] xl:hidden flex flex-col max-h-[75vh] border border-[#ebe5f8]"
+            variants={popupVariants}
             initial="hidden"
             animate="visible"
             exit="exit"
           >
-            <div className="flex items-center justify-between p-6 border-b border-gray-100">
-              <Link href="/" className="flex items-center gap-3" onClick={() => setMobileMenuOpen(false)}>
-                <img
-                  src="/images/logo.png"
-                  alt="Srila Prabhupada ISKCON Gambheeram logo"
-                  width={150}
-                  height={48}
-                  className="object-contain object-left"
-                />
-              </Link>
-              <button
-                onClick={() => setMobileMenuOpen(false)}
-                className="h-12 w-12 flex items-center justify-center rounded-full bg-gray-50 text-gray-800"
-              >
-                <X size={24} />
-              </button>
-            </div>
+            <div className="flex-1 overflow-y-auto px-6 py-6 custom-scrollbar">
+              
+              {/* Dynamic Content based on activePopup */}
+              {activeMobilePopup === "More" ? (
+                <div className="flex flex-col gap-2">
+                  {/* Filter out tabs already in bottom bar */}
+                  {NAV_DATA.filter(n => !["Home", "Mandir", "Prabhupada", "Activities"].includes(n.label)).map((item) => {
+                    const hasDropdown = !!item.dropdown;
+                    const isOpen = mobileAccordion === item.label;
 
-            <div className="flex-1 overflow-y-auto px-6 py-4">
-              <div className="flex flex-col">
-                {NAV_DATA.map((item) => {
-                  const hasDropdown = item.dropdown || item.dropdownColumns;
-                  const isOpen = mobileAccordion === item.label;
-
-                  return (
-                    <motion.div key={item.label} variants={itemVariants} className="flex flex-col">
-                      {hasDropdown ? (
-                        <>
-                          <button 
-                            className="mobile-accordion-btn"
-                            onClick={() => setMobileAccordion(isOpen ? null : item.label)}
+                    return (
+                      <div key={item.label} className="flex flex-col">
+                        {hasDropdown ? (
+                          <>
+                            <button 
+                              className="flex justify-between items-center py-4 text-[16px] font-bold text-gray-900 border-b border-[#e9e3f4]"
+                              onClick={() => setMobileAccordion(isOpen ? null : item.label)}
+                            >
+                              {item.label}
+                              <ChevronDown size={18} className={`transition-transform duration-300 ${isOpen ? "rotate-180 text-[#123A8C]" : "text-gray-400"}`} />
+                            </button>
+                            <AnimatePresence>
+                              {isOpen && (
+                                <motion.div 
+                                  initial={{ height: 0, opacity: 0 }}
+                                  animate={{ height: "auto", opacity: 1 }}
+                                  exit={{ height: 0, opacity: 0 }}
+                                  className="overflow-hidden"
+                                >
+                                  <div className="py-2 flex flex-col gap-1 mb-2">
+                                    {item.dropdown!.map(link => (
+                                      <Link 
+                                        key={link.href} 
+                                        href={link.href}
+                                        className="py-2.5 px-2 text-[15px] font-medium text-gray-700 hover:text-[#123A8C] transition-colors"
+                                        onClick={() => setActiveMobilePopup(null)}
+                                      >
+                                        {link.title}
+                                      </Link>
+                                    ))}
+                                  </div>
+                                </motion.div>
+                              )}
+                            </AnimatePresence>
+                          </>
+                        ) : (
+                          <Link 
+                            href={item.href} 
+                            className="py-4 text-[16px] font-bold text-gray-900 border-b border-[#e9e3f4] flex items-center gap-3"
+                            onClick={() => setActiveMobilePopup(null)}
                           >
-                            {item.label}
-                            <ChevronDown size={20} className={`transition-transform duration-300 ${isOpen ? "rotate-180 text-[var(--color-accent-primary)]" : "text-gray-400"}`} />
-                          </button>
-                          
-                          <AnimatePresence>
-                            {isOpen && (
-                              <motion.div 
-                                initial={{ height: 0, opacity: 0 }}
-                                animate={{ height: "auto", opacity: 1 }}
-                                exit={{ height: 0, opacity: 0 }}
-                                className="overflow-hidden"
-                              >
-                                <div className="py-4 pl-4 flex flex-col gap-6 bg-gray-50/50 rounded-b-2xl border-b border-l border-r border-gray-50">
-                                  {/* Simple Dropdown */}
-                                  {item.dropdown && (
-                                    <div className="flex flex-col gap-4">
-                                      {item.dropdown.map(link => (
-                                        <Link 
-                                          key={link.href} 
-                                          href={link.href}
-                                          className="text-[15px] font-medium text-gray-600"
-                                          onClick={() => setMobileMenuOpen(false)}
-                                        >
-                                          {link.title}
-                                        </Link>
-                                      ))}
-                                    </div>
-                                  )}
-
-                                  {/* Column Dropdown */}
-                                  {item.dropdownColumns && (
-                                    <div className="flex flex-col gap-6">
-                                      {item.dropdownColumns.map((col, idx) => (
-                                        <div key={idx} className="flex flex-col">
-                                          <div className="text-[11px] font-bold tracking-widest uppercase text-[var(--color-accent-primary)] mb-3">{col.header}</div>
-                                          <div className="flex flex-col gap-3">
-                                            {col.items.map(link => (
-                                              <Link 
-                                                key={link.title} 
-                                                href={link.href}
-                                                className="text-[15px] font-medium text-gray-600"
-                                                onClick={() => setMobileMenuOpen(false)}
-                                              >
-                                                {link.title}
-                                              </Link>
-                                            ))}
-                                          </div>
-                                        </div>
-                                      ))}
-                                    </div>
-                                  )}
-                                </div>
-                              </motion.div>
-                            )}
-                          </AnimatePresence>
-                        </>
-                      ) : (
-                        <Link 
-                          href={item.href} 
-                          className="mobile-accordion-btn"
-                          onClick={() => setMobileMenuOpen(false)}
-                        >
-                          {item.label}
-                        </Link>
-                      )}
-                    </motion.div>
-                  );
-                })}
-              </div>
-            </div>
-
-            <div className="p-6 border-t border-gray-100 bg-gray-50 flex flex-col gap-4">
-              <Link
-                href="/donate"
-                onClick={() => setMobileMenuOpen(false)}
-                className="ultra-btn-secondary w-full h-[52px] rounded-full flex items-center justify-center font-medium font-sans border border-gray-200"
-              >
-                Donate
-              </Link>
-              <Link
-                href="/visit"
-                onClick={() => setMobileMenuOpen(false)}
-                className="ultra-btn-primary w-full h-[52px] rounded-full flex items-center justify-center font-medium font-sans"
-              >
-                Visit Temple
-              </Link>
+                             {item.label}
+                          </Link>
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+              ) : (
+                /* Simple list for Mandir, Prabhupada, Activities */
+                <div className="flex flex-col gap-1">
+                  <h3 className="font-display text-xl font-bold text-gray-900 mb-2 px-2">{activeMobilePopup}</h3>
+                  {getDropdownData(activeMobilePopup)?.map(link => (
+                    <Link 
+                      key={link.href} 
+                      href={link.href}
+                      className="py-3 px-2 text-[15px] font-medium text-gray-700 hover:text-[#123A8C] transition-colors border-b border-[#e9e3f4] last:border-0"
+                      onClick={() => setActiveMobilePopup(null)}
+                    >
+                      {link.title}
+                    </Link>
+                  ))}
+                </div>
+              )}
             </div>
           </motion.div>
         )}
       </AnimatePresence>
+
+      <nav className="flex xl:hidden fixed bottom-0 left-0 w-full h-[68px] bg-[#f4f8fc] border-t border-[#dbeafe] z-[9000] justify-between items-center px-2 pb-safe shadow-[0_-4px_20px_rgba(0,0,0,0.03)]">
+        {/* Bottom Nav Items */}
+        {[
+          { label: "Home", href: "/", icon: Home, isDropdown: false },
+          { label: "Mandir", icon: Landmark, isDropdown: true },
+          { label: "Prabhupada", icon: Globe, isDropdown: true },
+          { label: "Activities", icon: Sparkles, isDropdown: true },
+        ].map((item) => {
+          const isActive = pathname === item.href || (item.href !== "/" && item.href && pathname?.startsWith(item.href)) || activeMobilePopup === item.label;
+          
+          return item.isDropdown ? (
+            <button 
+              key={item.label}
+              onClick={() => setActiveMobilePopup(activeMobilePopup === item.label ? null : item.label)}
+              className={`flex flex-col items-center justify-center flex-1 h-full gap-1 transition-colors ${isActive ? "text-[#123A8C]" : "text-gray-600 hover:text-[#123A8C]"}`}
+            >
+              <item.icon size={22} strokeWidth={isActive ? 2.5 : 2} className={isActive ? "scale-110 transition-transform" : ""} />
+              <span className={`text-[10px] font-semibold tracking-wide ${isActive ? "opacity-100" : "opacity-80"}`}>{item.label}</span>
+            </button>
+          ) : (
+            <Link 
+              key={item.label} 
+              href={item.href!}
+              onClick={() => setActiveMobilePopup(null)}
+              className={`flex flex-col items-center justify-center flex-1 h-full gap-1 transition-colors ${isActive && !activeMobilePopup ? "text-[#123A8C]" : "text-gray-600 hover:text-[#123A8C]"}`}
+            >
+              <item.icon size={22} strokeWidth={isActive && !activeMobilePopup ? 2.5 : 2} className={isActive && !activeMobilePopup ? "scale-110 transition-transform" : ""} />
+              <span className={`text-[10px] font-semibold tracking-wide ${isActive && !activeMobilePopup ? "opacity-100" : "opacity-80"}`}>{item.label}</span>
+            </Link>
+          );
+        })}
+        
+        {/* 'More' Button triggers drawer */}
+        <button 
+          onClick={() => setActiveMobilePopup(activeMobilePopup === "More" ? null : "More")}
+          className={`flex flex-col items-center justify-center flex-1 h-full gap-1 transition-colors ${activeMobilePopup === "More" ? "text-[#123A8C]" : "text-gray-600 hover:text-[#123A8C]"}`}
+        >
+          <LayoutGrid size={22} strokeWidth={activeMobilePopup === "More" ? 2.5 : 2} className={activeMobilePopup === "More" ? "scale-110 transition-transform" : ""} />
+          <span className={`text-[10px] font-semibold tracking-wide ${activeMobilePopup === "More" ? "opacity-100" : "opacity-80"}`}>More</span>
+        </button>
+      </nav>
+
+      {/* Spacer to prevent content from hiding behind the bottom nav on mobile */}
+      <div className="h-[68px] xl:hidden w-full" />
     </>
   );
 }

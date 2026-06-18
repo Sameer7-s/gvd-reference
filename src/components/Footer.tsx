@@ -496,35 +496,6 @@ export function Footer() {
         }
       `}} />
 
-      {/* Mantra Section */}
-      <section className="mantra-section-wrap">
-        <div className="mantra-particles">
-          <div className="particle-layer layer-1" />
-          <div className="particle-layer layer-2" />
-          <div className="particle-layer layer-3" />
-        </div>
-
-        <div className="mantra-container">
-          <div className="mantra-top-divider">
-            <div className="line" />
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#B8D3EB" strokeWidth="1.5">
-              <path d="M12 22c-4.4 0-8-3.6-8-8 0-4.4 3.6-8 8-8s8 3.6 8 8c0 4.4-3.6 8-8 8z" opacity="0.2"/>
-              <path d="M12 14c-1.1 0-2-.9-2-2 0-2.2 2-6 2-6s2 3.8 2 6c0 1.1-.9 2-2 2z" fill="#B8D3EB"/>
-              <path d="M12 22c-2.2 0-4-1.8-4-4 0-3.3 4-8 4-8s4 4.7 4 8c0 2.2-1.8 4-4 4z"/>
-            </svg>
-            <div className="line" />
-          </div>
-
-          <div className="mantra-text">
-            HARE KRISHNA HARE KRISHNA<br />
-            KRISHNA KRISHNA HARE HARE<br />
-            HARE RAMA HARE RAMA<br />
-            RAMA RAMA HARE HARE
-          </div>
-        </div>
-
-        <div className="mantra-footer-transition" />
-      </section>
 
       {/* Main Footer */}
       <footer className="luxury-footer overflow-hidden relative">
