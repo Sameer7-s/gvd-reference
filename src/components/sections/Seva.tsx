@@ -32,7 +32,7 @@ function AmountPill({ amount, highlight }: { amount: number; highlight: boolean 
 
 /* ── Seva Card ───────────────────────────────────────────────────── */
 export function SevaCard({ seva }: { seva: Seva }) {
-  const isHL = seva.highlight;
+  const isHL = !!seva.highlight;
 
   return (
     <article
