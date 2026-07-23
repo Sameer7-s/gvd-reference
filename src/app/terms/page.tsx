@@ -47,12 +47,12 @@ export default function TermsPage() {
           {sections.map((s) => (
             <section key={s.h}>
               <h2 className="font-display text-2xl text-text-primary">{s.h}</h2>
-              <p className="mt-3 leading-relaxed text-muted">{s.p}</p>
+              <p className="mt-3 leading-relaxed text-text-muted">{s.p}</p>
             </section>
           ))}
           <section>
             <h2 className="font-display text-2xl text-text-primary">Questions</h2>
-            <p className="mt-3 leading-relaxed text-muted">
+            <p className="mt-3 leading-relaxed text-text-muted">
               Reach us at{" "}
               <a className="font-medium text-accent-primary underline" href={`mailto:${CONTACT.email}`}>
                 {CONTACT.email}

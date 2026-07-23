@@ -68,7 +68,7 @@ export default async function VisitPage() {
                   </span>
                   <div>
                     <h3 className="font-display text-lg text-text-primary">{g.title}</h3>
-                    <p className="mt-1 text-sm text-muted">{g.text}</p>
+                    <p className="mt-1 text-sm text-text-muted">{g.text}</p>
                   </div>
                 </div>
               </Reveal>

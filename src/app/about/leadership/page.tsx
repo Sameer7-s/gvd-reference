@@ -125,7 +125,7 @@ export default async function LeadershipPage() {
                       {leader.role}
                     </p>
                   </div>
-                  <div className="space-y-6 text-lg text-[var(--color-text-muted)] leading-relaxed">
+                  <div className="space-y-6 text-lg text-[var(--color-text-text-muted)] leading-relaxed">
                     {leader.content.map((paragraph, idx) => (
                       <p key={idx}>{paragraph}</p>
                     ))}
@@ -158,7 +158,7 @@ export default async function LeadershipPage() {
                   </div>
                   <div>
                     <h4 className="font-display text-xl text-[var(--color-text-primary)] mb-1">{auth.name}</h4>
-                    <p className="text-sm text-[var(--color-text-muted)]">{auth.role}</p>
+                    <p className="text-sm text-[var(--color-text-text-muted)]">{auth.role}</p>
                   </div>
                 </div>
               </Reveal>

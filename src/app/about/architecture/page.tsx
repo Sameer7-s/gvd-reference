@@ -122,7 +122,7 @@ export default async function ArchitecturePage() {
                     <p.icon className="h-6 w-6" />
                   </span>
                   <h3 className="font-display text-xl text-[var(--color-text-primary)]">{p.title}</h3>
-                  <p className="text-[var(--color-text-muted)] leading-relaxed text-sm">{p.desc}</p>
+                  <p className="text-[var(--color-text-text-muted)] leading-relaxed text-sm">{p.desc}</p>
                 </div>
               </Reveal>
             ))}
@@ -183,7 +183,7 @@ export default async function ArchitecturePage() {
                     </div>
                     <div>
                       <h4 className="text-lg font-display text-[var(--color-text-primary)] mb-2">{feat.title}</h4>
-                      <p className="text-[var(--color-text-muted)] text-sm leading-relaxed">{feat.desc}</p>
+                      <p className="text-[var(--color-text-text-muted)] text-sm leading-relaxed">{feat.desc}</p>
                     </div>
                   </div>
                 </Reveal>
@@ -196,7 +196,7 @@ export default async function ArchitecturePage() {
               <h3 className="font-display text-2xl text-[var(--color-text-primary)] mb-6">Temple Features</h3>
               <ul className="space-y-4 mb-10">
                 {["Traditional Design", "Natural materials", "Devotional spaces", "Peaceful atmosphere"].map((f, i) => (
-                  <li key={i} className="flex items-center gap-3 text-[var(--color-text-muted)]">
+                  <li key={i} className="flex items-center gap-3 text-[var(--color-text-text-muted)]">
                     <div className="h-1.5 w-1.5 rounded-full bg-[var(--color-accent-primary)]"></div>
                     {f}
                   </li>
@@ -206,7 +206,7 @@ export default async function ArchitecturePage() {
             <Reveal delay={100}>
               <div className="bg-white rounded-2xl p-6 border border-[var(--color-accent-primary)]/10 shadow-sm text-center">
                 <h4 className="text-lg font-display text-[var(--color-text-primary)] mb-2">Mandir Nirman Seva</h4>
-                <p className="text-sm text-[var(--color-text-muted)] mb-6">Contribute to the sacred atmosphere of Gupt Vrindavan Dham and be part of timeless spiritual heritage.</p>
+                <p className="text-sm text-[var(--color-text-text-muted)] mb-6">Contribute to the sacred atmosphere of Gupt Vrindavan Dham and be part of timeless spiritual heritage.</p>
                 <Link href="/donate" className="inline-flex items-center gap-2 bg-[var(--color-accent-primary)] text-white px-6 py-3 rounded-full text-sm font-medium hover:bg-[var(--color-accent-secondary)] transition-colors w-full justify-center">
                   Offer Seva Now <ArrowRight size={16} />
                 </Link>
@@ -263,7 +263,7 @@ export default async function ArchitecturePage() {
                     <h4 className="font-display text-xl text-[var(--color-accent-primary)]">{lvl.level}</h4>
                   </div>
                   <div className="sm:w-2/3">
-                    <p className="text-[var(--color-text-muted)] leading-relaxed">{lvl.desc}</p>
+                    <p className="text-[var(--color-text-text-muted)] leading-relaxed">{lvl.desc}</p>
                   </div>
                 </div>
               </Reveal>
@@ -286,7 +286,7 @@ export default async function ArchitecturePage() {
                   <div className="absolute top-0 right-0 p-6 opacity-5 font-display text-8xl font-bold text-[var(--color-accent-primary)] pointer-events-none group-hover:scale-110 transition-transform">{point.num}</div>
                   <span className="inline-block px-3 py-1 bg-white rounded-full text-xs font-semibold text-[var(--color-accent-primary)] w-max mb-6 shadow-sm">{point.tag}</span>
                   <h3 className="font-display text-2xl text-[var(--color-text-primary)] mb-4 relative z-10">{point.title}</h3>
-                  <p className="text-[var(--color-text-muted)] leading-relaxed text-sm relative z-10">{point.desc}</p>
+                  <p className="text-[var(--color-text-text-muted)] leading-relaxed text-sm relative z-10">{point.desc}</p>
                 </div>
               </Reveal>
             ))}
@@ -301,7 +301,7 @@ export default async function ArchitecturePage() {
             <SectionHeading eyebrow="Be a Part of Lord’s Divine Seva" title="Be Part of This Sacred Vision" className="mx-auto" />
           </Reveal>
           <Reveal delay={100}>
-            <p className="mt-6 text-lg leading-relaxed text-[var(--color-text-muted)] mb-10">
+            <p className="mt-6 text-lg leading-relaxed text-[var(--color-text-text-muted)] mb-10">
               Every contribution and visit is counted as a part of serving the Lotus Feet of the Lord. Help us in building Gupt Vrindavan Dham, a place of devotion, simplicity, and spiritual awakening.
             </p>
           </Reveal>

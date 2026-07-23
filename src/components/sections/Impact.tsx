@@ -17,7 +17,7 @@ export function Impact() {
           <h2 className="mt-4 text-3xl text-[var(--color-text-primary)] sm:text-4xl font-display">
             Devotion in <span className="text-[var(--color-accent-primary)]">action</span>
           </h2>
-          <p className="mt-4 text-[var(--color-text-muted)]">
+          <p className="mt-4 text-[var(--color-text-text-muted)]">
             Through the mercy of the Lord and the generosity of devotees, the dham has touched
             countless lives across Visakhapatnam.
           </p>
@@ -29,7 +29,7 @@ export function Impact() {
               <div className="rounded-3xl border border-[var(--color-accent-primary)]/20 bg-white/60 p-5 text-center backdrop-blur transition-colors duration-300 hover:border-[var(--color-accent-primary)]/50 hover:bg-white shadow-luxury sm:p-6">
                 <p className="font-display text-3xl text-[var(--color-accent-primary)] sm:text-4xl lg:text-5xl">{stat.value}</p>
                 <p className="mt-2 font-medium text-[var(--color-text-primary)]">{stat.label}</p>
-                {stat.sub && <p className="mt-1 text-xs text-[var(--color-text-muted)]">{stat.sub}</p>}
+                {stat.sub && <p className="mt-1 text-xs text-[var(--color-text-text-muted)]">{stat.sub}</p>}
               </div>
             </Reveal>
           ))}

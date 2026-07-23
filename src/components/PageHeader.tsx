@@ -21,7 +21,7 @@ export function PageHeader({
 
       <div className="container-page relative">
         <nav aria-label="Breadcrumb" className="mb-6">
-          <ol className="flex flex-wrap items-center gap-1.5 text-sm text-[var(--color-text-muted)]">
+          <ol className="flex flex-wrap items-center gap-1.5 text-sm text-[var(--color-text-text-muted)]">
             {crumbs.map((c, i) => (
               <li key={c.href} className="flex items-center gap-1.5">
                 {i > 0 && <ChevronRight className="h-3.5 w-3.5 text-[var(--color-accent-primary)] opacity-50" />}
@@ -43,7 +43,7 @@ export function PageHeader({
           </span>
         )}
         <h1 className="mt-4 max-w-3xl text-4xl leading-[1.05] text-[var(--color-text-primary)] sm:text-5xl font-display">{title}</h1>
-        {intro && <p className="mt-5 max-w-2xl text-lg leading-relaxed text-[var(--color-text-muted)]">{intro}</p>}
+        {intro && <p className="mt-5 max-w-2xl text-lg leading-relaxed text-[var(--color-text-text-muted)]">{intro}</p>}
       </div>
     </section>
   );

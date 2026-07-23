@@ -40,7 +40,7 @@ export function Festivals() {
                 <p className="inline-flex items-center gap-2 text-[var(--color-accent-primary)] font-medium">
                   <CalendarDays className="h-4 w-4" /> {FEATURED_FESTIVAL.display}
                 </p>
-                <p className="max-w-md text-[var(--color-text-muted)]">{FEATURED_FESTIVAL.blurb}</p>
+                <p className="max-w-md text-[var(--color-text-text-muted)]">{FEATURED_FESTIVAL.blurb}</p>
                 <Countdown iso={`${FEATURED_FESTIVAL.date}T00:00:00+05:30`} className="mt-1" />
                 <Button href="/donate#nitya-seva" variant="gold" size="md" className="mt-2">
                   Sponsor the celebration
@@ -66,7 +66,7 @@ export function Festivals() {
                   {f.display}
                 </span>
                 <h3 className="mt-4 font-display text-xl text-[var(--color-text-primary)]">{f.name}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-[var(--color-text-muted)]">{f.blurb}</p>
+                <p className="mt-2 text-sm leading-relaxed text-[var(--color-text-text-muted)]">{f.blurb}</p>
               </article>
             </Reveal>
           ))}
@@ -77,7 +77,7 @@ export function Festivals() {
           <div className="flex flex-col md:flex-row items-end justify-between gap-4 mb-8">
             <div>
               <h3 className="font-display text-2xl text-[var(--color-text-primary)] sm:text-3xl">Glimpses of Devotion</h3>
-              <p className="mt-2 text-[var(--color-text-muted)] max-w-lg">Experience the joy and spiritual vibrancy of our past temple celebrations.</p>
+              <p className="mt-2 text-[var(--color-text-text-muted)] max-w-lg">Experience the joy and spiritual vibrancy of our past temple celebrations.</p>
             </div>
             <div className="flex gap-2">
               <span className="text-xs font-medium uppercase tracking-widest text-[var(--color-accent-primary)]">Swipe to explore</span>

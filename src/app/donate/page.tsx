@@ -55,7 +55,7 @@ export default async function DonatePage() {
                   <r.icon className="h-5 w-5" />
                 </span>
                 <h2 className="font-display text-lg text-text-primary">{r.title}</h2>
-                <p className="text-sm text-muted">{r.text}</p>
+                <p className="text-sm text-text-muted">{r.text}</p>
               </div>
             </Reveal>
           ))}

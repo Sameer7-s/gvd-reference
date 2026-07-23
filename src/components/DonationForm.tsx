@@ -123,7 +123,7 @@ export function DonationForm({ sevas = SEVAS }: { sevas?: Seva[] }) {
               />
               <span
                 className={`grid h-4 w-4 place-items-center rounded-full border ${
-                  sevaSlug === s.slug ? "border-accent-secondary" : "border-text-muted/40"
+                  sevaSlug === s.slug ? "border-accent-secondary" : "border-text-text-muted/40"
                 }`}
               >
                 {sevaSlug === s.slug && <span className="h-2 w-2 rounded-full bg-accent-secondary" />}
@@ -179,7 +179,7 @@ export function DonationForm({ sevas = SEVAS }: { sevas?: Seva[] }) {
             Custom amount
           </label>
           <div className="relative">
-            <BadgeIndianRupee className="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-muted" />
+            <BadgeIndianRupee className="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-text-muted" />
             <input
               id="custom-amount"
               type="number"
@@ -303,7 +303,7 @@ export function DonationForm({ sevas = SEVAS }: { sevas?: Seva[] }) {
         </button>
       </div>
 
-      <p className="flex items-center justify-center gap-2 text-center text-xs text-muted">
+      <p className="flex items-center justify-center gap-2 text-center text-xs text-text-muted">
         <ShieldCheck className="h-4 w-4 text-emerald-600" />
         256-bit encrypted · powered by a PCI-DSS compliant gateway · your details are never shared.
       </p>

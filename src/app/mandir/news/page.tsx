@@ -130,7 +130,7 @@ export default async function NewsPage() {
                     <Link href="#">{article.title}</Link>
                   </h2>
                   
-                  <p className="text-[var(--color-text-muted)] text-lg leading-relaxed mb-6">
+                  <p className="text-[var(--color-text-text-muted)] text-lg leading-relaxed mb-6">
                     {article.excerpt}
                   </p>
                   

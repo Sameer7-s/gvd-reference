@@ -13,7 +13,7 @@ export function FinalCta() {
         <h2 className="text-[40px] md:text-[56px] lg:text-[64px] leading-[1.1] mb-6 max-w-[800px] text-[var(--color-text-primary)]">
           Begin Your Spiritual Journey Today
         </h2>
-        <p className="text-[18px] md:text-[22px] leading-[1.6] text-[var(--color-text-muted)] mb-12 max-w-[600px]">
+        <p className="text-[18px] md:text-[22px] leading-[1.6] text-[var(--color-text-text-muted)] mb-12 max-w-[600px]">
           Join thousands seeking peace, wisdom, and purpose through Krishna Consciousness.
         </p>
         

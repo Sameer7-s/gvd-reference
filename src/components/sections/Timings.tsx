@@ -30,7 +30,7 @@ export function Timings() {
           <li key={s.name} className="flex items-baseline justify-between gap-4 py-3">
             <div>
               <p className="font-medium text-[var(--color-text-primary)]">{s.name}</p>
-              {s.note && <p className="text-xs text-[var(--color-text-muted)]">{s.note}</p>}
+              {s.note && <p className="text-xs text-[var(--color-text-text-muted)]">{s.note}</p>}
             </div>
             <span className="shrink-0 font-display text-lg tabular-nums text-[var(--color-accent-primary)]">
               {s.display}
@@ -55,7 +55,7 @@ export function Timings() {
             />
             <div className="mt-6 flex flex-col items-start gap-4">
               <DarshanStatus />
-              <div className="inline-flex items-center gap-2 rounded-xl bg-[var(--color-text-primary)]/5 px-4 py-2 text-sm text-[var(--color-text-muted)]">
+              <div className="inline-flex items-center gap-2 rounded-xl bg-[var(--color-text-primary)]/5 px-4 py-2 text-sm text-[var(--color-text-text-muted)]">
                 <Clock className="h-4 w-4 text-[var(--color-accent-primary)]" />
                 Temple rests 1:00 PM – 4:30 PM
               </div>
