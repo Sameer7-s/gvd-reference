@@ -4,15 +4,28 @@ import { getDb } from "@/lib/mongodb";
 
 type Params = { params: Promise<{ id: string }> };
 
+// Only these fields may be written from the client (prevents mass-assignment).
+const ALLOWED = ["title", "slug", "tagline", "description", "icon", "amounts", "highlight"];
+
 export async function PUT(req: NextRequest, { params }: Params) {
   try {
     const { id } = await params;
-    const body = await req.json();
-    const db = await getDb();
+    if (!ObjectId.isValid(id)) {
+      return NextResponse.json({ error: "Invalid seva id" }, { status: 400 });
+    }
+    const body = await req.json().catch(() => ({}));
+    const update: Record<string, unknown> = {};
+    for (const key of ALLOWED) {
+      if (body[key] !== undefined) update[key] = body[key];
+    }
+    if (Object.keys(update).length === 0) {
+      return NextResponse.json({ error: "No valid fields to update" }, { status: 400 });
+    }
 
+    const db = await getDb();
     const result = await db.collection("sevas").updateOne(
       { _id: new ObjectId(id) },
-      { $set: { ...body, updatedAt: new Date() } }
+      { $set: { ...update, updatedAt: new Date() } }
     );
 
     if (result.matchedCount === 0) {
@@ -28,6 +41,9 @@ export async function PUT(req: NextRequest, { params }: Params) {
 export async function DELETE(_req: NextRequest, { params }: Params) {
   try {
     const { id } = await params;
+    if (!ObjectId.isValid(id)) {
+      return NextResponse.json({ error: "Invalid seva id" }, { status: 400 });
+    }
     const db = await getDb();
 
     const result = await db.collection("sevas").deleteOne({ _id: new ObjectId(id) });
