@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useState, useEffect } from "react";
-import { Menu, X, ChevronDown, ArrowRight, Mail, MessageCircle, Youtube, Instagram, Twitter, Facebook, Moon, Heart } from "lucide-react";
+import { Menu, X, ChevronDown, ArrowRight, Mail, MessageCircle, Youtube, Instagram, Twitter, Facebook, Moon, Heart, Home, Landmark, UserRound, Sparkles, LayoutGrid } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { LogoMark } from "@/components/brand";
 import { usePathname } from "next/navigation";
@@ -112,6 +112,14 @@ const NAV_DATA: NavItem[] = [
 ];
 
 const EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
+
+// Fixed bottom tab bar (phones + small tablets). "More" opens the full drawer.
+const BOTTOM_TABS = [
+  { label: "Home", href: "/", Icon: Home },
+  { label: "Mandir", href: "/mandir", Icon: Landmark },
+  { label: "Prabhupada", href: "/prabhupada", Icon: UserRound },
+  { label: "Activities", href: "/activities", Icon: Sparkles },
+];
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -587,6 +595,38 @@ export function Navbar() {
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* ── FIXED BOTTOM TAB BAR (mobile + small tablet) ── */}
+      <nav
+        className="lg:hidden fixed bottom-0 inset-x-0 z-[9998] flex items-stretch justify-around bg-white/95 backdrop-blur-md border-t border-[rgba(0,0,0,0.08)] shadow-[0_-4px_20px_rgba(0,0,0,0.06)] pb-[env(safe-area-inset-bottom)]"
+        aria-label="Primary"
+      >
+        {BOTTOM_TABS.map(({ label, href, Icon }) => {
+          const active = href === "/" ? pathname === "/" : pathname === href || pathname?.startsWith(href + "/");
+          return (
+            <Link
+              key={href}
+              href={href}
+              aria-current={active ? "page" : undefined}
+              className={`flex flex-1 flex-col items-center justify-center gap-1 py-2 text-[11px] font-medium transition-colors ${
+                active ? "text-[#123A8C]" : "text-gray-500"
+              }`}
+            >
+              <Icon size={22} strokeWidth={active ? 2.4 : 1.8} />
+              {label}
+            </Link>
+          );
+        })}
+        <button
+          type="button"
+          onClick={() => setMobileMenuOpen(true)}
+          aria-label="Open menu"
+          className="flex flex-1 flex-col items-center justify-center gap-1 py-2 text-[11px] font-medium text-gray-500 transition-colors"
+        >
+          <LayoutGrid size={22} strokeWidth={1.8} />
+          More
+        </button>
+      </nav>
     </>
   );
 }
