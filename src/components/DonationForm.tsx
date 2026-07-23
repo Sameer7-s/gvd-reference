@@ -41,15 +41,33 @@ export function DonationForm() {
     return Object.keys(e).length === 0;
   };
 
-  const handleSubmit = (ev: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
     // Honeypot
     if ((ev.currentTarget.elements.namedItem("website") as HTMLInputElement)?.value) return;
     if (!validate()) return;
     setStatus("submitting");
-    // In production, POST to a serverless route that creates a Razorpay/PayU order,
-    // then redirect to the gateway. Never expose secret keys client-side.
-    setTimeout(() => setStatus("done"), 1100);
+    // SIMULATED: records the donation server-side (status "simulated").
+    // Tomorrow this becomes create-order → gateway redirect → verify.
+    try {
+      const res = await fetch("/api/donate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          seva: sevaSlug,
+          frequency,
+          amount: finalAmount,
+          name: form.name,
+          email: form.email,
+          phone: form.phone,
+        }),
+      });
+      if (!res.ok) throw new Error("request failed");
+      setStatus("done");
+    } catch {
+      setStatus("idle");
+      setErrors((e) => ({ ...e, submit: "Something went wrong. Please try again." }));
+    }
   };
 
   if (status === "done") {
@@ -248,6 +266,12 @@ export function DonationForm() {
         {/* Honeypot */}
         <input type="text" name="website" tabIndex={-1} autoComplete="off" aria-hidden="true" className="hidden" />
       </fieldset>
+
+      {errors.submit && (
+        <p className="text-center text-sm text-red-600" role="alert">
+          {errors.submit}
+        </p>
+      )}
 
       {/* Summary + submit */}
       <div className="flex flex-col gap-4 rounded-2xl border border-accent-primary/20 bg-bg-secondary/80 p-5 sm:flex-row sm:items-center sm:justify-between">
