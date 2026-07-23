@@ -22,6 +22,11 @@ if (process.env.NODE_ENV === "development") {
 }
 
 export async function getDb(): Promise<Db> {
+  // Fail loudly on a misconfigured deploy instead of silently connecting to
+  // localhost (which would surface as confusing empty data / 500s in prod).
+  if (!process.env.MONGODB_URI && process.env.NODE_ENV === "production") {
+    throw new Error("MONGODB_URI is not set");
+  }
   await client.connect();
   return client.db(DB_NAME);
 }
