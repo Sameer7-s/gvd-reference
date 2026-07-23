@@ -1,12 +1,21 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Link from "next/link";
-
 import { ArrowRight, ShieldCheck } from "lucide-react";
 import { Reveal } from "@/components/Reveal";
-import { SectionHeading, Button } from "@/components/ui";
+import { SectionHeading } from "@/components/ui";
 
-import { SEVAS, type Seva } from "@/lib/site";
+interface SevaDoc {
+  _id: string;
+  title: string;
+  slug: string;
+  tagline: string;
+  description: string;
+  icon: string;
+  amounts: number[];
+  highlight: boolean;
+}
 
 /* ── Amount pill ─────────────────────────────────────────────────── */
 function AmountPill({ amount, highlight }: { amount: number; highlight: boolean }) {
@@ -31,7 +40,7 @@ function AmountPill({ amount, highlight }: { amount: number; highlight: boolean 
 }
 
 /* ── Seva Card ───────────────────────────────────────────────────── */
-export function SevaCard({ seva }: { seva: Seva }) {
+export function SevaCard({ seva }: { seva: SevaDoc }) {
   const isHL = !!seva.highlight;
 
   return (
@@ -73,7 +82,6 @@ export function SevaCard({ seva }: { seva: Seva }) {
         }
       }}
     >
-      {/* Radial shimmer — highlight card only */}
       {isHL && (
         <div
           className="pointer-events-none absolute inset-0 rounded-[28px]"
@@ -83,8 +91,6 @@ export function SevaCard({ seva }: { seva: Seva }) {
           }}
         />
       )}
-
-      {/* Top row: badge or category line */}
       <div className="relative z-10 mb-5">
         {isHL ? (
           <span
@@ -105,8 +111,6 @@ export function SevaCard({ seva }: { seva: Seva }) {
           />
         )}
       </div>
-
-      {/* Title */}
       <h3
         className="relative z-10 font-display leading-tight"
         style={{
@@ -119,8 +123,6 @@ export function SevaCard({ seva }: { seva: Seva }) {
       >
         {seva.title}
       </h3>
-
-      {/* Tagline */}
       <p
         className="relative z-10 text-sm font-medium"
         style={{
@@ -131,8 +133,6 @@ export function SevaCard({ seva }: { seva: Seva }) {
       >
         {seva.tagline}
       </p>
-
-      {/* Divider */}
       <div
         className="relative z-10 mb-4 h-px w-full"
         style={{
@@ -141,8 +141,6 @@ export function SevaCard({ seva }: { seva: Seva }) {
             : "rgba(29,92,150,0.08)",
         }}
       />
-
-      {/* Description */}
       <p
         className="relative z-10 text-sm leading-relaxed"
         style={{
@@ -152,18 +150,12 @@ export function SevaCard({ seva }: { seva: Seva }) {
       >
         {seva.description}
       </p>
-
-      {/* Amount pills */}
       <div className="relative z-10 mt-5 flex flex-wrap gap-2">
-        {seva.amounts.map((amt) => (
+        {seva.amounts?.map((amt) => (
           <AmountPill key={amt} amount={amt} highlight={isHL} />
         ))}
       </div>
-
-      {/* Spacer */}
       <div className="flex-1" />
-
-      {/* CTA button */}
       <div className="relative z-10 mt-6">
         <Link
           href={`/donate#${seva.slug}`}
@@ -188,27 +180,9 @@ export function SevaCard({ seva }: { seva: Seva }) {
                   boxShadow: "0 8px 24px rgba(18,58,140,0.25)",
                 }
           }
-          onMouseEnter={(e) => {
-            if (isHL) {
-              (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.16)";
-            } else {
-              (e.currentTarget as HTMLElement).style.boxShadow = "0 14px 32px rgba(18,58,140,0.38)";
-              (e.currentTarget as HTMLElement).style.transform = "translateY(-1px)";
-            }
-          }}
-          onMouseLeave={(e) => {
-            if (isHL) {
-              (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.10)";
-            } else {
-              (e.currentTarget as HTMLElement).style.boxShadow = "0 8px 24px rgba(18,58,140,0.25)";
-              (e.currentTarget as HTMLElement).style.transform = "";
-            }
-          }}
         >
           Contribute
-          <ArrowRight
-            className="h-4 w-4 transition-transform duration-300 group-hover/cta:translate-x-1"
-          />
+          <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover/cta:translate-x-1" />
         </Link>
       </div>
     </article>
@@ -217,14 +191,17 @@ export function SevaCard({ seva }: { seva: Seva }) {
 
 /* ── Section ─────────────────────────────────────────────────────── */
 export function Seva() {
+  const [sevas, setSevas] = useState<SevaDoc[]>([]);
+
+  useEffect(() => {
+    fetch("/api/admin/sevas")
+      .then((res) => res.json())
+      .then((data) => setSevas(Array.isArray(data) ? data : []))
+      .catch((err) => console.error("Failed to load sevas", err));
+  }, []);
+
   return (
-    <section
-      id="sevas"
-      className="relative overflow-hidden py-20 sm:py-28"
-      style={{ background: "#EDF2F8" }}
-    >
-
-
+    <section id="sevas" className="relative overflow-hidden py-20 sm:py-28" style={{ background: "#EDF2F8" }}>
       <div className="container-page relative">
         <Reveal>
           <SectionHeading
@@ -249,14 +226,13 @@ export function Seva() {
         </Reveal>
 
         <div className="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {SEVAS.map((seva, i) => (
+          {sevas.map((seva, i) => (
             <Reveal key={seva.slug} delay={i * 70}>
               <SevaCard seva={seva} />
             </Reveal>
           ))}
         </div>
 
-        {/* Trust bar */}
         <Reveal className="mt-10">
           <div
             className="flex flex-col items-center justify-between gap-5 rounded-2xl px-6 py-5 text-center sm:flex-row sm:text-left"

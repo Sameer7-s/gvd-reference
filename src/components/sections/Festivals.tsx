@@ -1,11 +1,11 @@
 "use client"; // force HMR
 
+import { useEffect, useState } from "react";
 import { CalendarDays, ArrowRight } from "lucide-react";
 import { Reveal } from "@/components/Reveal";
 import { SectionHeading, Button, AssetFrame } from "@/components/ui";
 import { Countdown } from "@/components/Countdown";
 import { Lotus } from "@/components/decor";
-import { FESTIVALS, FEATURED_FESTIVAL } from "@/lib/site";
 
 export function Festivals() {
   const PAST_FESTIVALS = [
@@ -14,6 +14,24 @@ export function Festivals() {
     { name: "Ratha Yatra", img: "https://images.unsplash.com/photo-1601004890684-d8cbf643f5f2?auto=format&fit=crop&q=80&w=800" },
     { name: "Govardhan Puja", img: "https://images.unsplash.com/photo-1542385151-efd9000785a0?auto=format&fit=crop&q=80&w=800" },
   ];
+
+  const [festivals, setFestivals] = useState<any[]>([]);
+
+  useEffect(() => {
+    fetch("/api/admin/events")
+      .then((res) => res.json())
+      .then((data) => {
+        if (Array.isArray(data)) {
+          // Filter out festivals or use upcoming events
+          const upcoming = data.filter((e) => new Date(e.date) >= new Date()).sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+          setFestivals(upcoming);
+        }
+      })
+      .catch((err) => console.error("Failed to fetch festivals", err));
+  }, []);
+
+  const featuredFestival = festivals.length > 0 ? festivals[0] : null;
+  const upcomingFestivals = festivals.length > 1 ? festivals.slice(1, 5) : [];
 
   return (
     <section id="festivals" className="relative bg-[var(--color-bg-tertiary)] py-20 sm:py-28 overflow-hidden">
@@ -27,50 +45,54 @@ export function Festivals() {
         </Reveal>
 
         {/* Featured festival */}
-        <Reveal className="mt-14">
-          <div className="relative overflow-hidden rounded-[2rem] border border-[var(--color-accent-primary)]/20 bg-white shadow-luxury">
-            <div className="grid items-center gap-8 p-8 lg:grid-cols-2 lg:p-12">
-              <div className="flex flex-col items-start gap-5">
-                <span className="inline-flex items-center gap-2 rounded-full bg-[var(--color-accent-primary)]/10 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] text-[var(--color-accent-primary)]">
-                  <Lotus className="h-3.5 w-3.5 rotate-180" /> Festival Spotlight
-                </span>
-                <h3 className="font-display text-3xl text-[var(--color-text-primary)] sm:text-4xl">
-                  {FEATURED_FESTIVAL.name}
-                </h3>
-                <p className="inline-flex items-center gap-2 text-[var(--color-accent-primary)] font-medium">
-                  <CalendarDays className="h-4 w-4" /> {FEATURED_FESTIVAL.display}
-                </p>
-                <p className="max-w-md text-[var(--color-text-muted)]">{FEATURED_FESTIVAL.blurb}</p>
-                <Countdown iso={`${FEATURED_FESTIVAL.date}T00:00:00+05:30`} className="mt-1" />
-                <Button href="/donate#nitya-seva" variant="gold" size="md" className="mt-2">
-                  Sponsor the celebration
-                  <ArrowRight className="h-4 w-4" />
-                </Button>
+        {featuredFestival && (
+          <Reveal className="mt-14">
+            <div className="relative overflow-hidden rounded-[2rem] border border-[var(--color-accent-primary)]/20 bg-white shadow-luxury">
+              <div className="grid items-center gap-8 p-8 lg:grid-cols-2 lg:p-12">
+                <div className="flex flex-col items-start gap-5">
+                  <span className="inline-flex items-center gap-2 rounded-full bg-[var(--color-accent-primary)]/10 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] text-[var(--color-accent-primary)]">
+                    <Lotus className="h-3.5 w-3.5 rotate-180" /> Festival Spotlight
+                  </span>
+                  <h3 className="font-display text-3xl text-[var(--color-text-primary)] sm:text-4xl">
+                    {featuredFestival.title}
+                  </h3>
+                  <p className="inline-flex items-center gap-2 text-[var(--color-accent-primary)] font-medium">
+                    <CalendarDays className="h-4 w-4" /> {new Date(featuredFestival.date).toLocaleDateString("en-IN", { day: "numeric", month: "long", year: "numeric" })}
+                  </p>
+                  <p className="max-w-md text-[var(--color-text-muted)]">{featuredFestival.description}</p>
+                  <Countdown iso={new Date(featuredFestival.date).toISOString()} className="mt-1" />
+                  <Button href="/donate#nitya-seva" variant="gold" size="md" className="mt-2">
+                    Sponsor the celebration
+                    <ArrowRight className="h-4 w-4" />
+                  </Button>
+                </div>
+                <AssetFrame
+                  label={`${featuredFestival.title} Utsav`}
+                  tone="gold"
+                  className="aspect-[4/3] w-full shadow-luxury ring-1 ring-[var(--color-accent-primary)]/30"
+                />
               </div>
-              <AssetFrame
-                label={`${FEATURED_FESTIVAL.name} Utsav`}
-                tone="gold"
-                className="aspect-[4/3] w-full shadow-luxury ring-1 ring-[var(--color-accent-primary)]/30"
-              />
             </div>
-          </div>
-        </Reveal>
+          </Reveal>
+        )}
 
         {/* Festival list */}
-        <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {FESTIVALS.map((f, i) => (
-            <Reveal key={f.name} delay={i * 80}>
-              <article className="group flex h-full flex-col rounded-2xl border border-[var(--color-accent-primary)]/15 bg-white/60 p-6 shadow-luxury transition-all duration-300 hover:border-[var(--color-accent-primary)]/40 hover:bg-white hover:-translate-y-1">
-                <span className="inline-flex w-fit items-center gap-1.5 rounded-full bg-[var(--color-accent-primary)]/10 px-3 py-1 text-xs font-semibold text-[var(--color-accent-primary)]">
-                  <CalendarDays className="h-3.5 w-3.5" />
-                  {f.display}
-                </span>
-                <h3 className="mt-4 font-display text-xl text-[var(--color-text-primary)]">{f.name}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-[var(--color-text-muted)]">{f.blurb}</p>
-              </article>
-            </Reveal>
-          ))}
-        </div>
+        {upcomingFestivals.length > 0 && (
+          <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {upcomingFestivals.map((f, i) => (
+              <Reveal key={f._id} delay={i * 80}>
+                <article className="group flex h-full flex-col rounded-2xl border border-[var(--color-accent-primary)]/15 bg-white/60 p-6 shadow-luxury transition-all duration-300 hover:border-[var(--color-accent-primary)]/40 hover:bg-white hover:-translate-y-1">
+                  <span className="inline-flex w-fit items-center gap-1.5 rounded-full bg-[var(--color-accent-primary)]/10 px-3 py-1 text-xs font-semibold text-[var(--color-accent-primary)]">
+                    <CalendarDays className="h-3.5 w-3.5" />
+                    {new Date(f.date).toLocaleDateString("en-IN", { day: "numeric", month: "long", year: "numeric" })}
+                  </span>
+                  <h3 className="mt-4 font-display text-xl text-[var(--color-text-primary)]">{f.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-[var(--color-text-muted)] line-clamp-3">{f.description}</p>
+                </article>
+              </Reveal>
+            ))}
+          </div>
+        )}
 
         {/* New Interactive Addition: Past Festivals Carousel */}
         <Reveal className="mt-24">

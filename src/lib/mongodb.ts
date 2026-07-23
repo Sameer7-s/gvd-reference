@@ -1,29 +1,55 @@
-import { MongoClient, Db } from "mongodb";
+import mongoose from "mongoose";
 
-const MONGODB_URI = process.env.MONGODB_URI ?? "mongodb://localhost:27017";
-const DB_NAME = "gvd_reference";
+const MONGODB_URI = process.env.MONGODB_URI_NEW || process.env.MONGODB_URI;
 
-// In development Next.js hot-reloads frequently, so we cache the client on
-// the global object to avoid opening new connections on every reload.
+if (!MONGODB_URI) {
+  throw new Error(
+    "Please define the MONGODB_URI_NEW environment variable inside .env.local"
+  );
+}
+
+// Global caching for Mongoose instance across hot-reloads in development
 declare global {
-  // eslint-disable-next-line no-var
-  var _mongoClient: MongoClient | undefined;
+  var mongoose: {
+    conn: typeof import("mongoose") | null;
+    promise: Promise<typeof import("mongoose")> | null;
+  };
 }
 
-let client: MongoClient;
+let cached = global.mongoose;
 
-if (process.env.NODE_ENV === "development") {
-  if (!global._mongoClient) {
-    global._mongoClient = new MongoClient(MONGODB_URI);
+if (!cached) {
+  cached = global.mongoose = { conn: null, promise: null };
+}
+
+export async function connectToDatabase() {
+  if (cached.conn) {
+    return cached.conn;
   }
-  client = global._mongoClient;
-} else {
-  client = new MongoClient(MONGODB_URI);
+
+  if (!cached.promise) {
+    const opts = {
+      bufferCommands: false,
+      family: 4, // Force IPv4 to fix querySrv ECONNREFUSED on some networks
+    };
+
+    cached.promise = mongoose.connect(MONGODB_URI as string, opts).then((mongoose) => {
+      return mongoose;
+    });
+  }
+  
+  try {
+    cached.conn = await cached.promise;
+  } catch (e) {
+    cached.promise = null;
+    throw e;
+  }
+
+  return cached.conn;
 }
 
-export async function getDb(): Promise<Db> {
-  await client.connect();
-  return client.db(DB_NAME);
+// Helper to get db instance (for compatibility if needed, though mostly we use mongoose models)
+export async function getDb() {
+  const mongooseInstance = await connectToDatabase();
+  return mongooseInstance.connection.db;
 }
-
-export { client };

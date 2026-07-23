@@ -51,15 +51,24 @@ function Counter({ target, label }: { target: string; label: string }) {
 
 
 export function Statistics() {
+  const [stats, setStats] = useState<any>(null);
+
+  useEffect(() => {
+    fetch("/api/admin/stats")
+      .then((res) => res.json())
+      .then((data) => setStats(data))
+      .catch((err) => console.error("Failed to fetch stats", err));
+  }, []);
+
   return (
     <section className="w-full section-padding bg-[var(--color-bg-white)]">
       <Reveal>
       <div className="container-page">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 divide-y sm:divide-y-0 sm:divide-x divide-[var(--color-accent-primary)]/10">
+          <Counter target={stats?.donationsCount ? `${stats.donationsCount}+` : "10,000+"} label="Devotees" />
+          <Counter target={stats?.sevasCount ? `${stats.sevasCount}` : "15+"} label="Active Sevas" />
           <Counter target="50,000+" label="Visitors" />
-          <Counter target="15+" label="Years of Service" />
-          <Counter target="10,000+" label="Devotees" />
-          <Counter target="500+" label="Events Conducted" />
+          <Counter target={stats?.eventsCount ? `${stats.eventsCount}+` : "500+"} label="Events Conducted" />
         </div>
       </div>
       </Reveal>

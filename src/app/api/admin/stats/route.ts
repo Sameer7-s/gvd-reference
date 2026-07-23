@@ -1,15 +1,19 @@
 import { NextResponse } from "next/server";
-import { getDb } from "@/lib/mongodb";
+import { connectToDatabase } from "@/lib/mongodb";
+import Event from "@/models/Event";
+import Seva from "@/models/Seva";
+import Donation from "@/models/Donation";
 
 export async function GET() {
   try {
-    const db = await getDb();
+    await connectToDatabase();
     const [eventsCount, sevasCount, donationsAgg] = await Promise.all([
-      db.collection("events").countDocuments(),
-      db.collection("sevas").countDocuments(),
-      db.collection("donations").aggregate([
+      Event.countDocuments({ isDeleted: false }),
+      Seva.countDocuments({ isDeleted: false }),
+      Donation.aggregate([
+        { $match: { paymentStatus: "Success" } },
         { $group: { _id: null, total: { $sum: "$amount" }, count: { $sum: 1 } } },
-      ]).toArray(),
+      ]),
     ]);
 
     const donationStats = donationsAgg[0] ?? { total: 0, count: 0 };

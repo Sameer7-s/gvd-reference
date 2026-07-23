@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import type { ReactNode } from "react";
 
 type IconName =
@@ -89,11 +90,31 @@ export function EventCategoryCard({ title, icon }: EventCategoryCardProps) {
 }
 
 export function EventCategoryCards() {
+  const [events, setEvents] = useState<any[]>([]);
+
+  useEffect(() => {
+    fetch("/api/admin/events")
+      .then((res) => res.json())
+      .then((data) => {
+        if (Array.isArray(data)) {
+          // Show only top 6 upcoming events
+          setEvents(data.slice(0, 6));
+        }
+      })
+      .catch((err) => console.error("Failed to load events", err));
+  }, []);
+
   return (
     <div className="sg-cards-row">
-      {categories.map((cat) => (
-        <EventCategoryCard key={cat.title} title={cat.title} icon={cat.icon} />
-      ))}
+      {events.length > 0 ? (
+        events.map((evt) => (
+          <EventCategoryCard key={evt._id} title={evt.title} icon={(evt.category?.toLowerCase() as IconName) || "festival"} />
+        ))
+      ) : (
+        categories.map((cat) => (
+          <EventCategoryCard key={cat.title} title={cat.title} icon={cat.icon} />
+        ))
+      )}
     </div>
   );
 }
