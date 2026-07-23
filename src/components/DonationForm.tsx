@@ -2,16 +2,6 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { BadgeIndianRupee, ShieldCheck, Lock, CheckCircle2, Loader2 } from "lucide-react";
-<<<<<<< HEAD
-
-type Frequency = "once" | "monthly";
-
-export function DonationForm() {
-  const [sevas, setSevas] = useState<any[]>([]);
-  const [sevaSlug, setSevaSlug] = useState("");
-  const [frequency, setFrequency] = useState<Frequency>("once");
-  const [amount, setAmount] = useState<number>(0);
-=======
 import { SEVAS, type Seva } from "@/lib/site";
 
 type Frequency = "once" | "monthly";
@@ -20,40 +10,10 @@ export function DonationForm({ sevas = SEVAS }: { sevas?: Seva[] }) {
   const [sevaSlug, setSevaSlug] = useState(sevas[0].slug);
   const [frequency, setFrequency] = useState<Frequency>("once");
   const [amount, setAmount] = useState<number>(sevas[0].amounts[1]);
->>>>>>> 302b5cae1d296bbcb3a5f4b1dba0b13b3da2befd
   const [custom, setCustom] = useState("");
   const [form, setForm] = useState({ name: "", email: "", phone: "", pan: "", message: "" });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [status, setStatus] = useState<"idle" | "submitting" | "done">("idle");
-  const [loading, setLoading] = useState(true);
-
-<<<<<<< HEAD
-  useEffect(() => {
-    fetch("/api/admin/sevas")
-      .then((res) => res.json())
-      .then((data) => {
-        if (Array.isArray(data) && data.length > 0) {
-          setSevas(data);
-          
-          // Deep-link support: /donate#anna-daan preselects the seva.
-          const hash = window.location.hash.replace("#", "");
-          const match = data.find((s) => s.slug === hash);
-          if (match) {
-            setSevaSlug(match.slug);
-            setAmount(match.amounts?.[1] || match.amounts?.[0] || 1001);
-          } else {
-            setSevaSlug(data[0].slug);
-            setAmount(data[0].amounts?.[1] || data[0].amounts?.[0] || 1001);
-          }
-        }
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.error("Failed to load sevas", err);
-        setLoading(false);
-      });
-=======
-  const seva = useMemo(() => sevas.find((s) => s.slug === sevaSlug) ?? sevas[0], [sevaSlug, sevas]);
 
   // Deep-link support: /donate#anna-daan preselects the seva.
   useEffect(() => {
@@ -63,7 +23,6 @@ export function DonationForm({ sevas = SEVAS }: { sevas?: Seva[] }) {
       setSevaSlug(match.slug);
       setAmount(match.amounts[1]);
     }
->>>>>>> 302b5cae1d296bbcb3a5f4b1dba0b13b3da2befd
   }, []);
 
   const seva = useMemo(() => sevas.find((s) => s.slug === sevaSlug) || sevas[0], [sevas, sevaSlug]);
@@ -86,9 +45,6 @@ export function DonationForm({ sevas = SEVAS }: { sevas?: Seva[] }) {
     if ((ev.currentTarget.elements.namedItem("website") as HTMLInputElement)?.value) return;
     if (!validate()) return;
     setStatus("submitting");
-<<<<<<< HEAD
-    setTimeout(() => setStatus("done"), 1100);
-=======
     // SIMULATED: records the donation server-side (status "simulated").
     // Tomorrow this becomes create-order → gateway redirect → verify.
     try {
@@ -110,12 +66,7 @@ export function DonationForm({ sevas = SEVAS }: { sevas?: Seva[] }) {
       setStatus("idle");
       setErrors((e) => ({ ...e, submit: "Something went wrong. Please try again." }));
     }
->>>>>>> 302b5cae1d296bbcb3a5f4b1dba0b13b3da2befd
   };
-
-  if (loading) {
-    return <div className="flex h-64 items-center justify-center"><Loader2 className="h-8 w-8 animate-spin text-accent-primary" /></div>;
-  }
 
   if (!sevas.length) {
     return <div className="p-8 text-center text-text-muted">No sevas available at the moment.</div>;
@@ -303,8 +254,6 @@ export function DonationForm({ sevas = SEVAS }: { sevas?: Seva[] }) {
         <input type="text" name="website" tabIndex={-1} autoComplete="off" aria-hidden="true" className="hidden" />
       </fieldset>
 
-<<<<<<< HEAD
-=======
       {errors.submit && (
         <p className="text-center text-sm text-red-600" role="alert">
           {errors.submit}
@@ -312,7 +261,6 @@ export function DonationForm({ sevas = SEVAS }: { sevas?: Seva[] }) {
       )}
 
       {/* Summary + submit */}
->>>>>>> 302b5cae1d296bbcb3a5f4b1dba0b13b3da2befd
       <div className="flex flex-col gap-4 rounded-2xl border border-accent-primary/20 bg-bg-secondary/80 p-5 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <p className="text-sm text-text-muted">You are offering</p>

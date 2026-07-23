@@ -1,21 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import Link from "next/link";
 import { ArrowRight, ShieldCheck } from "lucide-react";
 import { Reveal } from "@/components/Reveal";
 import { SectionHeading } from "@/components/ui";
-
-interface SevaDoc {
-  _id: string;
-  title: string;
-  slug: string;
-  tagline: string;
-  description: string;
-  icon: string;
-  amounts: number[];
-  highlight: boolean;
-}
+import { SEVAS, type Seva } from "@/lib/site";
 
 /* ── Amount pill ─────────────────────────────────────────────────── */
 function AmountPill({ amount, highlight }: { amount: number; highlight: boolean }) {
@@ -40,7 +29,7 @@ function AmountPill({ amount, highlight }: { amount: number; highlight: boolean 
 }
 
 /* ── Seva Card ───────────────────────────────────────────────────── */
-export function SevaCard({ seva }: { seva: SevaDoc }) {
+export function SevaCard({ seva }: { seva: Seva }) {
   const isHL = !!seva.highlight;
 
   return (
@@ -190,20 +179,7 @@ export function SevaCard({ seva }: { seva: SevaDoc }) {
 }
 
 /* ── Section ─────────────────────────────────────────────────────── */
-<<<<<<< HEAD
-export function Seva() {
-  const [sevas, setSevas] = useState<SevaDoc[]>([]);
-
-  useEffect(() => {
-    fetch("/api/admin/sevas")
-      .then((res) => res.json())
-      .then((data) => setSevas(Array.isArray(data) ? data : []))
-      .catch((err) => console.error("Failed to load sevas", err));
-  }, []);
-
-=======
 export function Seva({ sevas = SEVAS }: { sevas?: Seva[] }) {
->>>>>>> 302b5cae1d296bbcb3a5f4b1dba0b13b3da2befd
   return (
     <section id="sevas" className="relative overflow-hidden py-20 sm:py-28" style={{ background: "#EDF2F8" }}>
       <div className="container-page relative">

@@ -45,7 +45,6 @@ export function Festivals() {
         </Reveal>
 
         {/* Featured festival */}
-<<<<<<< HEAD
         {featuredFestival && (
           <Reveal className="mt-14">
             <div className="relative overflow-hidden rounded-[2rem] border border-[var(--color-accent-primary)]/20 bg-white shadow-luxury">
@@ -72,34 +71,12 @@ export function Festivals() {
                   tone="gold"
                   className="aspect-[4/3] w-full shadow-luxury ring-1 ring-[var(--color-accent-primary)]/30"
                 />
-=======
-        <Reveal className="mt-14">
-          <div className="relative overflow-hidden rounded-[2rem] border border-[var(--color-accent-primary)]/20 bg-white shadow-luxury">
-            <div className="grid items-center gap-8 p-8 lg:grid-cols-2 lg:p-12">
-              <div className="flex flex-col items-start gap-5">
-                <span className="inline-flex items-center gap-2 rounded-full bg-[var(--color-accent-primary)]/10 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] text-[var(--color-accent-primary)]">
-                  <Lotus className="h-3.5 w-3.5 rotate-180" /> Festival Spotlight
-                </span>
-                <h3 className="font-display text-3xl text-[var(--color-text-primary)] sm:text-4xl">
-                  {FEATURED_FESTIVAL.name}
-                </h3>
-                <p className="inline-flex items-center gap-2 text-[var(--color-accent-primary)] font-medium">
-                  <CalendarDays className="h-4 w-4" /> {FEATURED_FESTIVAL.display}
-                </p>
-                <p className="max-w-md text-[var(--color-text-text-muted)]">{FEATURED_FESTIVAL.blurb}</p>
-                <Countdown iso={`${FEATURED_FESTIVAL.date}T00:00:00+05:30`} className="mt-1" />
-                <Button href="/donate#nitya-seva" variant="gold" size="md" className="mt-2">
-                  Sponsor the celebration
-                  <ArrowRight className="h-4 w-4" />
-                </Button>
->>>>>>> 302b5cae1d296bbcb3a5f4b1dba0b13b3da2befd
               </div>
             </div>
           </Reveal>
         )}
 
         {/* Festival list */}
-<<<<<<< HEAD
         {upcomingFestivals.length > 0 && (
           <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {upcomingFestivals.map((f, i) => (
@@ -116,22 +93,6 @@ export function Festivals() {
             ))}
           </div>
         )}
-=======
-        <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {FESTIVALS.map((f, i) => (
-            <Reveal key={f.name} delay={i * 80}>
-              <article className="group flex h-full flex-col rounded-2xl border border-[var(--color-accent-primary)]/15 bg-white/60 p-6 shadow-luxury transition-all duration-300 hover:border-[var(--color-accent-primary)]/40 hover:bg-white hover:-translate-y-1">
-                <span className="inline-flex w-fit items-center gap-1.5 rounded-full bg-[var(--color-accent-primary)]/10 px-3 py-1 text-xs font-semibold text-[var(--color-accent-primary)]">
-                  <CalendarDays className="h-3.5 w-3.5" />
-                  {f.display}
-                </span>
-                <h3 className="mt-4 font-display text-xl text-[var(--color-text-primary)]">{f.name}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-[var(--color-text-text-muted)]">{f.blurb}</p>
-              </article>
-            </Reveal>
-          ))}
-        </div>
->>>>>>> 302b5cae1d296bbcb3a5f4b1dba0b13b3da2befd
 
         {/* New Interactive Addition: Past Festivals Carousel */}
         <Reveal className="mt-24">
