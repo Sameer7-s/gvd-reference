@@ -1,13 +1,14 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import {
   LayoutDashboard,
   CalendarDays,
   HandHeart,
   ExternalLink,
   ChevronRight,
+  LogOut,
 } from "lucide-react";
 
 const NAV = [
@@ -18,6 +19,16 @@ const NAV = [
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
+  const router = useRouter();
+
+  // The login page renders without the admin chrome (it's the one public /admin route).
+  if (pathname === "/admin/login") return <>{children}</>;
+
+  const logout = async () => {
+    await fetch("/api/admin/logout", { method: "POST" });
+    router.replace("/admin/login");
+    router.refresh();
+  };
 
   return (
     <div className="min-h-screen" style={{ background: "#0B1220", color: "#E8EDF5" }}>
@@ -58,14 +69,23 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           </div>
         </div>
 
-        <Link
-          href="/"
-          target="_blank"
-          className="flex items-center gap-1.5 text-xs font-medium transition-colors hover:text-white"
-          style={{ color: "rgba(255,255,255,0.45)" }}
-        >
-          View site <ExternalLink size={12} />
-        </Link>
+        <div className="flex items-center gap-5">
+          <Link
+            href="/"
+            target="_blank"
+            className="flex items-center gap-1.5 text-xs font-medium transition-colors hover:text-white"
+            style={{ color: "rgba(255,255,255,0.45)" }}
+          >
+            View site <ExternalLink size={12} />
+          </Link>
+          <button
+            onClick={logout}
+            className="flex items-center gap-1.5 text-xs font-medium transition-colors hover:text-white"
+            style={{ color: "rgba(255,255,255,0.45)" }}
+          >
+            Logout <LogOut size={12} />
+          </button>
+        </div>
       </header>
 
       <div className="flex min-h-[calc(100vh-60px)]">
