@@ -6,7 +6,7 @@ import { ArrowRight, Star } from "lucide-react";
 import { Reveal } from "@/components/Reveal";
 import { Lotus, PeacockFeather } from "@/components/decor";
 
-const templeDarshanImage = "/images/temple-darshan.jpg.png";
+const templeDarshanImage = "/images/temple-darshan.jpg";
 
 const timelineItems = [
   {

@@ -5,8 +5,9 @@
  * holder logged in with the admin password. Everything here runs on the Edge
  * runtime (middleware) as well as Node route handlers — it only uses Web Crypto.
  *
- * Requires two secrets in the environment:
- *   ADMIN_PASSWORD  — the shared admin login password
+ * Requires these in the environment:
+ *   ADMIN_USERNAME  — the admin login username
+ *   ADMIN_PASSWORD  — the admin login password
  *   SESSION_SECRET  — a long random string used to sign session cookies
  */
 

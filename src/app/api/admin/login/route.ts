@@ -2,17 +2,24 @@ import { NextRequest, NextResponse } from "next/server";
 import { SESSION_COOKIE, signSession, safeEqual } from "@/lib/auth";
 
 export async function POST(req: NextRequest) {
-  const expected = process.env.ADMIN_PASSWORD;
-  if (!expected || !process.env.SESSION_SECRET) {
+  const expectedUser = process.env.ADMIN_USERNAME;
+  const expectedPass = process.env.ADMIN_PASSWORD;
+  if (!expectedUser || !expectedPass || !process.env.SESSION_SECRET) {
     return NextResponse.json(
-      { error: "Admin auth is not configured. Set ADMIN_PASSWORD and SESSION_SECRET." },
+      { error: "Admin auth is not configured. Set ADMIN_USERNAME, ADMIN_PASSWORD and SESSION_SECRET." },
       { status: 500 }
     );
   }
 
-  const { password } = await req.json().catch(() => ({ password: undefined }));
-  if (typeof password !== "string" || !safeEqual(password, expected)) {
-    return NextResponse.json({ error: "Invalid password." }, { status: 401 });
+  const { username, password } = await req
+    .json()
+    .catch(() => ({ username: undefined, password: undefined }));
+  // Check both, without short-circuiting, so a wrong username and a wrong
+  // password fail identically (no hint about which half was right).
+  const okUser = typeof username === "string" && safeEqual(username, expectedUser);
+  const okPass = typeof password === "string" && safeEqual(password, expectedPass);
+  if (!okUser || !okPass) {
+    return NextResponse.json({ error: "Invalid username or password." }, { status: 401 });
   }
 
   const res = NextResponse.json({ ok: true });

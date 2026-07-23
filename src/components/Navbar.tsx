@@ -114,11 +114,14 @@ const NAV_DATA: NavItem[] = [
 const EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
 // Fixed bottom tab bar (phones + small tablets). "More" opens the full drawer.
+// Section roots (/mandir, /prabhupada, /activities) have no index page — they're
+// menu parents — so each tab navigates to its primary child but highlights for
+// the whole section via `match`.
 const BOTTOM_TABS = [
-  { label: "Home", href: "/", Icon: Home },
-  { label: "Mandir", href: "/mandir", Icon: Landmark },
-  { label: "Prabhupada", href: "/prabhupada", Icon: UserRound },
-  { label: "Activities", href: "/activities", Icon: Sparkles },
+  { label: "Home", href: "/", match: "/", Icon: Home },
+  { label: "Mandir", href: "/mandir/explore", match: "/mandir", Icon: Landmark },
+  { label: "Prabhupada", href: "/prabhupada/about", match: "/prabhupada", Icon: UserRound },
+  { label: "Activities", href: "/activities/education", match: "/activities", Icon: Sparkles },
 ];
 
 export function Navbar() {
@@ -601,8 +604,8 @@ export function Navbar() {
         className="lg:hidden fixed bottom-0 inset-x-0 z-[9998] flex items-stretch justify-around bg-white/95 backdrop-blur-md border-t border-[rgba(0,0,0,0.08)] shadow-[0_-4px_20px_rgba(0,0,0,0.06)] pb-[env(safe-area-inset-bottom)]"
         aria-label="Primary"
       >
-        {BOTTOM_TABS.map(({ label, href, Icon }) => {
-          const active = href === "/" ? pathname === "/" : pathname === href || pathname?.startsWith(href + "/");
+        {BOTTOM_TABS.map(({ label, href, match, Icon }) => {
+          const active = match === "/" ? pathname === "/" : pathname === match || pathname?.startsWith(match + "/");
           return (
             <Link
               key={href}

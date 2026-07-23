@@ -7,6 +7,7 @@ import { Lock, Loader2 } from "lucide-react";
 function LoginForm() {
   const router = useRouter();
   const params = useSearchParams();
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
@@ -19,7 +20,7 @@ function LoginForm() {
       const res = await fetch("/api/admin/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ password }),
+        body: JSON.stringify({ username, password }),
       });
       if (!res.ok) {
         const data = await res.json().catch(() => ({}));
@@ -59,6 +60,20 @@ function LoginForm() {
           </div>
         </div>
 
+        <label htmlFor="username" className="block text-xs font-medium mb-2" style={{ color: "rgba(255,255,255,0.55)" }}>
+          Admin username
+        </label>
+        <input
+          id="username"
+          type="text"
+          autoComplete="username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          autoFocus
+          className="w-full rounded-xl px-4 py-3 text-sm text-white outline-none mb-4"
+          style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.10)" }}
+        />
+
         <label htmlFor="password" className="block text-xs font-medium mb-2" style={{ color: "rgba(255,255,255,0.55)" }}>
           Admin password
         </label>
@@ -68,7 +83,6 @@ function LoginForm() {
           autoComplete="current-password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          autoFocus
           className="w-full rounded-xl px-4 py-3 text-sm text-white outline-none"
           style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.10)" }}
         />
@@ -81,7 +95,7 @@ function LoginForm() {
 
         <button
           type="submit"
-          disabled={loading || !password}
+          disabled={loading || !username || !password}
           className="mt-6 w-full flex items-center justify-center gap-2 rounded-xl py-3 text-sm font-semibold text-white transition-opacity disabled:opacity-50"
           style={{ background: "#2563EB" }}
         >

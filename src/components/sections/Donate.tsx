@@ -218,7 +218,7 @@ export function Donate() {
               transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
             >
               <Image
-                src="/images/peacock-feather.png"
+                src="/images/peacock-feather.jpg"
                 alt="Sacred Krishna peacock feather"
                 fill
                 className="object-contain"

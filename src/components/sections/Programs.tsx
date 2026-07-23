@@ -5,7 +5,7 @@ import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { Reveal } from "@/components/Reveal";
 
-const templeDarshanImage = "/images/temple-darshan.jpg.png";
+const templeDarshanImage = "/images/temple-darshan.jpg";
 
 const experiences = [
   {

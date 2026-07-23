@@ -21,7 +21,7 @@ const SLIDES = [
   },
   {
     id: "architecture",
-    image: "/images/temple_architecture_4k.png",
+    image: "/images/temple_architecture_4k.jpg",
     focal: "center center",
     eyebrow: "SACRED ARCHITECTURE",
     title: "Discover the Majesty of Timeless Temples",
@@ -32,7 +32,7 @@ const SLIDES = [
   },
   {
     id: "kirtan",
-    image: "/images/kirtan_gathering_4k.png",
+    image: "/images/kirtan_gathering_4k.jpg",
     focal: "center center",
     eyebrow: "HOLY KIRTAN",
     title: "Experience the Joy of Collective Devotion",
@@ -43,7 +43,7 @@ const SLIDES = [
   },
   {
     id: "festival",
-    image: "/images/festival_celebration_4k.png",
+    image: "/images/festival_celebration_4k.jpg",
     focal: "center center",
     eyebrow: "FESTIVAL CELEBRATION",
     title: "Celebrate the Divine Through Sacred Festivals",
@@ -54,7 +54,7 @@ const SLIDES = [
   },
   {
     id: "wisdom",
-    image: "/images/spiritual_wisdom_4k.png",
+    image: "/images/spiritual_wisdom_4k.jpg",
     focal: "center center",
     eyebrow: "ETERNAL WISDOM",
     title: "Transform Life Through Bhagavad Gita",
@@ -214,7 +214,9 @@ export function HeroCarousel() {
                 alt={slide.title}
                 fill
                 priority={i === 0}
-                unoptimized
+                fetchPriority={i === 0 ? "high" : undefined}
+                loading={i === 0 ? "eager" : "lazy"}
+                sizes="100vw"
                 style={{ objectFit: "cover", objectPosition: slide.focal }}
               />
 
