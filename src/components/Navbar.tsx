@@ -16,7 +16,8 @@ type NavItem = {
   dropdown?: { title: string; href: string; desc?: string }[];
   dropdownColumns?: {
     header: string;
-    links: { title: string; href: string; desc?: string }[];
+    items?: { title: string; href: string; desc?: string }[];
+    links?: { title: string; href: string; desc?: string }[];
   }[];
   highlight?: {
     title: string;
@@ -30,6 +31,7 @@ type NavItem = {
     image: string;
     href: string;
     action: string;
+    date?: string;
   };
 };
 
