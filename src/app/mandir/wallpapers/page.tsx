@@ -95,7 +95,7 @@ export default function WallpapersPage() {
               <SectionHeading title="Featured Wallpapers" eyebrow="Highlights" align="left" className="mb-10" />
            </Reveal>
            <div className="grid md:grid-cols-2 gap-8">
-              <Reveal className="relative group overflow-hidden rounded-[2rem] shadow-sm hover:shadow-temple transition-shadow h-96">
+              <Reveal className="relative group overflow-hidden rounded-[2rem] shadow-sm hover:shadow-luxury transition-shadow h-96">
                  <AssetFrame tone="saffron" className="w-full h-full" />
                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent p-8 flex flex-col justify-end text-white">
                     <h3 className="text-2xl font-display font-medium mb-1">Radha Krishna Divine Love Art</h3>
@@ -106,7 +106,7 @@ export default function WallpapersPage() {
                  </div>
               </Reveal>
 
-              <Reveal delay={100} className="relative group overflow-hidden rounded-[2rem] shadow-sm hover:shadow-temple transition-shadow h-96">
+              <Reveal delay={100} className="relative group overflow-hidden rounded-[2rem] shadow-sm hover:shadow-luxury transition-shadow h-96">
                  <AssetFrame tone="night" className="w-full h-full" />
                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent p-8 flex flex-col justify-end text-white">
                     <h3 className="text-2xl font-display font-medium mb-1">Hanuman Ji Samadhi Mobile Art</h3>
@@ -171,7 +171,7 @@ export default function WallpapersPage() {
                 
                 return (
                   <Reveal key={wallpaper.title} delay={(index % 4) * 50} className="break-inside-avoid">
-                     <div className="relative group overflow-hidden rounded-[2rem] bg-white shadow-sm border border-gray-100 hover:shadow-temple transition-all duration-300 transform hover:-translate-y-1">
+                     <div className="relative group overflow-hidden rounded-[2rem] bg-white shadow-sm border border-gray-100 hover:shadow-luxury transition-all duration-300 transform hover:-translate-y-1">
                         <div className={`relative w-full ${heightClass} overflow-hidden`}>
                            <AssetFrame tone={wallpaper.tone as any} className="w-full h-full rounded-none transition-transform duration-700 group-hover:scale-105" />
                            <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300" />

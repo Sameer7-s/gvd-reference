@@ -50,7 +50,7 @@ export default async function VisitPage() {
 
       <Timings />
 
-      <section className="bg-cream py-20 sm:py-24">
+      <section className="bg-bg-primary py-20 sm:py-24">
         <div className="container-page">
           <Reveal>
             <SectionHeading
@@ -62,12 +62,12 @@ export default async function VisitPage() {
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {guidelines.map((g, i) => (
               <Reveal key={g.title} delay={i * 70}>
-                <div className="flex h-full items-start gap-4 rounded-2xl border border-gold-500/20 bg-ivory/70 p-6">
-                  <span className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-saffron-500 to-maroon-700 text-cream">
+                <div className="flex h-full items-start gap-4 rounded-2xl border border-accent-primary/20 bg-bg-white/70 p-6">
+                  <span className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-accent-primary to-accent-secondary text-white">
                     <g.icon className="h-6 w-6" />
                   </span>
                   <div>
-                    <h3 className="font-display text-lg text-maroon-900">{g.title}</h3>
+                    <h3 className="font-display text-lg text-text-primary">{g.title}</h3>
                     <p className="mt-1 text-sm text-muted">{g.text}</p>
                   </div>
                 </div>

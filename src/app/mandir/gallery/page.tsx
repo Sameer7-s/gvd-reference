@@ -80,7 +80,7 @@ export default function GalleryPage() {
                   delay={index * 100} 
                   className={`flex flex-col group ${isWide ? "md:col-span-2 lg:col-span-2" : ""}`}
                 >
-                   <div className="relative overflow-hidden rounded-[2rem] bg-white shadow-sm hover:shadow-temple transition-shadow duration-300 border border-gray-100 flex flex-col h-full">
+                   <div className="relative overflow-hidden rounded-[2rem] bg-white shadow-sm hover:shadow-luxury transition-shadow duration-300 border border-gray-100 flex flex-col h-full">
                       <div className={`relative w-full ${isWide ? 'aspect-[21/9] sm:aspect-[21/9]' : 'aspect-[4/3]'} overflow-hidden`}>
                          <AssetFrame 
                             tone={album.tone} 

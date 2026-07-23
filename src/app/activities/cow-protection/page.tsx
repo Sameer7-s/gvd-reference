@@ -27,7 +27,7 @@ export default function CowProtectionPage() {
           </Reveal>
 
           <div className="grid md:grid-cols-1 max-w-2xl mx-auto gap-10">
-            <Reveal className="group flex flex-col bg-bg-secondary rounded-[2rem] p-4 border border-gray-100 hover:shadow-temple transition-shadow">
+            <Reveal className="group flex flex-col bg-bg-secondary rounded-[2rem] p-4 border border-gray-100 hover:shadow-luxury transition-shadow">
               <AssetFrame 
                 label="HINGONIA Cattle Rehabilitation Centre" 
                 tone="saffron" 

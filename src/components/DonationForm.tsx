@@ -289,7 +289,7 @@ export function DonationForm({ sevas = SEVAS }: { sevas?: Seva[] }) {
         <button
           type="submit"
           disabled={status === "submitting"}
-          className="inline-flex cursor-pointer items-center justify-center gap-2 rounded-lg bg-gradient-to-br from-accent-secondary to-accent-primary px-7 py-3.5 font-semibold text-white shadow-temple transition-all hover:from-accent-primary hover:to-accent-secondary disabled:cursor-wait disabled:opacity-70"
+          className="inline-flex cursor-pointer items-center justify-center gap-2 rounded-lg bg-gradient-to-br from-accent-secondary to-accent-primary px-7 py-3.5 font-semibold text-white shadow-luxury transition-all hover:from-accent-primary hover:to-accent-secondary disabled:cursor-wait disabled:opacity-70"
         >
           {status === "submitting" ? (
             <>

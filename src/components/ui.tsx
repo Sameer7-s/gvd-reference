@@ -8,15 +8,15 @@ type ButtonSize = "sm" | "md" | "lg";
 
 const VARIANTS: Record<ButtonVariant, string> = {
   primary:
-    "bg-gradient-to-br from-accent-secondary to-accent-primary text-white shadow-temple hover:from-accent-primary hover:to-accent-secondary hover:shadow-temple-lg",
-  gold: "bg-gradient-to-br from-accent-light to-accent-primary text-text-primary shadow-temple hover:from-accent-light hover:to-accent-secondary",
+    "bg-gradient-to-br from-accent-secondary to-accent-primary text-white shadow-luxury hover:from-accent-primary hover:to-accent-secondary hover:shadow-luxury-hover",
+  gold: "bg-gradient-to-br from-accent-light to-accent-primary text-text-primary shadow-luxury hover:from-accent-light hover:to-accent-secondary",
   outline:
     "border border-accent-primary/40 bg-bg-secondary/60 text-text-primary hover:border-accent-primary hover:bg-bg-tertiary/50",
   "outline-light":
     "border border-accent-light/40 bg-transparent text-bg-primary hover:border-accent-light hover:bg-bg-primary/10",
   ghost: "text-text-primary hover:bg-bg-secondary/50",
   light:
-    "bg-bg-primary text-text-primary shadow-temple hover:bg-bg-secondary border border-accent-primary/30",
+    "bg-bg-primary text-text-primary shadow-luxury hover:bg-bg-secondary border border-accent-primary/30",
 };
 
 const SIZES: Record<ButtonSize, string> = {

@@ -46,15 +46,15 @@ export default async function DonatePage() {
         ]}
       />
 
-      <section className="bg-cream py-10">
+      <section className="bg-bg-primary py-10">
         <div className="container-page grid grid-cols-2 gap-4 lg:grid-cols-4">
           {reasons.map((r, i) => (
             <Reveal key={r.title} delay={i * 70}>
-              <div className="flex h-full flex-col items-start gap-2 rounded-2xl border border-gold-500/20 bg-ivory/70 p-5">
-                <span className="grid h-11 w-11 place-items-center rounded-xl bg-gradient-to-br from-saffron-500 to-maroon-700 text-cream">
+              <div className="flex h-full flex-col items-start gap-2 rounded-2xl border border-accent-primary/20 bg-bg-white/70 p-5">
+                <span className="grid h-11 w-11 place-items-center rounded-xl bg-gradient-to-br from-accent-primary to-accent-secondary text-white">
                   <r.icon className="h-5 w-5" />
                 </span>
-                <h2 className="font-display text-lg text-maroon-900">{r.title}</h2>
+                <h2 className="font-display text-lg text-text-primary">{r.title}</h2>
                 <p className="text-sm text-muted">{r.text}</p>
               </div>
             </Reveal>
@@ -62,10 +62,10 @@ export default async function DonatePage() {
         </div>
       </section>
 
-      <section className="bg-cream pb-24">
+      <section className="bg-bg-primary pb-24">
         <div className="container-page max-w-4xl">
           <Reveal>
-            <div className="rounded-[2rem] border border-gold-500/25 bg-ivory/80 p-6 shadow-temple-lg sm:p-10">
+            <div className="rounded-[2rem] border border-accent-primary/25 bg-bg-white/80 p-6 shadow-luxury-hover sm:p-10">
               <DonationForm sevas={sevas} />
             </div>
           </Reveal>
