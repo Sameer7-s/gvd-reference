@@ -2,25 +2,25 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { BadgeIndianRupee, ShieldCheck, Lock, CheckCircle2, Loader2 } from "lucide-react";
-import { SEVAS } from "@/lib/site";
+import { SEVAS, type Seva } from "@/lib/site";
 
 type Frequency = "once" | "monthly";
 
-export function DonationForm() {
-  const [sevaSlug, setSevaSlug] = useState(SEVAS[0].slug);
+export function DonationForm({ sevas = SEVAS }: { sevas?: Seva[] }) {
+  const [sevaSlug, setSevaSlug] = useState(sevas[0].slug);
   const [frequency, setFrequency] = useState<Frequency>("once");
-  const [amount, setAmount] = useState<number>(SEVAS[0].amounts[1]);
+  const [amount, setAmount] = useState<number>(sevas[0].amounts[1]);
   const [custom, setCustom] = useState("");
   const [form, setForm] = useState({ name: "", email: "", phone: "", pan: "", message: "" });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [status, setStatus] = useState<"idle" | "submitting" | "done">("idle");
 
-  const seva = useMemo(() => SEVAS.find((s) => s.slug === sevaSlug) ?? SEVAS[0], [sevaSlug]);
+  const seva = useMemo(() => sevas.find((s) => s.slug === sevaSlug) ?? sevas[0], [sevaSlug, sevas]);
 
   // Deep-link support: /donate#anna-daan preselects the seva.
   useEffect(() => {
     const hash = window.location.hash.replace("#", "");
-    const match = SEVAS.find((s) => s.slug === hash);
+    const match = sevas.find((s) => s.slug === hash);
     if (match) {
       setSevaSlug(match.slug);
       setAmount(match.amounts[1]);
@@ -100,7 +100,7 @@ export function DonationForm() {
       <fieldset>
         <legend className="mb-3 font-display text-lg text-text-primary">1 · Choose a seva</legend>
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          {SEVAS.map((s) => (
+          {sevas.map((s) => (
             <label
               key={s.slug}
               className={`flex cursor-pointer items-center gap-3 rounded-xl border p-4 text-sm transition-colors ${

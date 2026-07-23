@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getDb } from "@/lib/mongodb";
-import { SEVAS } from "@/lib/site";
+import { getSevas } from "@/lib/content";
 
 /**
  * SIMULATED donation endpoint.
@@ -25,7 +25,7 @@ export async function POST(req: NextRequest) {
     // Honeypot: bots fill this hidden field. Pretend success, store nothing.
     if (website) return NextResponse.json({ ok: true, simulated: true }, { status: 201 });
 
-    const sevaDef = SEVAS.find((s) => s.slug === seva);
+    const sevaDef = (await getSevas()).find((s) => s.slug === seva);
     const amt = Number(amount);
     const invalid: string[] = [];
     if (!sevaDef) invalid.push("seva");

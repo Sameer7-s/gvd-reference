@@ -216,7 +216,7 @@ export function SevaCard({ seva }: { seva: Seva }) {
 }
 
 /* ── Section ─────────────────────────────────────────────────────── */
-export function Seva() {
+export function Seva({ sevas = SEVAS }: { sevas?: Seva[] }) {
   return (
     <section
       id="sevas"
@@ -249,7 +249,7 @@ export function Seva() {
         </Reveal>
 
         <div className="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {SEVAS.map((seva, i) => (
+          {sevas.map((seva, i) => (
             <Reveal key={seva.slug} delay={i * 70}>
               <SevaCard seva={seva} />
             </Reveal>

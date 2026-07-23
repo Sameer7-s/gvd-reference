@@ -10,15 +10,19 @@ declare global {
   var _mongoClient: MongoClient | undefined;
 }
 
+// Fail fast when the DB is unreachable so public pages that read from Mongo
+// (with a static fallback) never hang on the request path.
+const options = { serverSelectionTimeoutMS: 5000, connectTimeoutMS: 5000 };
+
 let client: MongoClient;
 
 if (process.env.NODE_ENV === "development") {
   if (!global._mongoClient) {
-    global._mongoClient = new MongoClient(MONGODB_URI);
+    global._mongoClient = new MongoClient(MONGODB_URI, options);
   }
   client = global._mongoClient;
 } else {
-  client = new MongoClient(MONGODB_URI);
+  client = new MongoClient(MONGODB_URI, options);
 }
 
 export async function getDb(): Promise<Db> {

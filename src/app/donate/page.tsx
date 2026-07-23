@@ -5,6 +5,7 @@ import { JsonLd } from "@/components/JsonLd";
 import { DonationForm } from "@/components/DonationForm";
 import { Reveal } from "@/components/Reveal";
 import { buildMetadata, breadcrumbJsonLd } from "@/lib/seo";
+import { getSevas } from "@/lib/content";
 
 export const metadata = buildMetadata({
   title: "Donate · Offer a Seva",
@@ -23,6 +24,7 @@ const reasons = [
 
 export default async function DonatePage() {
   const nonce = (await headers()).get("x-nonce") ?? undefined;
+  const sevas = await getSevas();
 
   return (
     <>
@@ -64,7 +66,7 @@ export default async function DonatePage() {
         <div className="container-page max-w-4xl">
           <Reveal>
             <div className="rounded-[2rem] border border-gold-500/25 bg-ivory/80 p-6 shadow-temple-lg sm:p-10">
-              <DonationForm />
+              <DonationForm sevas={sevas} />
             </div>
           </Reveal>
         </div>
