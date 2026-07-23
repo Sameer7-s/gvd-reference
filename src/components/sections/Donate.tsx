@@ -24,26 +24,7 @@ const PARTICLES = Array.from({ length: 18 }, (_, i) => ({
 }));
 
 
-// SVG Mandala corner decoration
-function Mandala({ size = 200, opacity = 0.04 }: { size?: number; opacity?: number }) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 200 200" fill="none" style={{ opacity }}>
-      <circle cx="100" cy="100" r="90" stroke="#7898B0" strokeWidth="0.5" />
-      <circle cx="100" cy="100" r="70" stroke="#7898B0" strokeWidth="0.5" />
-      <circle cx="100" cy="100" r="50" stroke="#7898B0" strokeWidth="0.5" />
-      <circle cx="100" cy="100" r="30" stroke="#7898B0" strokeWidth="0.8" />
-      {Array.from({ length: 16 }).map((_, i) => {
-        const angle = (i * 360) / 16;
-        const rad = (angle * Math.PI) / 180;
-        const x1 = 100 + 30 * Math.cos(rad);
-        const y1 = 100 + 30 * Math.sin(rad);
-        const x2 = 100 + 90 * Math.cos(rad);
-        const y2 = 100 + 90 * Math.sin(rad);
-        return <line key={i} x1={x1} y1={y1} x2={x2} y2={y2} stroke="#7898B0" strokeWidth="0.4" />;
-      })}
-    </svg>
-  );
-}
+
 
 // Temple watercolor silhouette via SVG
 function TempleSilhouette() {
@@ -180,9 +161,7 @@ export function Donate() {
         </div>
       )}
 
-      {/* Layer 5 — Mandala corners */}
-      <div className="absolute top-0 left-0 pointer-events-none"><Mandala size={240} opacity={0.045} /></div>
-      <div className="absolute bottom-0 right-0 pointer-events-none"><Mandala size={160} opacity={0.035} /></div>
+
 
       {/* Layer 6 — Decorative Watermark */}
       <div

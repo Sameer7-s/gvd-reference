@@ -5,7 +5,7 @@ import Link from "next/link";
 import { ArrowRight, ShieldCheck } from "lucide-react";
 import { Reveal } from "@/components/Reveal";
 import { SectionHeading, Button } from "@/components/ui";
-import { Mandala } from "@/components/decor";
+
 import { SEVAS, type Seva } from "@/lib/site";
 
 /* ── Amount pill ─────────────────────────────────────────────────── */
@@ -223,11 +223,7 @@ export function Seva() {
       className="relative overflow-hidden py-20 sm:py-28"
       style={{ background: "#EDF2F8" }}
     >
-      {/* Subtle mandala watermark */}
-      <Mandala
-        className="pointer-events-none absolute -right-48 top-16 h-[34rem] w-[34rem] opacity-[0.04]"
-        style={{ color: "#1D5C96" }}
-      />
+
 
       <div className="container-page relative">
         <Reveal>

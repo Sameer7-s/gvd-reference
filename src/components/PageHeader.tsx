@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ChevronRight } from "lucide-react";
-import { Mandala, Lotus } from "@/components/decor";
+import { Lotus } from "@/components/decor";
 
 export function PageHeader({
   eyebrow,
@@ -16,7 +16,7 @@ export function PageHeader({
   return (
     <section className="relative isolate overflow-hidden bg-[var(--color-bg-primary)] pt-44 pb-16 text-[var(--color-text-primary)]">
       <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(110%_80%_at_50%_-20%,rgba(212,175,55,0.08)_0%,rgba(212,175,55,0.03)_50%,transparent_100%)]" />
-      <Mandala className="pointer-events-none absolute left-1/2 top-[-30%] h-[130%] w-auto -translate-x-1/2 text-[var(--color-accent-primary)] opacity-5 animate-spin-slow" />
+
       <div className="pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-[var(--color-bg-primary)] to-transparent" />
 
       <div className="container-page relative">

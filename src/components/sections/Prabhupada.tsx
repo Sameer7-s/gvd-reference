@@ -1,12 +1,12 @@
 import { Quote } from "lucide-react";
 import { Reveal } from "@/components/Reveal";
 import { SectionHeading, AssetFrame } from "@/components/ui";
-import { Lotus, Mandala } from "@/components/decor";
+import { Lotus } from "@/components/decor";
 
 export function Prabhupada() {
   return (
     <section id="prabhupada" className="relative overflow-hidden bg-[var(--color-bg-secondary)] py-20 sm:py-28">
-      <Mandala className="pointer-events-none absolute -right-40 bottom-0 h-[30rem] w-[30rem] text-[var(--color-accent-primary)] opacity-10" />
+
 
       <div className="container-page relative grid items-center gap-14 lg:grid-cols-[0.9fr_1.1fr]">
         <Reveal className="relative mx-auto w-full max-w-sm">

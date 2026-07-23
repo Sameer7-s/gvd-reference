@@ -1,7 +1,7 @@
 import { MapPin, Phone, Mail, Navigation, Clock } from "lucide-react";
 import { Reveal } from "@/components/Reveal";
 import { SectionHeading, Button } from "@/components/ui";
-import { Mandala } from "@/components/decor";
+
 import { CONTACT } from "@/lib/site";
 
 const mapsLink = `https://www.google.com/maps/search/?api=1&query=${CONTACT.mapsQuery}`;
@@ -21,7 +21,7 @@ export function VisitCta() {
 
   return (
     <section id="visit" className="relative overflow-hidden bg-black py-20 text-white sm:py-28">
-      <Mandala className="pointer-events-none absolute -right-32 -top-20 h-[30rem] w-[30rem] text-[var(--color-accent-primary)] opacity-[0.06] animate-spin-slower" />
+
 
       <div className="container-page relative grid items-center gap-12 lg:grid-cols-2">
         <Reveal>

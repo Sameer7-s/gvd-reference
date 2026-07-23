@@ -1,12 +1,12 @@
 import { Reveal } from "@/components/Reveal";
-import { Mandala, Lotus } from "@/components/decor";
+import { Lotus } from "@/components/decor";
 import { Button } from "@/components/ui";
 import { IMPACT } from "@/lib/site";
 
 export function Impact() {
   return (
     <section className="relative overflow-hidden bg-gradient-to-br from-[var(--color-bg-primary)] via-[var(--color-bg-secondary)] to-[var(--color-bg-tertiary)] py-20 text-[var(--color-text-primary)] sm:py-24">
-      <Mandala className="pointer-events-none absolute -left-40 -top-24 h-[34rem] w-[34rem] text-[var(--color-accent-primary)] opacity-10 animate-spin-slow" />
+
       <div className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-[var(--color-accent-primary)]/40 to-transparent" />
 
       <div className="container-page relative">

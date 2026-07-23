@@ -1,6 +1,6 @@
 "use client";
 
-import { Mandala } from "@/components/decor";
+
 
 function TempleTowerLeft({ className }: { className?: string }) {
   return (
@@ -27,8 +27,7 @@ function TempleComplexRight({ className }: { className?: string }) {
 export function TempleBackground() {
   return (
     <div className="sg-background" aria-hidden="true">
-      <Mandala className="sg-mandala sg-mandala--left text-[#D8B26A]" petals={24} />
-      <Mandala className="sg-mandala sg-mandala--right text-[#D8B26A]" petals={24} />
+
       <TempleTowerLeft className="sg-temple-silhouette sg-temple-silhouette--left" />
       <TempleComplexRight className="sg-temple-silhouette sg-temple-silhouette--right" />
     </div>

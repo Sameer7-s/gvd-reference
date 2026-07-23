@@ -2,200 +2,109 @@
 
 import Link from "next/link";
 import { useState, useEffect } from "react";
-import { Menu, X, ChevronDown, ArrowRight } from "lucide-react";
+import { Menu, X, ChevronDown, ArrowRight, Mail, MessageCircle, Youtube, Instagram, Twitter, Facebook, Moon, Heart } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { LogoMark } from "@/components/brand";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
 
 // Mega Menu Data Structure
-const NAV_DATA = [
+type NavItem = {
+  label: string;
+  href: string;
+  isMega: boolean;
+  dropdown?: { title: string; href: string; desc?: string }[];
+  dropdownColumns?: {
+    header: string;
+    links: { title: string; href: string; desc?: string }[];
+  }[];
+  highlight?: {
+    title: string;
+    desc: string;
+    href: string;
+    action: string;
+  };
+  featuredCard?: {
+    title: string;
+    desc: string;
+    image: string;
+    href: string;
+    action: string;
+  };
+};
+
+const NAV_DATA: NavItem[] = [
   { label: "Home", href: "/", isMega: false },
   {
     label: "About Us",
     href: "/about",
     isMega: false,
     dropdown: [
-      { title: "About Temple", desc: "Learn about our spiritual sanctuary", href: "/about/temple" },
-      { title: "Our Mission", desc: "Our core values and vision", href: "/about/mission" },
-      { title: "Our History", desc: "The journey of our movement", href: "/about/history" },
-      { title: "Founder Acharya", desc: "Srila Prabhupada's legacy", href: "/about/founder" },
-      { title: "Temple Architecture", desc: "Explore the sacred design and heritage", href: "/about/architecture" },
-      { title: "Leadership Team", desc: "Meet the devotees guiding our mission", href: "/about/leadership" },
-      { title: "Governance", desc: "Transparency and administrative structure", href: "/about/governance" },
-      { title: "Global ISKCON Movement", desc: "Our worldwide community", href: "/about/iskcon" },
-      { title: "Contact Us", desc: "Get in touch with us", href: "/contact" },
+      { title: "About Temple", href: "/about/temple" },
+      { title: "Our Centers", href: "/about/centers" },
+      { title: "Our Architecture", href: "/about/architecture" },
+      { title: "Leadership", href: "/about/leadership" },
+      { title: "Governance", href: "/about/governance" },
+      { title: "Contact Us", href: "/contact" },
     ],
   },
   {
-    label: "Sevas",
-    href: "/sevas",
+    label: "Mandir",
+    href: "/mandir",
     isMega: false,
-    dropdownColumns: [
-      {
-        header: "Daily Worship",
-        items: [
-          { title: "Mangala Aarti", href: "/sevas/mangala" },
-          { title: "Tulasi Aarti", href: "/sevas/tulasi" },
-          { title: "Raj Bhoga Offering", href: "/sevas/raj-bhoga" },
-          { title: "Sandhya Aarti", href: "/sevas/sandhya" },
-          { title: "Shayana Aarti", href: "/sevas/shayana" },
-        ],
-      },
-      {
-        header: "Offerings",
-        items: [
-          { title: "Annadanam Seva", href: "/sevas/annadanam" },
-          { title: "Gau Seva", href: "/sevas/gau" },
-          { title: "Flower Seva", href: "/sevas/flower" },
-          { title: "Deepa Seva", href: "/sevas/deepa" },
-          { title: "Festival Sponsorship", href: "/sevas/festival" },
-        ],
-      },
-      {
-        header: "Devotional Services",
-        items: [
-          { title: "Book Distribution", href: "/sevas/books" },
-          { title: "Temple Volunteering", href: "/sevas/volunteer" },
-          { title: "Bhajan Seva", href: "/sevas/bhajan" },
-          { title: "Sponsorship Opportunities", href: "/sevas/sponsorship" },
-        ],
-      },
+    dropdown: [
+      { title: "Explore Temple", href: "/mandir/explore" },
+      { title: "Our Schedule", href: "/mandir/schedule" },
+      { title: "News & Media Coverage", href: "/mandir/news" },
+      { title: "Gallery", href: "/mandir/gallery" },
+      { title: "Darshans", href: "/mandir/darshans" },
+      { title: "Wallpapers", href: "/mandir/wallpapers" },
     ],
   },
   {
-    label: "Festivals",
-    href: "/festivals",
-    isMega: true,
-    dropdownColumns: [
-      {
-        header: "Featured Festivals",
-        items: [
-          { title: "Janmashtami", href: "/festivals/janmashtami" },
-          { title: "Ratha Yatra", href: "/festivals/ratha-yatra" },
-          { title: "Gaura Purnima", href: "/festivals/gaura-purnima" },
-          { title: "Radhashtami", href: "/festivals/radhashtami" },
-          { title: "Nityananda Trayodashi", href: "/festivals/nityananda" },
-        ],
-      },
-      {
-        header: "Yearly Celebrations",
-        items: [
-          { title: "Kartik Month", href: "/festivals/kartik" },
-          { title: "Govardhan Puja", href: "/festivals/govardhan" },
-          { title: "Narasimha Chaturdashi", href: "/festivals/narasimha" },
-          { title: "Rama Navami", href: "/festivals/rama-navami" },
-          { title: "Ekadashi Calendar", href: "/festivals/ekadashi" },
-        ],
-      },
-    ],
-    featuredCard: {
-      image: "/images/festival_celebration_4k.png",
-      date: "August 26, 2026",
-      title: "Sri Krishna Janmashtami",
-      desc: "Join us for the grandest celebration of Lord Krishna's appearance day.",
-      href: "/festivals/janmashtami",
-    },
-  },
-  {
-    label: "Visit",
-    href: "/visit",
+    label: "Prabhupada",
+    href: "/prabhupada",
     isMega: false,
-    dropdownColumns: [
-      {
-        header: "Temple Information",
-        items: [
-          { title: "Darshan Timings", href: "/visit/darshan" },
-          { title: "Temple Schedule", href: "/visit/schedule" },
-          { title: "Daily Programs", href: "/visit/programs" },
-          { title: "Aarti Timings", href: "/visit/aarti" },
-        ],
-      },
-      {
-        header: "Visitor Guide",
-        items: [
-          { title: "First Time Visitors", href: "/visit/first-time" },
-          { title: "Dress Code", href: "/visit/dress-code" },
-          { title: "Temple Etiquette", href: "/visit/etiquette" },
-          { title: "Frequently Asked Questions", href: "/visit/faq" },
-        ],
-      },
-      {
-        header: "Location",
-        items: [
-          { title: "Directions", href: "/visit/directions" },
-          { title: "Parking Information", href: "/visit/parking" },
-          { title: "Nearby Attractions", href: "/visit/attractions" },
-          { title: "Accommodation", href: "/visit/accommodation" },
-        ],
-      },
+    dropdown: [
+      { title: "About", href: "/prabhupada/about" },
+      { title: "Qualities", href: "/prabhupada/qualities" },
+      { title: "Facts", href: "/prabhupada/facts" },
+      { title: "Milestone Timeline", href: "/prabhupada/timeline" },
+      { title: "Books", href: "/prabhupada/books" },
+      { title: "Sampradaya", href: "/prabhupada/sampradaya" },
+      { title: "Quotes", href: "/prabhupada/quotes" },
     ],
   },
   {
     label: "Activities",
     href: "/activities",
     isMega: false,
-    dropdownColumns: [
-      {
-        header: "Education",
-        items: [
-          { title: "Bhagavad Gita Classes", href: "/activities/gita" },
-          { title: "Srimad Bhagavatam Classes", href: "/activities/bhavagatam" },
-          { title: "Youth Programs", href: "/activities/youth" },
-          { title: "Children's Classes", href: "/activities/children" },
-        ],
-      },
-      {
-        header: "Community",
-        items: [
-          { title: "Sunday Feast", href: "/activities/sunday-feast" },
-          { title: "Spiritual Retreats", href: "/activities/retreats" },
-          { title: "Cultural Events", href: "/activities/cultural" },
-          { title: "Community Gatherings", href: "/activities/gatherings" },
-        ],
-      },
-      {
-        header: "Outreach",
-        items: [
-          { title: "Harinam Sankirtan", href: "/activities/harinam" },
-          { title: "Food Distribution", href: "/activities/food" },
-          { title: "Prison Outreach", href: "/activities/prison" },
-          { title: "College Programs", href: "/activities/college" },
-        ],
-      },
+    dropdown: [
+      { title: "Education", href: "/activities/education" },
+      { title: "Food Distribution", href: "/activities/food-distribution" },
+      { title: "Cow Protection", href: "/activities/cow-protection" },
+      { title: "Yuga Dharma", href: "/activities/yuga-dharma" },
+      { title: "Projects", href: "/activities/projects" },
+      { title: "Events", href: "/activities/events" },
+      { title: "Services", href: "/activities/services" },
     ],
+  },
+  {
+    label: "Festivals",
+    href: "/festivals",
+    isMega: false,
   },
   {
     label: "Get Involved",
     href: "/get-involved",
     isMega: false,
-    dropdownColumns: [
-      {
-        header: "Volunteer",
-        items: [
-          { title: "Become a Volunteer", href: "/get-involved/volunteer" },
-          { title: "Event Support", href: "/get-involved/events" },
-          { title: "Temple Services", href: "/get-involved/services" },
-          { title: "Community Outreach", href: "/get-involved/outreach" },
-        ],
-      },
-      {
-        header: "Donate",
-        items: [
-          { title: "One-Time Donation", href: "/donate/one-time" },
-          { title: "Monthly Donation", href: "/donate/monthly" },
-          { title: "Sponsor a Program", href: "/donate/sponsor" },
-          { title: "Legacy Giving", href: "/donate/legacy" },
-        ],
-      },
-      {
-        header: "Membership",
-        items: [
-          { title: "Devotee Membership", href: "/get-involved/membership/devotee" },
-          { title: "Community Membership", href: "/get-involved/membership/community" },
-          { title: "Youth Membership", href: "/get-involved/membership/youth" },
-        ],
-      },
+    dropdown: [
+      { title: "Blogs", href: "/get-involved/blogs" },
+      { title: "Temple Universe", href: "/get-involved/temple-universe" },
+      { title: "Web Stories", href: "/get-involved/web-stories" },
+      { title: "Vaishnav Calendar", href: "/get-involved/calendar" },
+      { title: "Volunteer", href: "/get-involved/volunteer" },
+      { title: "Careers", href: "/get-involved/careers" },
     ],
   },
 ];
@@ -247,34 +156,30 @@ export function Navbar() {
         /* Mega Menu Core Styles */
         .mega-dropdown-panel {
           position: absolute;
-          top: 100%;
-          left: 50%;
-          transform: translateX(-50%);
-          background: rgba(255, 255, 255, 0.97);
-          backdrop-filter: blur(30px) saturate(180%);
-          -webkit-backdrop-filter: blur(30px) saturate(180%);
-          border: 1px solid rgba(29, 92, 150, 0.15);
-          border-radius: 24px;
-          box-shadow: 0 30px 80px rgba(0, 0, 0, 0.12);
-          padding: 32px;
+          top: calc(100% + 4px);
+          left: 0;
+          background: #F6F4FB;
+          border: 1px solid rgba(18, 58, 140, 0.1);
+          border-radius: 16px;
+          box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+          padding: 8px 6px;
           z-index: 100;
           cursor: default;
           pointer-events: auto;
-          margin-top: 16px;
         }
 
         .mega-link-item {
           display: block;
-          padding: 12px 16px;
-          border-radius: 12px;
-          color: #4A4A4A;
+          padding: 8px 12px;
+          border-radius: 8px;
+          color: #1F1F1F;
           font-family: var(--font-inter);
-          transition: all 300ms ease;
+          transition: all 200ms ease;
           text-decoration: none;
         }
 
         .mega-link-item:hover {
-          background: rgba(18, 58, 140, 0.04);
+          background: rgba(18, 58, 140, 0.06);
           color: #123A8C;
         }
 
@@ -303,31 +208,23 @@ export function Navbar() {
           letter-spacing: 0.1em;
           text-transform: uppercase;
           color: #1D5C96;
-          margin-bottom: 16px;
-          padding-left: 16px;
+          margin-bottom: 12px;
+          padding-left: 12px;
         }
 
         /* Nav Link Active State */
         .desktop-nav-link {
           position: relative;
-          color: #1F1F1F;
+          color: #333333;
           font-family: var(--font-inter);
           font-weight: 500;
-          font-size: 16px;
+          font-size: 14.5px;
           transition: color 300ms ease;
-          padding: 8px 12px;
+          padding: 8px 14px;
+          border-radius: 6px;
         }
-        .desktop-nav-link:hover {
+        .desktop-nav-link:hover, .desktop-nav-link.active-nav-link {
           color: #123A8C;
-        }
-        .desktop-nav-link .active-line {
-          position: absolute;
-          bottom: -2px;
-          left: 20%;
-          width: 60%;
-          height: 2px;
-          background: #1D5C96;
-          border-radius: 2px;
         }
 
         /* Mobile Accordion */
@@ -346,23 +243,61 @@ export function Navbar() {
       `}} />
 
       {/* ── DESKTOP HEADER ── */}
-      <header 
-        className={`ultra-navbar ${scrolled ? "is-scrolled" : ""}`}
-        onMouseLeave={() => setActiveDropdown(null)}
-      >
+      <div className="w-full flex flex-col">
+        {/* Top Bar */}
+        <div className="hidden md:flex bg-[#F6F4FB] h-[36px] w-full items-center justify-between px-6 xl:px-12 text-[12px] text-[#4A4A4A] border-b border-[rgba(0,0,0,0.03)] font-medium">
+          <div className="flex items-center gap-6">
+            <a href="mailto:info@hkmvizag.org" className="flex items-center gap-2 hover:text-[#123A8C] transition-colors">
+              <Mail size={14} strokeWidth={1.5} /> <span>info@hkmvizag.org</span>
+            </a>
+            <a href="tel:+919799999881" className="flex items-center gap-2 hover:text-[#123A8C] transition-colors">
+              <MessageCircle size={14} strokeWidth={1.5} /> <span>+91-97999 99881</span>
+            </a>
+          </div>
+          <div className="flex items-center gap-6">
+            <div className="flex items-center gap-2 bg-white px-3 py-[3px] rounded-full shadow-[0_1px_2px_rgba(0,0,0,0.05)] border border-gray-100 text-[11px] font-semibold text-[#1F3254]">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#123A8C]"></span>
+              Darshan Open 4:30 - 13:00
+            </div>
+            <div className="flex items-center gap-4 text-[#4A4A4A]">
+              <a href="#" className="hover:text-[#123A8C] transition-colors"><Youtube size={15} strokeWidth={1.5} /></a>
+              <a href="#" className="hover:text-[#123A8C] transition-colors"><Instagram size={15} strokeWidth={1.5} /></a>
+              <a href="#" className="hover:text-[#123A8C] transition-colors"><Twitter size={15} strokeWidth={1.5} /></a>
+              <a href="#" className="hover:text-[#123A8C] transition-colors"><Facebook size={15} strokeWidth={1.5} /></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="sticky top-0 z-[9999] w-full flex justify-center">
+        <header 
+          className={`ultra-navbar !static transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+            scrolled 
+              ? "shadow-[0_8px_30px_rgb(0,0,0,0.08)] border border-[rgba(18,58,140,0.15)] bg-white/95 backdrop-blur-md" 
+              : "border border-transparent border-b-[rgba(0,0,0,0.05)] bg-white"
+          }`}
+          style={{ 
+            height: '64px',
+            width: scrolled ? 'calc(100% - 32px)' : '100%',
+            maxWidth: scrolled ? '1400px' : '100%',
+            borderRadius: scrolled ? '16px' : '0px',
+            marginTop: scrolled ? '8px' : '0px'
+          }}
+          onMouseLeave={() => setActiveDropdown(null)}
+        >
         {/* Left: Logo */}
         <Link href="/" className="flex items-center gap-3 relative z-10 group">
           <img
             src="/images/logo.png"
             alt="Srila Prabhupada ISKCON Gambheeram logo"
-            width={180}
-            height={56}
-            className="object-contain object-left transition-transform duration-500 group-hover:scale-[1.02]"
+            width={160}
+            height={44}
+            className="object-contain object-left transition-transform duration-500 group-hover:scale-[1.02] max-h-[44px]"
           />
         </Link>
 
         {/* Center: Navigation */}
-        <nav className="hidden xl:flex items-center gap-6 relative h-full">
+        <nav className="hidden xl:flex items-center gap-8 relative h-full">
           {NAV_DATA.map((item) => {
             const isActive = pathname === item.href || (item.href !== "/" && pathname?.startsWith(item.href));
             const hasDropdown = item.dropdown || item.dropdownColumns;
@@ -372,21 +307,18 @@ export function Navbar() {
               <div 
                 key={item.label} 
                 className="h-full flex items-center relative"
-                onMouseEnter={() => hasDropdown && setActiveDropdown(item.label)}
+                onMouseEnter={() => setActiveDropdown(hasDropdown ? item.label : null)}
               >
                 <Link 
                   href={item.href}
-                  className="desktop-nav-link flex items-center gap-1.5"
+                  className={`desktop-nav-link flex items-center gap-1.5 ${isActive ? 'active-nav-link' : ''}`}
                 >
                   {item.label}
                   {hasDropdown && (
                     <ChevronDown 
                       size={14} 
-                      className={`transition-transform duration-300 ${isHovered ? "rotate-180 text-[#123A8C]" : "text-gray-400"}`} 
+                      className={`transition-transform duration-300 ${isHovered || isActive ? "rotate-180 text-[#123A8C]" : "text-gray-400"}`} 
                     />
-                  )}
-                  {isActive && (
-                    <motion.div layoutId="activeNavLine" className="active-line" />
                   )}
                 </Link>
 
@@ -400,10 +332,7 @@ export function Navbar() {
                       exit={{ opacity: 0, y: 10, scale: 0.98 }}
                       transition={{ duration: 0.45, ease: EASE }}
                       style={{ 
-                        width: item.isMega ? "900px" : item.dropdownColumns ? "max-content" : "320px",
-                        left: item.isMega ? "50%" : (item.label === "Get Involved" || item.label === "Activities") ? "auto" : "0%",
-                        right: (item.label === "Get Involved" || item.label === "Activities") ? "0%" : "auto",
-                        transform: item.isMega ? "translateX(-50%)" : (item.label === "Get Involved" || item.label === "Activities") ? "none" : "translateX(-20%)",
+                        width: item.dropdownColumns ? "max-content" : "240px",
                       }}
                     >
                       {/* Simple List (About Us) */}
@@ -421,12 +350,27 @@ export function Navbar() {
                         </div>
                       )}
 
-                      {/* Column Layout (Sevas, Visit, Activities, Get Involved, Festivals) */}
+                      {/* Column Layout */}
                       {item.dropdownColumns && (
-                        <div className="flex gap-12">
-                          <div className="flex gap-8">
+                        <div className="flex gap-8">
+                          {item.highlight && (
+                            <div className="w-[260px] flex flex-col justify-between p-5 bg-gray-50/70 rounded-[14px] border border-gray-100/80 group/hl">
+                              <div>
+                                <h3 className="text-lg font-serif font-medium text-gray-900 mb-2">{item.highlight.title}</h3>
+                                <p className="text-[13px] text-gray-500 leading-relaxed">{item.highlight.desc}</p>
+                              </div>
+                              <Link 
+                                href={item.highlight.href}
+                                className="mt-4 text-[13px] font-semibold text-[#123A8C] uppercase tracking-wider flex items-center gap-2 group-hover/hl:text-[#0a2663] transition-colors"
+                                onClick={() => setActiveDropdown(null)}
+                              >
+                                {item.highlight.action} <ArrowRight size={14} className="transition-transform group-hover/hl:translate-x-1" />
+                              </Link>
+                            </div>
+                          )}
+                          <div className="flex gap-6 py-2">
                             {item.dropdownColumns.map((col, idx) => (
-                              <div key={idx} className="flex flex-col min-w-[200px]">
+                              <div key={idx} className="flex flex-col min-w-[170px]">
                                 <div className="mega-col-header">{col.header}</div>
                                 <div className="flex flex-col gap-1">
                                   {col.items.map((link) => (
@@ -482,27 +426,19 @@ export function Navbar() {
         </nav>
 
         {/* Right: CTA */}
-        <div className="hidden xl:flex items-center gap-4 relative z-10">
+        <div className="hidden xl:flex items-center gap-3 relative z-10">
+          <button
+            aria-label="Toggle Dark Mode"
+            className="grid h-9 w-9 place-items-center rounded-full bg-[#123A8C] text-white hover:bg-[#0a2663] transition-colors"
+          >
+            <Moon size={16} />
+          </button>
           <Link
             href="/donate"
-            className="ultra-btn-secondary h-[48px] px-6"
-            style={{ 
-              borderRadius: 999, 
-              border: "1px solid rgba(0,0,0,0.1)", 
-              fontFamily: "var(--font-inter)", 
-              fontWeight: 500,
-              display: "flex",
-              alignItems: "center"
-            }}
+            className="h-9 px-5 rounded-full flex items-center gap-2 bg-[#123A8C] text-white font-medium text-[13px] hover:bg-[#0a2663] transition-colors shadow-sm group/btn"
           >
-            Donate
-          </Link>
-          <Link
-            href="/visit"
-            className="ultra-btn-primary h-[48px] px-7"
-            style={{ fontFamily: "var(--font-inter)", fontWeight: 500, display: "flex", alignItems: "center" }}
-          >
-            Visit Temple
+            <Heart size={14} fill="currentColor" className="animate-heart-beat" />
+            Donate Now
           </Link>
         </div>
 
@@ -516,6 +452,7 @@ export function Navbar() {
           <Menu size={24} />
         </button>
       </header>
+      </div>
 
       {/* ── MOBILE FULLSCREEN DRAWER ── */}
       <AnimatePresence>

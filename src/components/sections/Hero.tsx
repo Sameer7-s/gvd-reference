@@ -333,10 +333,6 @@ export function Hero() {
       {/* Layer 3: Watermark */}
       <div className="hero-watermark">HARE<br/>KRISHNA</div>
 
-      {/* Layer 4: Mandalas */}
-      <div className="hero-mandala hm-tl" />
-      <div className="hero-mandala hm-tr" />
-      <div className="hero-mandala hm-br" />
 
       {/* Layer 5: Particles */}
       <div className="hero-particles" />

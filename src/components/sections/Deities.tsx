@@ -1,6 +1,6 @@
 import { Reveal } from "@/components/Reveal";
 import { SectionHeading, AssetFrame } from "@/components/ui";
-import { Mandala, DivineGlow } from "@/components/decor";
+import { DivineGlow } from "@/components/decor";
 import { DEITIES } from "@/lib/site";
 
 const tones = ["night", "krishna", "gold"] as const;
@@ -9,7 +9,7 @@ export function Deities() {
   return (
     <section className="relative overflow-hidden bg-black py-20 sm:py-28">
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(80%_60%_at_50%_0%,rgba(212,175,55,0.1)_0%,transparent_60%)]" />
-      <Mandala className="pointer-events-none absolute left-1/2 top-0 h-[140%] w-auto -translate-x-1/2 text-[var(--color-accent-primary)] opacity-[0.06] animate-spin-slower" />
+
 
       <div className="container-page relative">
         <Reveal>

@@ -1,7 +1,7 @@
 import { Music, Sparkles, UtensilsCrossed, HandHeart } from "lucide-react";
 import { Reveal } from "@/components/Reveal";
 import { SectionHeading, AssetFrame } from "@/components/ui";
-import { Mandala, LotusDivider } from "@/components/decor";
+import { LotusDivider } from "@/components/decor";
 import { SITE } from "@/lib/site";
 
 const pillars = [
@@ -14,7 +14,7 @@ const pillars = [
 export function Welcome() {
   return (
     <section id="about" className="relative overflow-hidden bg-[var(--color-bg-secondary)] py-20 sm:py-28">
-      <Mandala className="pointer-events-none absolute -left-40 top-10 h-96 w-96 text-[var(--color-accent-primary)] opacity-[0.05]" />
+
 
       <div className="container-page grid items-center gap-14 lg:grid-cols-2">
         <Reveal className="relative order-2 lg:order-1">
@@ -30,7 +30,7 @@ export function Welcome() {
             </p>
           </div>
           <div className="absolute -left-5 -top-5 hidden h-24 w-24 rounded-full border border-[var(--color-accent-primary)]/30 bg-[var(--color-accent-primary)]/5 lg:grid lg:place-items-center">
-            <Mandala className="h-16 w-16 text-[var(--color-accent-primary)]/40 animate-spin-slow" />
+
           </div>
         </Reveal>
 

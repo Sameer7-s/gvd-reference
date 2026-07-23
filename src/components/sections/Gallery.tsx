@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Star } from "lucide-react";
 import { Reveal } from "@/components/Reveal";
-import { Lotus, Mandala, PeacockFeather } from "@/components/decor";
+import { Lotus, PeacockFeather } from "@/components/decor";
 
 const templeDarshanImage = "/images/temple-darshan.jpg.png";
 
@@ -74,7 +74,7 @@ export function Gallery() {
     >
       <div className="tm-paper-texture" aria-hidden="true" />
       <PeacockFeather className="tm-peacock" aria-hidden="true" />
-      <Mandala className="tm-mandala text-accent-primary/20" petals={24} aria-hidden="true" />
+
 
       <div className="tm-container">
         <Reveal className="tm-header">
