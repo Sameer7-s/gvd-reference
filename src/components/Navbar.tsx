@@ -314,6 +314,11 @@ export function Navbar() {
                 <Link 
                   href={item.href}
                   className={`desktop-nav-link flex items-center gap-1.5 ${isActive ? 'active-nav-link' : ''}`}
+                  onClick={(e) => {
+                    if (hasDropdown) {
+                      e.preventDefault();
+                    }
+                  }}
                 >
                   {item.label}
                   {hasDropdown && (
