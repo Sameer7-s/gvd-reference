@@ -167,7 +167,7 @@ export function SevaCard({ seva }: { seva: Seva }) {
       <div className="relative z-10 mt-6">
         <Link
           href={`/donate#${seva.slug}`}
-          className="group/cta flex w-full items-center justify-center gap-2 rounded-full font-semibold tracking-wide transition-all duration-300"
+          className="group/cta flex w-full items-center justify-center gap-2 rounded-lg font-semibold tracking-wide transition-all duration-300"
           style={
             isHL
               ? {
@@ -281,7 +281,7 @@ export function Seva() {
             </div>
             <Link
               href="/donate"
-              className="shrink-0 rounded-full border text-sm font-semibold tracking-wide transition-all duration-200 hover:bg-[rgba(29,92,150,0.06)]"
+              className="shrink-0 rounded-lg border text-sm font-semibold tracking-wide transition-all duration-200 hover:bg-[rgba(29,92,150,0.06)]"
               style={{
                 padding: "10px 22px",
                 borderColor: "rgba(29,92,150,0.25)",

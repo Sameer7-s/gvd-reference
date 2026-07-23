@@ -43,7 +43,7 @@ export function Button({
   external = false,
   ...rest
 }: ButtonProps) {
-  const cls = `group/btn inline-flex items-center justify-center gap-2 rounded-full font-semibold tracking-wide transition-all duration-300 ease-soft cursor-pointer focus-visible:outline-none ${VARIANTS[variant]} ${SIZES[size]} ${className}`;
+  const cls = `group/btn inline-flex items-center justify-center gap-2 rounded-lg font-semibold tracking-wide transition-all duration-300 ease-soft cursor-pointer focus-visible:outline-none ${VARIANTS[variant]} ${SIZES[size]} ${className}`;
 
   if (href) {
     if (external || href.startsWith("http") || href.startsWith("tel:") || href.startsWith("mailto:")) {

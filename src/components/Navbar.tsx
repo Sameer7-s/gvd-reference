@@ -375,7 +375,7 @@ export function Navbar() {
                               <div key={idx} className="flex flex-col min-w-[170px]">
                                 <div className="mega-col-header">{col.header}</div>
                                 <div className="flex flex-col gap-1">
-                                  {col.items.map((link) => (
+                                  {(col.items || col.links || []).map((link) => (
                                     <Link key={link.title} href={link.href} className="mega-link-item group/item" onClick={() => setActiveDropdown(null)}>
                                       <span className="mega-link-title justify-between">
                                         <span>{link.title}</span>
@@ -431,13 +431,13 @@ export function Navbar() {
         <div className="hidden xl:flex items-center gap-3 relative z-10">
           <button
             aria-label="Toggle Dark Mode"
-            className="grid h-9 w-9 place-items-center rounded-full bg-[#123A8C] text-white hover:bg-[#0a2663] transition-colors"
+            className="grid h-9 w-9 place-items-center rounded-lg bg-[#123A8C] text-white hover:bg-[#0a2663] transition-colors"
           >
             <Moon size={16} />
           </button>
           <Link
             href="/donate"
-            className="h-9 px-5 rounded-full flex items-center gap-2 bg-[#123A8C] text-white font-medium text-[13px] hover:bg-[#0a2663] transition-colors shadow-sm group/btn"
+            className="h-9 px-5 rounded-lg flex items-center gap-2 bg-[#123A8C] text-white font-medium text-[13px] hover:bg-[#0a2663] transition-colors shadow-sm group/btn"
           >
             <Heart size={14} fill="currentColor" className="animate-heart-beat" />
             Donate Now
@@ -448,7 +448,7 @@ export function Navbar() {
         <button
           type="button"
           onClick={() => setMobileMenuOpen(true)}
-          className="grid h-12 w-12 place-items-center rounded-full xl:hidden transition-colors bg-gray-50 hover:bg-gray-100"
+          className="grid h-12 w-12 place-items-center rounded-lg xl:hidden transition-colors bg-gray-50 hover:bg-gray-100"
           aria-label="Open mobile menu"
         >
           <Menu size={24} />
@@ -478,7 +478,7 @@ export function Navbar() {
               </Link>
               <button
                 onClick={() => setMobileMenuOpen(false)}
-                className="h-12 w-12 flex items-center justify-center rounded-full bg-gray-50 text-gray-800"
+                className="h-12 w-12 flex items-center justify-center rounded-lg bg-gray-50 text-gray-800"
               >
                 <X size={24} />
               </button>
@@ -534,7 +534,7 @@ export function Navbar() {
                                         <div key={idx} className="flex flex-col">
                                           <div className="text-[11px] font-bold tracking-widest uppercase text-[var(--color-accent-primary)] mb-3">{col.header}</div>
                                           <div className="flex flex-col gap-3">
-                                            {col.items.map(link => (
+                                            {(col.items || col.links || []).map(link => (
                                               <Link 
                                                 key={link.title} 
                                                 href={link.href}
@@ -573,14 +573,14 @@ export function Navbar() {
               <Link
                 href="/donate"
                 onClick={() => setMobileMenuOpen(false)}
-                className="ultra-btn-secondary w-full h-[52px] rounded-full flex items-center justify-center font-medium font-sans border border-gray-200"
+                className="ultra-btn-secondary w-full h-[52px] rounded-lg flex items-center justify-center font-medium font-sans border border-gray-200"
               >
                 Donate
               </Link>
               <Link
                 href="/visit"
                 onClick={() => setMobileMenuOpen(false)}
-                className="ultra-btn-primary w-full h-[52px] rounded-full flex items-center justify-center font-medium font-sans"
+                className="ultra-btn-primary w-full h-[52px] rounded-lg flex items-center justify-center font-medium font-sans"
               >
                 Visit Temple
               </Link>

@@ -65,7 +65,7 @@ export function DonationForm() {
         </p>
         <button
           onClick={() => setStatus("idle")}
-          className="mt-6 cursor-pointer rounded-full border border-accent-primary/40 px-6 py-3 text-sm font-semibold text-text-primary transition-colors hover:bg-accent-light/10"
+          className="mt-6 cursor-pointer rounded-lg border border-accent-primary/40 px-6 py-3 text-sm font-semibold text-text-primary transition-colors hover:bg-accent-light/10"
         >
           Make another offering
         </button>
@@ -120,13 +120,13 @@ export function DonationForm() {
       <fieldset>
         <legend className="mb-3 font-display text-lg text-text-primary">2 · Contribution</legend>
 
-        <div className="mb-4 inline-flex rounded-full border border-accent-primary/20 bg-bg-secondary/60 p-1">
+        <div className="mb-4 inline-flex rounded-lg border border-accent-primary/20 bg-bg-secondary/60 p-1">
           {(["once", "monthly"] as Frequency[]).map((f) => (
             <button
               key={f}
               type="button"
               onClick={() => setFrequency(f)}
-              className={`cursor-pointer rounded-full px-5 py-1.5 text-sm font-semibold capitalize transition-colors ${
+              className={`cursor-pointer rounded-lg px-5 py-1.5 text-sm font-semibold capitalize transition-colors ${
                 frequency === f ? "bg-accent-primary text-white" : "text-text-muted hover:text-text-primary"
               }`}
             >
@@ -144,7 +144,7 @@ export function DonationForm() {
                 setAmount(amt);
                 setCustom("");
               }}
-              className={`inline-flex items-center justify-center gap-0.5 rounded-xl border py-3 font-semibold transition-colors ${
+              className={`inline-flex items-center justify-center gap-0.5 rounded-lg border py-3 font-semibold transition-colors ${
                 !custom && amount === amt
                   ? "border-accent-primary bg-accent-light/10 text-accent-secondary"
                   : "border-accent-primary/20 bg-bg-secondary/60 text-text-primary hover:border-accent-primary"
@@ -265,7 +265,7 @@ export function DonationForm() {
         <button
           type="submit"
           disabled={status === "submitting"}
-          className="inline-flex cursor-pointer items-center justify-center gap-2 rounded-full bg-gradient-to-br from-accent-secondary to-accent-primary px-7 py-3.5 font-semibold text-white shadow-temple transition-all hover:from-accent-primary hover:to-accent-secondary disabled:cursor-wait disabled:opacity-70"
+          className="inline-flex cursor-pointer items-center justify-center gap-2 rounded-lg bg-gradient-to-br from-accent-secondary to-accent-primary px-7 py-3.5 font-semibold text-white shadow-temple transition-all hover:from-accent-primary hover:to-accent-secondary disabled:cursor-wait disabled:opacity-70"
         >
           {status === "submitting" ? (
             <>

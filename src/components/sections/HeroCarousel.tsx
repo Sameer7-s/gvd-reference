@@ -143,31 +143,13 @@ export function HeroCarousel() {
   const pos = (i: number) => {
     const d = ((i - current) % TOTAL + TOTAL) % TOTAL;
     if (d === 0)         return "active";
-    if (d === 1)         return "next";
-    if (d === TOTAL - 1) return "prev";
     return "hidden";
   };
 
-  // Mobile: full-width card, prev/next hidden off-screen
-  // Desktop: 68% card with visible peek cards
-  const cardW  = isMobile ? "92%" : "68%";
-  const cardML = isMobile ? "-46%" : "-34%";
-  const cardTop = isMobile ? "5%" : "9%";
-  const cardH  = isMobile ? "90%" : "82%";
-
-  const mobileStyleMap: Record<string, React.CSSProperties> = {
-    active: { transform: "translateX(0%)", opacity: 1, filter: "brightness(1)", zIndex: 10, boxShadow: "0 40px 100px rgba(0,0,0,0.50)" },
-    prev:   { transform: "translateX(-110%)", opacity: 0, filter: "brightness(0.6)", zIndex: 5, boxShadow: "none" },
-    next:   { transform: "translateX(110%)", opacity: 0, filter: "brightness(0.6)", zIndex: 5, boxShadow: "none" },
-    hidden: { transform: "translateX(0%)", opacity: 0, filter: "brightness(0.4)", zIndex: 0, boxShadow: "none" },
+  const styleMap: Record<string, React.CSSProperties> = {
+    active: { opacity: 1, zIndex: 10, visibility: "visible", transform: "scale(1)" },
+    hidden: { opacity: 0, zIndex: 0, visibility: "hidden", transform: "scale(1.05)" },
   };
-  const desktopStyleMap: Record<string, React.CSSProperties> = {
-    active: { transform: "translateX(0%) scale(1) rotateY(0deg)", opacity: 1, filter: "brightness(1)", zIndex: 10, boxShadow: "0 60px 140px rgba(0,0,0,0.45)" },
-    prev:   { transform: "translateX(-78%) scale(0.88) rotateY(10deg)", opacity: 0.78, filter: "brightness(0.70)", zIndex: 5, boxShadow: "0 20px 60px rgba(0,0,0,0.30)" },
-    next:   { transform: "translateX(78%) scale(0.88) rotateY(-10deg)", opacity: 0.78, filter: "brightness(0.70)", zIndex: 5, boxShadow: "0 20px 60px rgba(0,0,0,0.30)" },
-    hidden: { transform: "translateX(0%) scale(0.7)", opacity: 0, filter: "brightness(0.4)", zIndex: 0, boxShadow: "none" },
-  };
-  const styleMap = isMobile ? mobileStyleMap : desktopStyleMap;
 
   return (
     <section
@@ -215,18 +197,14 @@ export function HeroCarousel() {
               onClick={() => { if (!isActive) goTo(i); }}
               style={{
                 position: "absolute",
-                width: cardW,
-                height: cardH,
-                top: cardTop,
-                left: "50%",
-                marginLeft: cardML,
-                borderRadius: isMobile ? 16 : 20,
+                width: "100%",
+                height: "100%",
+                top: 0,
+                left: 0,
                 overflow: "hidden",
-                transformStyle: isMobile ? "flat" : "preserve-3d",
-                willChange: "transform, opacity, filter",
+                willChange: "transform, opacity",
                 cursor: isActive ? "default" : "pointer",
-                border: isActive ? "1px solid rgba(255,255,255,0.10)" : "none",
-                transition: "transform 1000ms cubic-bezier(0.22,1,0.36,1), opacity 900ms ease, filter 900ms ease, box-shadow 900ms ease",
+                transition: "transform 1000ms cubic-bezier(0.22,1,0.36,1), opacity 900ms ease",
                 ...styleMap[p],
               }}
             >
@@ -399,55 +377,6 @@ export function HeroCarousel() {
           );
         })}
       </div>
-
-      {/* Navigation arrows */}
-      {[
-        { dir: "prev", fn: () => { prev(); setAutoplay(false); } },
-        { dir: "next", fn: () => { next(); setAutoplay(false); } },
-      ].map(({ dir, fn }) => (
-        <button
-          key={dir}
-          onClick={fn}
-          aria-label={`${dir === "prev" ? "Previous" : "Next"} slide`}
-          style={{
-            position: "absolute",
-            [dir === "prev" ? "left" : "right"]: isMobile ? 10 : 20,
-            top: "50%",
-            transform: "translateY(-50%)",
-            zIndex: 30,
-            width:  isMobile ? 40 : 68,
-            height: isMobile ? 40 : 68,
-            borderRadius: "50%",
-            background: "rgba(255,255,255,0.12)",
-            backdropFilter: "blur(20px)",
-            WebkitBackdropFilter: "blur(20px)",
-            border: "1px solid rgba(255,255,255,0.22)",
-            color: "#fff",
-            display: "flex", alignItems: "center", justifyContent: "center",
-            cursor: "pointer",
-            transition: "all 350ms cubic-bezier(0.22,1,0.36,1)",
-          }}
-          onMouseEnter={e => {
-            const el = e.currentTarget as HTMLButtonElement;
-            el.style.background = "linear-gradient(135deg, #123A8C, #1D5C96)";
-            el.style.borderColor = "#123A8C";
-            el.style.boxShadow = "0 0 28px rgba(18,58,140,0.45)";
-            el.style.transform = "translateY(-50%) scale(1.08)";
-          }}
-          onMouseLeave={e => {
-            const el = e.currentTarget as HTMLButtonElement;
-            el.style.background = "rgba(255,255,255,0.12)";
-            el.style.borderColor = "rgba(255,255,255,0.22)";
-            el.style.boxShadow = "none";
-            el.style.transform = "translateY(-50%) scale(1)";
-          }}
-        >
-          {dir === "prev"
-            ? <ChevronLeft  size={isMobile ? 16 : 28} strokeWidth={1.5} />
-            : <ChevronRight size={isMobile ? 16 : 28} strokeWidth={1.5} />
-          }
-        </button>
-      ))}
 
       {/* Pagination dots */}
       <div

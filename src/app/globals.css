@@ -120,6 +120,18 @@
   50% { transform: translateY(-10px); }
 }
 
+@keyframes heart-beat {
+  0%, 100% { transform: scale(1); }
+  14% { transform: scale(1.2); }
+  28% { transform: scale(1); }
+  42% { transform: scale(1.2); }
+  70% { transform: scale(1); }
+}
+
+.animate-heart-beat {
+  animation: heart-beat 1.5s ease-in-out infinite;
+}
+
 .animate-fade-in-up {
   animation: fade-in-up 1s var(--ease-luxury) forwards;
 }
