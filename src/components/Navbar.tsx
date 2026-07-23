@@ -434,12 +434,6 @@ export function Navbar() {
 
         {/* Right: CTA */}
         <div className="hidden xl:flex items-center gap-3 relative z-10">
-          <button
-            aria-label="Toggle Dark Mode"
-            className="grid h-9 w-9 place-items-center rounded-lg bg-[#123A8C] text-white hover:bg-[#0a2663] transition-colors"
-          >
-            <Moon size={16} />
-          </button>
           <Link
             href="/donate"
             className="h-9 px-5 rounded-lg flex items-center gap-2 bg-[#123A8C] text-white font-medium text-[13px] hover:bg-[#0a2663] transition-colors shadow-sm group/btn"
