@@ -42,7 +42,7 @@ function Counter({ target, label }: { target: string; label: string }) {
       >
         {isVisible ? target : "0"}
       </div>
-      <div className={`text-[16px] uppercase tracking-widest text-[var(--color-text-muted)] transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
+      <div className={`text-[16px] uppercase tracking-widest text-[var(--color-text-text-muted)] transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
         {label}
       </div>
     </div>

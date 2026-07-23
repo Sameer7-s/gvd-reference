@@ -72,7 +72,7 @@ export default async function AboutPage() {
                   <b.icon className="h-7 w-7" />
                 </span>
                 <h2 className="font-display text-2xl text-[var(--color-text-primary)]">{b.title}</h2>
-                <p className="leading-relaxed text-[var(--color-text-muted)]">{b.text}</p>
+                <p className="leading-relaxed text-[var(--color-text-text-muted)]">{b.text}</p>
               </div>
             </Reveal>
           ))}
@@ -97,7 +97,7 @@ export default async function AboutPage() {
                   </span>
                   <p className="font-display text-2xl text-[var(--color-accent-primary)]">{t.year}</p>
                   <h3 className="mt-1 font-display text-xl text-[var(--color-text-primary)]">{t.title}</h3>
-                  <p className="mt-1 text-[var(--color-text-muted)]">{t.text}</p>
+                  <p className="mt-1 text-[var(--color-text-text-muted)]">{t.text}</p>
                 </Reveal>
               ))}
             </ol>
@@ -124,12 +124,12 @@ export default async function AboutPage() {
                     <p.icon className="h-6 w-6" />
                   </span>
                   <h3 className="font-display text-lg text-[var(--color-text-primary)]">{p.title}</h3>
-                  <p className="text-sm text-[var(--color-text-muted)]">{p.text}</p>
+                  <p className="text-sm text-[var(--color-text-text-muted)]">{p.text}</p>
                 </div>
               </Reveal>
             ))}
           </div>
-          <Reveal className="mt-10 flex items-center justify-center gap-2 text-sm text-[var(--color-text-muted)]">
+          <Reveal className="mt-10 flex items-center justify-center gap-2 text-sm text-[var(--color-text-text-muted)]">
             <Users className="h-5 w-5 text-[var(--color-accent-primary)]" />
             Powered by a community of 6,000+ life members and countless volunteers.
           </Reveal>

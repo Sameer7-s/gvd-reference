@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { BadgeIndianRupee, ShieldCheck, Lock, CheckCircle2, Loader2 } from "lucide-react";
+<<<<<<< HEAD
 
 type Frequency = "once" | "monthly";
 
@@ -10,12 +11,23 @@ export function DonationForm() {
   const [sevaSlug, setSevaSlug] = useState("");
   const [frequency, setFrequency] = useState<Frequency>("once");
   const [amount, setAmount] = useState<number>(0);
+=======
+import { SEVAS, type Seva } from "@/lib/site";
+
+type Frequency = "once" | "monthly";
+
+export function DonationForm({ sevas = SEVAS }: { sevas?: Seva[] }) {
+  const [sevaSlug, setSevaSlug] = useState(sevas[0].slug);
+  const [frequency, setFrequency] = useState<Frequency>("once");
+  const [amount, setAmount] = useState<number>(sevas[0].amounts[1]);
+>>>>>>> 302b5cae1d296bbcb3a5f4b1dba0b13b3da2befd
   const [custom, setCustom] = useState("");
   const [form, setForm] = useState({ name: "", email: "", phone: "", pan: "", message: "" });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [status, setStatus] = useState<"idle" | "submitting" | "done">("idle");
   const [loading, setLoading] = useState(true);
 
+<<<<<<< HEAD
   useEffect(() => {
     fetch("/api/admin/sevas")
       .then((res) => res.json())
@@ -40,6 +52,18 @@ export function DonationForm() {
         console.error("Failed to load sevas", err);
         setLoading(false);
       });
+=======
+  const seva = useMemo(() => sevas.find((s) => s.slug === sevaSlug) ?? sevas[0], [sevaSlug, sevas]);
+
+  // Deep-link support: /donate#anna-daan preselects the seva.
+  useEffect(() => {
+    const hash = window.location.hash.replace("#", "");
+    const match = sevas.find((s) => s.slug === hash);
+    if (match) {
+      setSevaSlug(match.slug);
+      setAmount(match.amounts[1]);
+    }
+>>>>>>> 302b5cae1d296bbcb3a5f4b1dba0b13b3da2befd
   }, []);
 
   const seva = useMemo(() => sevas.find((s) => s.slug === sevaSlug) || sevas[0], [sevas, sevaSlug]);
@@ -57,12 +81,36 @@ export function DonationForm() {
     return Object.keys(e).length === 0;
   };
 
-  const handleSubmit = (ev: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
     if ((ev.currentTarget.elements.namedItem("website") as HTMLInputElement)?.value) return;
     if (!validate()) return;
     setStatus("submitting");
+<<<<<<< HEAD
     setTimeout(() => setStatus("done"), 1100);
+=======
+    // SIMULATED: records the donation server-side (status "simulated").
+    // Tomorrow this becomes create-order → gateway redirect → verify.
+    try {
+      const res = await fetch("/api/donate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          seva: sevaSlug,
+          frequency,
+          amount: finalAmount,
+          name: form.name,
+          email: form.email,
+          phone: form.phone,
+        }),
+      });
+      if (!res.ok) throw new Error("request failed");
+      setStatus("done");
+    } catch {
+      setStatus("idle");
+      setErrors((e) => ({ ...e, submit: "Something went wrong. Please try again." }));
+    }
+>>>>>>> 302b5cae1d296bbcb3a5f4b1dba0b13b3da2befd
   };
 
   if (loading) {
@@ -124,7 +172,7 @@ export function DonationForm() {
               />
               <span
                 className={`grid h-4 w-4 place-items-center rounded-full border ${
-                  sevaSlug === s.slug ? "border-accent-secondary" : "border-text-muted/40"
+                  sevaSlug === s.slug ? "border-accent-secondary" : "border-text-text-muted/40"
                 }`}
               >
                 {sevaSlug === s.slug && <span className="h-2 w-2 rounded-full bg-accent-secondary" />}
@@ -176,7 +224,7 @@ export function DonationForm() {
         <div className="mt-3">
           <label htmlFor="custom-amount" className="sr-only">Custom amount</label>
           <div className="relative">
-            <BadgeIndianRupee className="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-muted" />
+            <BadgeIndianRupee className="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-text-muted" />
             <input
               id="custom-amount"
               type="number"
@@ -255,6 +303,16 @@ export function DonationForm() {
         <input type="text" name="website" tabIndex={-1} autoComplete="off" aria-hidden="true" className="hidden" />
       </fieldset>
 
+<<<<<<< HEAD
+=======
+      {errors.submit && (
+        <p className="text-center text-sm text-red-600" role="alert">
+          {errors.submit}
+        </p>
+      )}
+
+      {/* Summary + submit */}
+>>>>>>> 302b5cae1d296bbcb3a5f4b1dba0b13b3da2befd
       <div className="flex flex-col gap-4 rounded-2xl border border-accent-primary/20 bg-bg-secondary/80 p-5 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <p className="text-sm text-text-muted">You are offering</p>
@@ -270,7 +328,7 @@ export function DonationForm() {
         <button
           type="submit"
           disabled={status === "submitting"}
-          className="inline-flex cursor-pointer items-center justify-center gap-2 rounded-lg bg-gradient-to-br from-accent-secondary to-accent-primary px-7 py-3.5 font-semibold text-white shadow-temple transition-all hover:from-accent-primary hover:to-accent-secondary disabled:cursor-wait disabled:opacity-70"
+          className="inline-flex cursor-pointer items-center justify-center gap-2 rounded-lg bg-gradient-to-br from-accent-secondary to-accent-primary px-7 py-3.5 font-semibold text-white shadow-luxury transition-all hover:from-accent-primary hover:to-accent-secondary disabled:cursor-wait disabled:opacity-70"
         >
           {status === "submitting" ? (
             <>
@@ -284,7 +342,7 @@ export function DonationForm() {
         </button>
       </div>
 
-      <p className="flex items-center justify-center gap-2 text-center text-xs text-muted">
+      <p className="flex items-center justify-center gap-2 text-center text-xs text-text-muted">
         <ShieldCheck className="h-4 w-4 text-emerald-600" />
         256-bit encrypted · powered by a PCI-DSS compliant gateway · your details are never shared.
       </p>

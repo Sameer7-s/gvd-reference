@@ -54,7 +54,7 @@ export default async function ContactPage() {
               <Reveal>
                 <div className="space-y-2">
                   <h2 className="font-display text-3xl text-[var(--color-text-primary)]">Contact Information</h2>
-                  <p className="text-[var(--color-text-muted)]">Reach out to us directly via email or phone.</p>
+                  <p className="text-[var(--color-text-text-muted)]">Reach out to us directly via email or phone.</p>
                 </div>
               </Reveal>
 
@@ -66,7 +66,7 @@ export default async function ContactPage() {
                     </div>
                     <div>
                       <p className="text-sm font-semibold text-[var(--color-text-primary)] uppercase tracking-wider mb-1">Email Us</p>
-                      <a href="mailto:info@guptvrindavandham.org" className="text-lg text-[var(--color-text-muted)] hover:text-[var(--color-accent-primary)] transition-colors">info@guptvrindavandham.org</a>
+                      <a href="mailto:info@guptvrindavandham.org" className="text-lg text-[var(--color-text-text-muted)] hover:text-[var(--color-accent-primary)] transition-colors">info@guptvrindavandham.org</a>
                     </div>
                   </div>
                 </Reveal>
@@ -78,7 +78,7 @@ export default async function ContactPage() {
                     </div>
                     <div>
                       <p className="text-sm font-semibold text-[var(--color-text-primary)] uppercase tracking-wider mb-1">Call Us</p>
-                      <a href="tel:+919799999881" className="text-lg text-[var(--color-text-muted)] hover:text-[var(--color-accent-primary)] transition-colors">+91-97999 99881</a>
+                      <a href="tel:+919799999881" className="text-lg text-[var(--color-text-text-muted)] hover:text-[var(--color-accent-primary)] transition-colors">+91-97999 99881</a>
                     </div>
                   </div>
                 </Reveal>
@@ -90,7 +90,7 @@ export default async function ContactPage() {
                     </div>
                     <div>
                       <p className="text-sm font-semibold text-[var(--color-text-primary)] uppercase tracking-wider mb-1">Office Hours</p>
-                      <p className="text-lg text-[var(--color-text-muted)]">9:00 am - 6:00 pm</p>
+                      <p className="text-lg text-[var(--color-text-text-muted)]">9:00 am - 6:00 pm</p>
                     </div>
                   </div>
                 </Reveal>
@@ -102,7 +102,7 @@ export default async function ContactPage() {
                     <MapPin className="h-6 w-6 text-[var(--color-accent-primary)] flex-shrink-0 mt-1" />
                     <div>
                       <h4 className="font-display text-xl text-[var(--color-text-primary)] mb-2">Gupt Vrindavan Dham</h4>
-                      <p className="text-[var(--color-text-muted)] leading-relaxed mb-4">Hare Krishna Marg, Jagatpura,<br/>Jaipur-302017</p>
+                      <p className="text-[var(--color-text-text-muted)] leading-relaxed mb-4">Hare Krishna Marg, Jagatpura,<br/>Jaipur-302017</p>
                       <Link href="#" className="text-sm font-semibold text-[var(--color-accent-primary)] hover:underline uppercase tracking-wider">
                         Get Directions
                       </Link>
@@ -117,7 +117,7 @@ export default async function ContactPage() {
               <div className="bg-white rounded-[2.5rem] p-8 sm:p-12 border border-[var(--color-accent-primary)]/10 shadow-luxury">
                 <div className="mb-8">
                   <h3 className="font-display text-2xl text-[var(--color-text-primary)] mb-2">Send us a Message</h3>
-                  <p className="text-[var(--color-text-muted)]">Fill out the form below, and one of our friendly team members will get back to you shortly.</p>
+                  <p className="text-[var(--color-text-text-muted)]">Fill out the form below, and one of our friendly team members will get back to you shortly.</p>
                 </div>
 
                 <form className="space-y-6">

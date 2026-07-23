@@ -96,7 +96,7 @@ export default function ExploreTemplePage() {
           </Reveal>
 
           <div className="grid md:grid-cols-3 gap-8 mt-16">
-            <Reveal delay={100} className="bg-white p-8 rounded-3xl shadow-sm border border-gray-100/50 hover:shadow-temple transition-shadow group">
+            <Reveal delay={100} className="bg-white p-8 rounded-3xl shadow-sm border border-gray-100/50 hover:shadow-luxury transition-shadow group">
               <div className="w-14 h-14 rounded-full bg-accent-light/20 flex items-center justify-center text-accent-primary mb-6 group-hover:scale-110 transition-transform">
                 <Sun className="w-7 h-7" />
               </div>
@@ -106,7 +106,7 @@ export default function ExploreTemplePage() {
               </p>
             </Reveal>
 
-            <Reveal delay={200} className="bg-white p-8 rounded-3xl shadow-sm border border-gray-100/50 hover:shadow-temple transition-shadow group">
+            <Reveal delay={200} className="bg-white p-8 rounded-3xl shadow-sm border border-gray-100/50 hover:shadow-luxury transition-shadow group">
               <div className="w-14 h-14 rounded-full bg-accent-light/20 flex items-center justify-center text-accent-primary mb-6 group-hover:scale-110 transition-transform">
                 <Music className="w-7 h-7" />
               </div>
@@ -116,7 +116,7 @@ export default function ExploreTemplePage() {
               </p>
             </Reveal>
 
-            <Reveal delay={300} className="bg-white p-8 rounded-3xl shadow-sm border border-gray-100/50 hover:shadow-temple transition-shadow group">
+            <Reveal delay={300} className="bg-white p-8 rounded-3xl shadow-sm border border-gray-100/50 hover:shadow-luxury transition-shadow group">
               <div className="w-14 h-14 rounded-full bg-accent-light/20 flex items-center justify-center text-accent-primary mb-6 group-hover:scale-110 transition-transform">
                 <Heart className="w-7 h-7" />
               </div>
@@ -145,7 +145,7 @@ export default function ExploreTemplePage() {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {divineExperiences.map((exp, i) => (
               <Reveal key={i} delay={i * 100}>
-                <AssetFrame tone={exp.tone} className="h-64 p-8 flex flex-col justify-end group cursor-pointer hover:shadow-temple transition-shadow">
+                <AssetFrame tone={exp.tone} className="h-64 p-8 flex flex-col justify-end group cursor-pointer hover:shadow-luxury transition-shadow">
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent z-10" />
                   <div className="relative z-20 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
                     <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center text-white mb-4 backdrop-blur-sm">

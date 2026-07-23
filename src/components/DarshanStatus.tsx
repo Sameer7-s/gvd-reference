@@ -78,7 +78,7 @@ export function DarshanStatus({
 
   return (
     <div
-      className={`inline-flex items-center gap-2.5 whitespace-nowrap rounded-full border border-accent-primary/20 bg-bg-secondary/85 px-4 py-1.5 text-sm shadow-temple backdrop-blur ${className}`}
+      className={`inline-flex items-center gap-2.5 whitespace-nowrap rounded-full border border-accent-primary/20 bg-bg-secondary/85 px-4 py-1.5 text-sm shadow-luxury backdrop-blur ${className}`}
       role="status"
       aria-live="polite"
     >

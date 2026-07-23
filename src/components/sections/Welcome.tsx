@@ -25,7 +25,7 @@ export function Welcome() {
           />
           <div className="absolute -bottom-6 -right-4 hidden rounded-2xl border border-[var(--color-accent-primary)]/30 bg-white/95 p-5 shadow-luxury sm:block">
             <p className="font-display text-4xl text-[var(--color-accent-primary)]">2015</p>
-            <p className="text-xs font-medium uppercase tracking-[0.18em] text-[var(--color-text-muted)]">
+            <p className="text-xs font-medium uppercase tracking-[0.18em] text-[var(--color-text-text-muted)]">
               Serving Vizag since
             </p>
           </div>
@@ -46,7 +46,7 @@ export function Welcome() {
             }
             className="max-w-none"
           />
-          <div className="space-y-4 text-base leading-relaxed text-[var(--color-text-muted)]">
+          <div className="space-y-4 text-base leading-relaxed text-[var(--color-text-text-muted)]">
             <p>
               {SITE.legalName} is a registered spiritual and cultural trust dedicated to sharing the
               timeless science of Krishna consciousness. From humble beginnings, the dham has grown
@@ -70,7 +70,7 @@ export function Welcome() {
                   </span>
                   <div>
                     <h3 className="font-display text-lg text-[var(--color-text-primary)]">{p.title}</h3>
-                    <p className="mt-0.5 text-sm text-[var(--color-text-muted)]">{p.text}</p>
+                    <p className="mt-0.5 text-sm text-[var(--color-text-text-muted)]">{p.text}</p>
                   </div>
                 </div>
               </Reveal>

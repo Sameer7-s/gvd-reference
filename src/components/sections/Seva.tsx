@@ -190,6 +190,7 @@ export function SevaCard({ seva }: { seva: SevaDoc }) {
 }
 
 /* ── Section ─────────────────────────────────────────────────────── */
+<<<<<<< HEAD
 export function Seva() {
   const [sevas, setSevas] = useState<SevaDoc[]>([]);
 
@@ -200,6 +201,9 @@ export function Seva() {
       .catch((err) => console.error("Failed to load sevas", err));
   }, []);
 
+=======
+export function Seva({ sevas = SEVAS }: { sevas?: Seva[] }) {
+>>>>>>> 302b5cae1d296bbcb3a5f4b1dba0b13b3da2befd
   return (
     <section id="sevas" className="relative overflow-hidden py-20 sm:py-28" style={{ background: "#EDF2F8" }}>
       <div className="container-page relative">

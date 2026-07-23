@@ -79,7 +79,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 
   return (
     <html lang="en-IN" className={`${cormorant.variable} ${playfair.variable} ${inter.variable}`} suppressHydrationWarning>
-      <body className="min-h-screen antialiased bg-[#F4F8FC] text-[#0F1D36] font-sans selection:bg-[#1D5C96] selection:text-white">
+      <body className="min-h-screen antialiased bg-[#F4F8FC] text-[#0F1D36] font-sans selection:bg-[#1D5C96] selection:text-white pb-[calc(64px+env(safe-area-inset-bottom))] lg:pb-0">
         <JsonLd data={jsonLd} nonce={nonce} />
 
         <a

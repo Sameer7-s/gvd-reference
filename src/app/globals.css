@@ -164,7 +164,13 @@
   align-items: center;
   justify-content: space-between;
   padding: 0 48px !important;
-  transition: background 0.3s ease;
+  transition:
+    width 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+    max-width 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+    border-radius 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+    margin-top 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+    background 0.3s ease;
 }
 
 .ultra-navbar.is-scrolled {

@@ -1,12 +1,35 @@
 import { NextRequest, NextResponse } from "next/server";
+import { SESSION_COOKIE, verifySession } from "@/lib/auth";
 
 /**
  * Generates a fresh nonce per request and attaches a strict
  * Content-Security-Policy. Next.js automatically tags its own inline
  * bootstrap scripts with this nonce, so `script-src` can stay locked down
  * with `strict-dynamic` and no `unsafe-inline`.
+ *
+ * Also gates the admin area: every `/admin` page and `/api/admin` route
+ * (except the login page/route) requires a valid signed session cookie.
  */
-export function middleware(request: NextRequest) {
+export async function middleware(request: NextRequest) {
+  const { pathname } = request.nextUrl;
+  const isAdminApi = pathname.startsWith("/api/admin") && pathname !== "/api/admin/login";
+  const isAdminPage =
+    pathname === "/admin" ||
+    (pathname.startsWith("/admin/") && pathname !== "/admin/login");
+
+  if (isAdminApi || isAdminPage) {
+    const authed = await verifySession(request.cookies.get(SESSION_COOKIE)?.value);
+    if (!authed) {
+      if (isAdminApi) {
+        return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+      }
+      const url = request.nextUrl.clone();
+      url.pathname = "/admin/login";
+      url.search = `?next=${encodeURIComponent(pathname)}`;
+      return NextResponse.redirect(url);
+    }
+  }
+
   const nonce = btoa(crypto.randomUUID());
   const isDev = process.env.NODE_ENV !== "production";
 

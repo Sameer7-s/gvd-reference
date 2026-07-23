@@ -126,7 +126,7 @@ export default async function GovernancePage() {
                   <h2 className="font-display text-3xl sm:text-4xl text-[var(--color-text-primary)] mb-8 pb-6 border-b border-[var(--color-accent-primary)]/10">
                     {leader.name}
                   </h2>
-                  <div className="space-y-6 text-lg text-[var(--color-text-muted)] leading-relaxed">
+                  <div className="space-y-6 text-lg text-[var(--color-text-text-muted)] leading-relaxed">
                     {leader.content.map((paragraph, idx) => (
                       <p key={idx}>{paragraph}</p>
                     ))}

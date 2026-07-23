@@ -83,7 +83,7 @@ export default async function CentersPage() {
             </p>
           </Reveal>
           <Reveal delay={100}>
-            <p className="mt-6 text-lg leading-relaxed text-[var(--color-text-muted)]">
+            <p className="mt-6 text-lg leading-relaxed text-[var(--color-text-text-muted)]">
               Each of these centres is independently governed and the confederation of these worldwide centres is known as Srila Prabhupada's Hare Krishna Movement or ISKCON Bangalore Group of centres.
             </p>
           </Reveal>

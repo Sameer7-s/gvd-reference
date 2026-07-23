@@ -12,9 +12,11 @@ import { SectionBlurTransition } from "@/components/SectionBlurTransition";
 import { JsonLd } from "@/components/JsonLd";
 
 import { faqJsonLd } from "@/lib/seo";
+import { getSevas } from "@/lib/content";
 
 export default async function HomePage() {
   const nonce = (await headers()).get("x-nonce") ?? undefined;
+  const sevas = await getSevas();
 
   return (
     <>
@@ -28,7 +30,7 @@ export default async function HomePage() {
       <Statistics />
       <Events />
       <Testimonials />
-      <Seva />
+      <Seva sevas={sevas} />
       <Donate />
     </>
   );

@@ -67,7 +67,7 @@ export default function QualitiesPage() {
           <div className="grid md:grid-cols-2 gap-6">
             {QUALITIES.map((q, i) => (
               <Reveal key={q.n} delay={(i % 2) * 100}>
-                <div className="bg-bg-secondary p-6 rounded-2xl h-full border border-gray-100 hover:shadow-temple transition-shadow">
+                <div className="bg-bg-secondary p-6 rounded-2xl h-full border border-gray-100 hover:shadow-luxury transition-shadow">
                   <div className="text-accent-primary font-display text-4xl mb-3 opacity-20 font-bold">{q.n.padStart(2, '0')}</div>
                   <h3 className="text-xl font-display font-medium text-text-primary mb-2 -mt-8 relative z-10">{q.title}</h3>
                   <p className="text-text-muted text-sm leading-relaxed">{q.desc}</p>

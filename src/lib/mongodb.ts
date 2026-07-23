@@ -16,6 +16,7 @@ declare global {
   };
 }
 
+<<<<<<< HEAD
 let cached = global.mongoose;
 
 if (!cached) {
@@ -52,4 +53,29 @@ export async function connectToDatabase() {
 export async function getDb() {
   const mongooseInstance = await connectToDatabase();
   return mongooseInstance.connection.db;
+=======
+// Fail fast when the DB is unreachable so public pages that read from Mongo
+// (with a static fallback) never hang on the request path.
+const options = { serverSelectionTimeoutMS: 5000, connectTimeoutMS: 5000 };
+
+let client: MongoClient;
+
+if (process.env.NODE_ENV === "development") {
+  if (!global._mongoClient) {
+    global._mongoClient = new MongoClient(MONGODB_URI, options);
+  }
+  client = global._mongoClient;
+} else {
+  client = new MongoClient(MONGODB_URI, options);
+}
+
+export async function getDb(): Promise<Db> {
+  // Fail loudly on a misconfigured deploy instead of silently connecting to
+  // localhost (which would surface as confusing empty data / 500s in prod).
+  if (!process.env.MONGODB_URI && process.env.NODE_ENV === "production") {
+    throw new Error("MONGODB_URI is not set");
+  }
+  await client.connect();
+  return client.db(DB_NAME);
+>>>>>>> 302b5cae1d296bbcb3a5f4b1dba0b13b3da2befd
 }

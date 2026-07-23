@@ -21,7 +21,7 @@ export default function ProjectsPage() {
       <section className="py-24 bg-white relative">
         <div className="container-page">
           <div className="grid md:grid-cols-2 max-w-4xl mx-auto gap-10">
-            <Reveal className="group flex flex-col bg-bg-secondary rounded-[2rem] p-4 border border-gray-100 hover:shadow-temple transition-shadow">
+            <Reveal className="group flex flex-col bg-bg-secondary rounded-[2rem] p-4 border border-gray-100 hover:shadow-luxury transition-shadow">
               <AssetFrame 
                 label="Hare Krishna Sewal Mandir" 
                 tone="saffron" 

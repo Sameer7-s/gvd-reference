@@ -42,19 +42,19 @@ export default function PrivacyPage() {
           { name: "Privacy", href: "/privacy" },
         ]}
       />
-      <article className="bg-cream py-20">
+      <article className="bg-bg-primary py-20">
         <div className="container-page max-w-3xl space-y-8">
           {sections.map((s) => (
             <section key={s.h}>
-              <h2 className="font-display text-2xl text-maroon-900">{s.h}</h2>
-              <p className="mt-3 leading-relaxed text-muted">{s.p}</p>
+              <h2 className="font-display text-2xl text-text-primary">{s.h}</h2>
+              <p className="mt-3 leading-relaxed text-text-muted">{s.p}</p>
             </section>
           ))}
           <section>
-            <h2 className="font-display text-2xl text-maroon-900">Contact us</h2>
-            <p className="mt-3 leading-relaxed text-muted">
+            <h2 className="font-display text-2xl text-text-primary">Contact us</h2>
+            <p className="mt-3 leading-relaxed text-text-muted">
               For any privacy questions, email{" "}
-              <a className="font-medium text-saffron-700 underline" href={`mailto:${CONTACT.email}`}>
+              <a className="font-medium text-accent-primary underline" href={`mailto:${CONTACT.email}`}>
                 {CONTACT.email}
               </a>{" "}
               or call {CONTACT.phonePrimary}.

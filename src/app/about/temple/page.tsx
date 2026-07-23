@@ -93,12 +93,12 @@ export default async function AboutTemplePage() {
             </p>
           </Reveal>
           <Reveal delay={100}>
-            <p className="text-lg leading-relaxed text-[var(--color-text-muted)]">
+            <p className="text-lg leading-relaxed text-[var(--color-text-text-muted)]">
               Inspired by the vision of His Divine Grace A.C. Bhaktivedanta Swami Srila Prabhupada, the foundation of the Hare Krishna Mandir, Jaipur, was laid in 2009 to spread his vision of uplifting society through the path of Krishna consciousness.
             </p>
           </Reveal>
           <Reveal delay={200}>
-            <p className="text-lg leading-relaxed text-[var(--color-text-muted)]">
+            <p className="text-lg leading-relaxed text-[var(--color-text-text-muted)]">
               This Hare Krishna Temple is a whole cultural complex itself, offering vibrant community gatherings and different activities to indulge in with a sense of compassion and devotion in the modern era.
             </p>
           </Reveal>
@@ -113,7 +113,7 @@ export default async function AboutTemplePage() {
               <SectionHeading eyebrow="Our Foundation" title="Our Spiritual Roots" />
             </Reveal>
             <Reveal delay={100}>
-              <div className="mt-8 space-y-6 text-[var(--color-text-muted)] leading-relaxed">
+              <div className="mt-8 space-y-6 text-[var(--color-text-text-muted)] leading-relaxed">
                 <p>
                   The Hare Krishna Movement was an initiative led by His Divine Grace A.C. Bhaktivedanta Swami Srila Prabhupada with deep reference to Vedic scriptures like the Bhagavad-gita and Srimad Bhagavatam.
                 </p>
@@ -168,7 +168,7 @@ export default async function AboutTemplePage() {
                     <p.icon className="h-7 w-7" />
                   </span>
                   <h3 className="font-display text-xl text-[var(--color-text-primary)]">{p.title}</h3>
-                  <p className="text-[var(--color-text-muted)] leading-relaxed">{p.text}</p>
+                  <p className="text-[var(--color-text-text-muted)] leading-relaxed">{p.text}</p>
                 </div>
               </Reveal>
             ))}
@@ -236,7 +236,7 @@ export default async function AboutTemplePage() {
                 {highlights.map((highlight, i) => (
                   <li key={i} className="flex items-start gap-4">
                     <CheckCircle2 className="h-6 w-6 text-[var(--color-accent-primary)] flex-shrink-0 mt-0.5" />
-                    <span className="text-[var(--color-text-muted)] text-lg">{highlight}</span>
+                    <span className="text-[var(--color-text-text-muted)] text-lg">{highlight}</span>
                   </li>
                 ))}
               </ul>
@@ -248,7 +248,7 @@ export default async function AboutTemplePage() {
               <SectionHeading eyebrow="Hidden Vrindavan" title="Why Jaipur is Known as “Gupt Vrindavan”" />
             </Reveal>
             <Reveal delay={200}>
-              <p className="mt-8 text-lg leading-relaxed text-[var(--color-text-muted)]">
+              <p className="mt-8 text-lg leading-relaxed text-[var(--color-text-text-muted)]">
                 The term <strong>Gupt Vrindavan</strong>, meaning “Hidden Vrindavan,” reflects Jaipur's deep spiritual heritage. During the Mughal era, revered deities from Vrindavan were relocated here for protection, transforming the city into a sacred sanctuary of devotion.
               </p>
             </Reveal>
@@ -264,7 +264,7 @@ export default async function AboutTemplePage() {
               <SectionHeading eyebrow="The Inspiration" title="Srila Prabhupada’s Vision for Jaipur" className="mx-auto" />
             </Reveal>
             <Reveal delay={100}>
-              <p className="mt-8 text-lg leading-relaxed text-[var(--color-text-muted)]">
+              <p className="mt-8 text-lg leading-relaxed text-[var(--color-text-text-muted)]">
                 In 1972, Srila Prabhupada visited the Pink City with his disciples. On this visit, he came up with a vision of building a replica of the Sri Sri Krishna Balaram Temple, Vrindavan, in Jaipur. His desire led to the foundation of Rajasthan’s Biggest Hindu Temple, Gupt Vrindavan Dham.
               </p>
             </Reveal>
@@ -284,7 +284,7 @@ export default async function AboutTemplePage() {
                       <div className={`bg-white p-6 rounded-2xl shadow-luxury border border-[var(--color-accent-primary)]/10 inline-block w-full sm:w-[80%] ${i % 2 !== 0 ? 'md:text-left' : 'md:text-right'}`}>
                         <span className="text-[var(--color-accent-primary)] font-bold text-lg mb-2 block">{item.year}</span>
                         <h4 className="font-display text-xl text-[var(--color-text-primary)] mb-2">{item.title}</h4>
-                        <p className="text-[var(--color-text-muted)] text-sm">{item.text}</p>
+                        <p className="text-[var(--color-text-text-muted)] text-sm">{item.text}</p>
                       </div>
                     </div>
                     <div className="hidden md:flex absolute left-1/2 -translate-x-1/2 h-4 w-4 rounded-full bg-[var(--color-accent-primary)] border-4 border-[var(--color-bg-secondary)] z-10"></div>
@@ -306,7 +306,7 @@ export default async function AboutTemplePage() {
             </h2>
           </Reveal>
           <Reveal delay={100}>
-            <p className="text-lg leading-relaxed text-[var(--color-text-muted)] mb-12">
+            <p className="text-lg leading-relaxed text-[var(--color-text-text-muted)] mb-12">
               Indulge in a spiritual experience and become part of something historical at <strong>Hare Krishna Temple, Jaipur</strong>. By learning and implementing the teachings of the Bhagavad-Gita, let’s come together to illuminate the path of humanity.
             </p>
           </Reveal>

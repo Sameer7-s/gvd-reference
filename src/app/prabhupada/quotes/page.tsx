@@ -25,7 +25,7 @@ export default function QuotesPage() {
         <div className="container-page">
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
             {quotes.map((q, i) => (
-              <Reveal key={q} delay={(i % 4) * 100} className="bg-white rounded-3xl p-4 shadow-sm border border-gray-100 hover:shadow-temple transition-shadow group flex flex-col">
+              <Reveal key={q} delay={(i % 4) * 100} className="bg-white rounded-3xl p-4 shadow-sm border border-gray-100 hover:shadow-luxury transition-shadow group flex flex-col">
                 <AssetFrame 
                   label={`Quote ${q}`} 
                   tone={["saffron", "maroon", "gold", "krishna", "night"][i % 5] as any} 

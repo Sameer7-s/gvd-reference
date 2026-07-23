@@ -46,7 +46,7 @@ export default function EventsPage() {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {EVENTS.map((item, i) => (
-              <Reveal key={i} delay={(i % 3) * 100} className="group flex flex-col bg-bg-secondary rounded-[2rem] p-4 border border-gray-100 hover:shadow-temple transition-shadow">
+              <Reveal key={i} delay={(i % 3) * 100} className="group flex flex-col bg-bg-secondary rounded-[2rem] p-4 border border-gray-100 hover:shadow-luxury transition-shadow">
                 <AssetFrame 
                   label={item.title} 
                   tone={item.tone as any} 

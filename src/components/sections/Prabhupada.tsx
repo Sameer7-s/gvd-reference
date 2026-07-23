@@ -30,7 +30,7 @@ export function Prabhupada() {
             title="His Divine Grace A. C. Bhaktivedanta Swami Prabhupada"
             className="max-w-none"
           />
-          <div className="space-y-4 text-base leading-relaxed text-[var(--color-text-muted)]">
+          <div className="space-y-4 text-base leading-relaxed text-[var(--color-text-text-muted)]">
             <p>
               In 1965, at the age of sixty-nine, Srila Prabhupada journeyed from India to the West
               with little more than a trunk of sacred books and unshakable faith in the holy name.

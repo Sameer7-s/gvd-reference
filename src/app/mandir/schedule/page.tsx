@@ -68,7 +68,7 @@ export default async function SchedulePage() {
               <Reveal>
                 <div className="mb-10">
                   <h2 className="font-display text-3xl text-[var(--color-text-primary)] mb-4">Today’s Schedule</h2>
-                  <p className="text-[var(--color-text-muted)] text-lg leading-relaxed">
+                  <p className="text-[var(--color-text-text-muted)] text-lg leading-relaxed">
                     The day begins with the Mangala darshan of the Lord, followed by various devotional activities including aartis, chanting of Hare Krishna, kirtan, and Bhagavata pravacan. We invite you to participate in today's Temple programs and nourish your soul.
                   </p>
                 </div>
@@ -99,7 +99,7 @@ export default async function SchedulePage() {
                   <div className="mb-6">
                     <span className="inline-block px-3 py-1 bg-[var(--color-accent-primary)]/10 text-[var(--color-accent-primary)] text-xs font-bold tracking-widest uppercase rounded-full mb-3">Festival</span>
                     <h4 className="font-display text-3xl text-[var(--color-text-primary)] mb-3">Gaur Purnima</h4>
-                    <p className="text-[var(--color-text-muted)] text-base">
+                    <p className="text-[var(--color-text-text-muted)] text-base">
                       Numerous festivals and celebrations are held throughout the year to please the Deities. Intensify your devotion for Sri Sri Krishna Balaram by visiting and participating in the temple activities.
                     </p>
                   </div>
@@ -110,7 +110,7 @@ export default async function SchedulePage() {
               <Reveal delay={200}>
                 <div>
                   <h3 className="font-display text-2xl text-[var(--color-text-primary)] mb-6">Discover Gupt Vrindavan Dham</h3>
-                  <p className="text-[var(--color-text-muted)] mb-6">Learn more about what you can do.</p>
+                  <p className="text-[var(--color-text-text-muted)] mb-6">Learn more about what you can do.</p>
                   
                   <div className="grid sm:grid-cols-2 gap-4">
                     {ctas.map((cta, i) => (
